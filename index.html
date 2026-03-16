@@ -127,6 +127,16 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
 .fi input,.fi select,.fi textarea{padding:7px 10px;border:1.5px solid #D1D5DB;border-radius:7px;font-size:12px;font-family:'Inter',sans-serif;width:100%;background:white;color:var(--text)}
 .fi input:focus,.fi select:focus,.fi textarea:focus{outline:none;border-color:#2E4A7D}
 .fi textarea{resize:vertical;min-height:70px}
+.fi-hint{font-size:10.5px;color:#6B7280;line-height:1.45;margin-top:1px;padding:2px 0}
+.fi-hint i{color:#9CA3AF;margin-right:3px;font-size:10px}
+.fi-doc{font-size:10.5px;background:#EFF6FF;border-left:3px solid #3B82F6;color:#1D4ED8;padding:4px 8px;border-radius:0 5px 5px 0;margin-top:2px;line-height:1.45}
+.fi-doc i{margin-right:3px;font-size:10px}
+.fi-warn{font-size:10.5px;background:#FFFBEB;border-left:3px solid #F59E0B;color:#92400E;padding:4px 8px;border-radius:0 5px 5px 0;margin-top:2px;line-height:1.45}
+.fi-warn i{margin-right:3px;font-size:10px}
+.fi-crit{font-size:10.5px;background:#FFF1F2;border-left:3px solid #EF4444;color:#BE185D;padding:4px 8px;border-radius:0 5px 5px 0;margin-top:2px;line-height:1.45}
+.fi-crit i{margin-right:3px;font-size:10px}
+.form-sec-note{font-size:11.5px;color:#374151;background:rgba(0,0,0,.04);border-radius:6px;padding:7px 10px;margin-bottom:10px;line-height:1.55}
+.form-sec-note b{color:var(--navy)}
 .req{color:#EF4444}
 .uyari{padding:8px 11px;border-radius:7px;font-size:12px;margin:5px 0}
 .uyari.sari{background:#FFFBEB;border:1px solid #FCD34D;color:#92400E}
@@ -555,8 +565,8 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
 <div id="iletisimPage" class="page">
   <div class="section">
     <div class="container">
-      <h2 class="sec-title">Bize Ulaşın</h2>
-      <span class="sec-sub">Önce almak istediğiniz hizmeti seçin — size özel form açılsın.</span>
+      <h2 class="sec-title">Ücretsiz Teşvik Analizi Talep Edin</h2>
+      <span class="sec-sub">Almak istediğiniz desteği seçin — size özel kapsamlı form açılsın. Her alan için yönlendirici açıklamalar mevcuttur.</span>
       <div class="g2" style="align-items:start;margin-top:20px">
         <!-- AKILLI FORM -->
         <div>
@@ -587,27 +597,57 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
             <!-- Ortak kişisel alanlar (her formda) -->
             <div class="form-box gold">
               <span class="form-lbl">KİŞİSEL VE FİRMA BİLGİLERİ</span>
+              <p class="form-sec-note">📋 <b>Tüm teşvik programlarında</b> başvuru sahibinin ve firmanın kimlik bilgileri zorunludur. Lütfen ticaret sicilindeki resmi unvan ve vergi numarasını kullanın.</p>
               <div class="g2">
-                <div class="fi"><label>Ad Soyad <span class="req">*</span></label><input id="f_ad" placeholder="Adınız Soyadınız"></div>
-                <div class="fi"><label>Telefon <span class="req">*</span></label><input id="f_tel" type="tel" placeholder="+90 5xx xxx xx xx"></div>
-                <div class="fi"><label>E-posta</label><input id="f_email" type="email" placeholder="ornek@firma.com"></div>
-                <div class="fi"><label>Firma Adı</label><input id="f_firma" placeholder="Ticaret unvanı"></div>
+                <div class="fi">
+                  <label>Ad Soyad <span class="req">*</span></label>
+                  <input id="f_ad" placeholder="Nüfus cüzdanındaki resmi adınız">
+                  <small class="fi-hint"><i class="fas fa-info-circle"></i>Başvuru sahibinin tam adı — nüfus cüzdanı ile birebir eşleşmeli.</small>
+                </div>
+                <div class="fi">
+                  <label>Cep Telefonu <span class="req">*</span></label>
+                  <input id="f_tel" type="tel" placeholder="+90 5xx xxx xx xx">
+                  <small class="fi-hint"><i class="fas fa-info-circle"></i>WhatsApp erişimi olan numara tercih edilir; danışmanınız bu hat üzerinden ulaşacak.</small>
+                </div>
+                <div class="fi">
+                  <label>E-posta</label>
+                  <input id="f_email" type="email" placeholder="kurumsal@firma.com">
+                  <small class="fi-hint"><i class="fas fa-info-circle"></i>Rapor ve resmi yazışmalar bu adrese iletilecektir.</small>
+                </div>
+                <div class="fi">
+                  <label>Firma / Ticari Unvan</label>
+                  <input id="f_firma" placeholder="Örn: ABC Makine San. ve Tic. Ltd. Şti.">
+                  <small class="fi-hint"><i class="fas fa-info-circle"></i>MERSİS / Ticaret Sicil'deki tam unvanı yazın.</small>
+                  <small class="fi-doc"><i class="fas fa-file-alt"></i><b>Kaynak:</b> e-Devlet → MERSİS sorgusu veya Ticaret Sicil Gazetesi (PDF)</small>
+                </div>
               </div>
             </div>
             <!-- Hizmete özel alanlar -->
             <div id="srvFields"></div>
             <!-- Dinamik uyarılar -->
             <div id="formUyarilar"></div>
-            <div class="fi"><label>Ek Notlar ve Sorularınız</label><textarea id="f_mesaj" placeholder="Projeniz veya ihtiyacınız hakkında..."></textarea></div>
+            <div class="fi">
+              <label>Ek Notlar, Özel Durumlar ve Sorularınız</label>
+              <textarea id="f_mesaj" style="min-height:90px" placeholder="Eklemek istediğiniz her şeyi buraya yazabilirsiniz. Örneğin:
+• Daha önce aldığınız teşvik: Program adı, belge no, yıl
+• Planlanan fuar: HANNOVER MESSE, Nisan 2026
+• İhracatçı birlik adınız: OAİB
+• Patent / faydalı model numarası: TR2023/xxxxx
+• Arsa / bina durumuna ilişkin ayrıntılar
+• Herhangi bir sorunuz veya özel koşulunuz"></textarea>
+              <small class="fi-hint"><i class="fas fa-info-circle"></i>Ne kadar ayrıntılı yazarsanız danışmanımız o kadar isabetli bir analiz sunabilir.</small>
+            </div>
             <!-- İletişim tercihi -->
             <div class="form-box" style="border-left:3px solid #7C3AED;background:#fdf4ff">
               <span class="form-lbl">İLETİŞİM TERCİHİ</span>
               <div class="g2">
                 <div class="fi"><label>Tercih</label>
                   <select id="f_iletisim"><option>WhatsApp (tercihli)</option><option>Telefon</option><option>E-posta</option></select>
+                  <small class="fi-hint"><i class="fas fa-info-circle"></i>WhatsApp üzerinden daha hızlı geri dönüş ve belge paylaşımı mümkün.</small>
                 </div>
                 <div class="fi"><label>Uygun Zaman</label>
                   <select id="f_zaman"><option>Hafta içi 09-12</option><option>Hafta içi 14-17</option><option>Hafta içi 17-20</option><option>Hafta sonu</option></select>
+                  <small class="fi-hint"><i class="fas fa-info-circle"></i>İlk görüşme yaklaşık 30–45 dakika sürmektedir.</small>
                 </div>
               </div>
             </div>
@@ -626,7 +666,7 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
             <h4>ADS Danışmanlık</h4>
             <p><i class="fas fa-map-marker-alt"></i> Ankara / Türkiye</p>
             <p><i class="fas fa-phone"></i> <a href="tel:+905323261673">+90 532 326 1673</a></p>
-            <p><i class="fas fa-envelope"></i> <a href="mailto:adstesvikdanismanlik@gmail.com">adstesvikdanismanlik@gmail.com</a></p>
+            <p><i class="fas fa-envelope"></i> <a href="/cdn-cgi/l/email-protection#d8b9bcabacbdabaeb1b3bcb9b6b1abb5b9b6b4b1b398bfb5b9b1b4f6bbb7b5"><span class="__cf_email__" data-cfemail="f7969384839284819e9c9396999e849a96999b9e9cb7909a969e9bd994989a">[email&#160;protected]</span></a></p>
             <p><i class="fas fa-clock"></i> Hafta içi 09:00–18:00</p>
             <a href="https://wa.me/905323261673" target="_blank" class="btn-wa"><i class="fab fa-whatsapp"></i> WhatsApp'ta Yaz</a>
             <div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.2)">
@@ -644,7 +684,7 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
 <!-- FOOTER -->
 <div class="footer">
   © 2026 ADS Yatırım ve Teşvik Danışmanlığı | Tüm Hakları Saklıdır.<br>
-  <a href="mailto:adstesvikdanismanlik@gmail.com">adstesvikdanismanlik@gmail.com</a> |
+  <a href="/cdn-cgi/l/email-protection#a1c0c5d2d5c4d2d7c8cac5c0cfc8d2ccc0cfcdc8cae1c6ccc0c8cd8fc2cecc"><span class="__cf_email__" data-cfemail="1170756265746267787a75707f78627c707f7d787a51767c70787d3f727e7c">[email&#160;protected]</span></a> |
   <a href="https://wa.me/905323261673">+90 532 326 1673</a>
 </div>
 <a href="https://wa.me/905323261673" target="_blank" class="wa-float"><i class="fab fa-whatsapp"></i></a>
@@ -986,7 +1026,7 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
 </div><!-- adminWrap -->
 
 <!-- ===== JAVASCRIPT ===== -->
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ================================================================
 // 1. DEPOLAMA & INIT
 // ================================================================
@@ -1058,140 +1098,499 @@ let secilenHizmet='';
 
 // Hizmet bazlı form alanları (el kitabı esaslı minimum bilgi)
 const SRV_FORMS={
-  yatirim:{label:'📊 Yatırım Teşvik Belgesi',fields:`
-    <div class="form-box navy"><span class="form-lbl">FİRMA VE YATIRIM BİLGİLERİ</span>
-    <div class="g2">
-      <div class="fi"><label>Vergi No / TC <span class="req">*</span></label><input id="f_vergi" placeholder="VKN veya TC"></div>
-      <div class="fi"><label>Hukuki Yapı</label><select id="f_hukuk"><option>Seçiniz...</option><option>A.Ş.</option><option>Ltd. Şti.</option><option>Şahıs</option><option>Kooperatif</option></select></div>
-      <div class="fi"><label>Sektör <span class="req">*</span></label><select id="f_sektor"><option>Seçiniz...</option><option>Yazılım / Teknoloji</option><option>Üretim / İmalat</option><option>Tarım / Gıda</option><option>Tekstil</option><option>Makine / Metal</option><option>Enerji</option><option>Sağlık</option><option>Turizm</option><option>Lojistik</option><option>Otomotiv Yan Sanayi</option><option>Kimya / Plastik</option><option>Diğer</option></select></div>
-      <div class="fi"><label>NACE Kodu</label><input id="f_nace" placeholder="Örn: 28.41"></div>
-      <div class="fi"><label>Mevcut Çalışan Sayısı</label><input id="f_calisan" type="number" min="0" placeholder="0"></div>
-      <div class="fi"><label>Yatırım Türü <span class="req">*</span></label><select id="f_ytur"><option>Seçiniz...</option><option>Yeni Tesis Kurulumu</option><option>Kapasite Artışı</option><option>Modernizasyon</option><option>Entegrasyon</option><option>Ar-Ge Merkezi</option></select></div>
-    </div>
-    <div class="g2">
-      <div class="fi"><label>Yatırım Tutarı (TL) <span class="req">*</span></label><input id="f_yatirim" type="number" min="0" placeholder="0"></div>
-      <div class="fi"><label>Yatırım İli <span class="req">*</span></label><select id="f_il" onchange="checkUyarilar()"><option>Seçiniz...</option><option>İstanbul</option><option>Ankara</option><option>İzmir</option><option>Bursa</option><option>Kocaeli</option><option>Adana</option><option>Antalya</option><option>Gaziantep</option><option>Kayseri</option><option>Konya</option><option>Mersin</option><option>Balıkesir</option><option>Samsun</option><option>Trabzon</option><option>Ağrı</option><option>Van</option><option>Diyarbakır</option><option>Şanlıurfa</option><option>Erzurum</option><option>Malatya</option><option>Ordu</option><option>Diğer</option></select></div>
-      <div class="fi"><label>Yatırım İlçesi</label><input id="f_ilce" placeholder="İlçe adı"></div>
-      <div class="fi"><label>Yeni İstihdam (kişi)</label><input id="f_istihdam" type="number" min="0" placeholder="0"></div>
-    </div>
-    <div class="g2">
-      <div class="fi"><label>OSB İçinde mi?</label><select id="f_osb" onchange="checkUyarilar()"><option>Seçiniz...</option><option value="evet">Evet</option><option value="hayır">Hayır</option><option value="plan">Planlıyorum</option></select></div>
-      <div class="fi"><label>OSB Adı</label><input id="f_osb_adi" placeholder="Varsa OSB adı"></div>
-      <div class="fi"><label>Yerli Makine/Ekipman (TL)</label><input id="f_yerli" type="number" min="0" placeholder="0"></div>
-      <div class="fi"><label>İnşaat/Bina Tutarı (TL)</label><input id="f_insaat" type="number" min="0" placeholder="0"></div>
-      <div class="fi"><label>İthal Makine?</label><select id="f_imp" onchange="checkUyarilar()"><option>Seçiniz...</option><option value="evet">Evet</option><option value="hayır">Hayır</option></select></div>
-      <div class="fi"><label>İthal Makine Tutarı (USD)</label><input id="f_imp_usd" type="number" min="0" placeholder="0"></div>
-    </div></div>`},
 
-  tubitak_1501:{label:'🔬 TÜBİTAK 1501 — Sanayi Ar-Ge',fields:`
-    <div class="form-box navy"><span class="form-lbl">PROJE VE FİRMA BİLGİLERİ</span>
-    <div class="g2">
-      <div class="fi"><label>Sektör <span class="req">*</span></label><select id="f_sektor"><option>Seçiniz...</option><option>Yazılım / Teknoloji</option><option>Üretim / İmalat</option><option>Makine / Metal</option><option>Kimya / Plastik</option><option>Elektronik</option><option>Savunma</option><option>Diğer</option></select></div>
-      <div class="fi"><label>Mevcut Çalışan Sayısı <span class="req">*</span></label><input id="f_calisan" type="number" min="0" placeholder="0"></div>
-      <div class="fi"><label>Ar-Ge Personel Sayısı <span class="req">*</span></label><input id="f_arge_pers" type="number" min="0" placeholder="0"></div>
-      <div class="fi"><label>Tahmini Proje Bütçesi (TL)</label><input id="f_butce" type="number" min="0" placeholder="Min 1.000.000 TL"></div>
-      <div class="fi"><label>Proje Konusu <span class="req">*</span></label><input id="f_proje_konu" placeholder="Kısaca proje konusu"></div>
-      <div class="fi"><label>PRODİS Kaydı Var mı?</label><select id="f_prodis"><option>Seçiniz...</option><option value="evet">Evet</option><option value="hayır">Hayır</option></select></div>
-      <div class="fi"><label>Patent / Faydalı Model?</label><select id="f_patent"><option>Seçiniz...</option><option value="evet">Evet</option><option value="hayır">Hayır</option></select></div>
-      <div class="fi"><label>Üniversite İşbirliği?</label><select id="f_uni"><option>Seçiniz...</option><option value="evet">Evet</option><option value="hayır">Hayır</option></select></div>
-    </div>
-    <div class="uyari mavi"><i class="fas fa-info-circle"></i> <strong>TÜBİTAK 1501:</strong> Minimum çalışan şartı yoktur ancak firma teknik kapasitesini göstermek zorundadır. PRODİS ön kaydı tamamlanmış olmalıdır.</div>
-    </div>`},
+/* ============================================================
+   1. YATIRIM TEŞVİK BELGESİ (E-TUYS)
+   ============================================================ */
+yatirim:{label:'📊 Yatırım Teşvik Belgesi (YTB)',fields:`
+<div class="form-box navy">
+  <span class="form-lbl">A — FİRMA KİMLİK VE HUKUKİ YAPI</span>
+  <p class="form-sec-note"><b>Neden önemli?</b> YTB başvurusunda firma kimlik bilgileri E-TUYS sistemine girilir. Sermaye ve hukuki yapı, başvurulabilecek teşvik türünü doğrudan belirler.</p>
+  <div class="g2">
+    <div class="fi"><label>Vergi Kimlik Numarası (VKN) <span class="req">*</span></label><input id="f_vergi" placeholder="10 haneli VKN (şirketler)">
+    <small class="fi-doc"><i class="fas fa-file-alt"></i><b>Kaynak:</b> e-Devlet → Vergi Levhası veya Vergi Dairesi'nden güncel Vergi Levhası (PDF)</small></div>
+    <div class="fi"><label>Ticaret Sicil Numarası</label><input id="f_tsicil" placeholder="Örn: Ankara 123456">
+    <small class="fi-doc"><i class="fas fa-file-alt"></i><b>Kaynak:</b> e-Devlet → MERSİS sorgulama veya güncel Ticaret Sicil Gazetesi nüshası (PDF)</small></div>
+    <div class="fi"><label>Hukuki Yapı <span class="req">*</span></label>
+    <select id="f_hukuk"><option value="">Seçiniz...</option><option>A.Ş.</option><option>Ltd. Şti.</option><option>Şahıs Firması</option><option>Kooperatif</option><option>Diğer</option></select>
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>A.Ş. → yüksek yatırım limiti; Şahıs → bazı programlarda kısıtlı.</small></div>
+    <div class="fi"><label>Ödenmiş Sermaye (TL) <span class="req">*</span></label><input id="f_sermaye" type="number" min="0" placeholder="Örn: 500000">
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>Taahhüt değil, fiilen ödenmiş sermaye.</small>
+    <small class="fi-doc"><i class="fas fa-file-alt"></i><b>Kaynak:</b> Son Ticaret Sicil Gazetesi / muhasebe → sermaye hesabı</small></div>
+    <div class="fi"><label>Firma Kuruluş Tarihi</label><input id="f_kurulus" type="date">
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>≥3 yıl kuruluş → YTB başvurusu daha kolay; yeni firmalar için ek belgeler istenebilir.</small></div>
+    <div class="fi"><label>Cinsiyet</label>
+    <select id="f_cinsiyet" onchange="checkUyarilar()"><option value="">Seçiniz...</option><option>Erkek</option><option>Kadın</option><option>Belirtmek istemiyorum</option></select>
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>Kadın girişimci → bazı desteklerde ek katsayı.</small></div>
+  </div>
+</div>
+<div class="form-box gold">
+  <span class="form-lbl">B — SEKTÖR VE KAPASİTE BİLGİLERİ</span>
+  <p class="form-sec-note"><b>Neden önemli?</b> NACE kodu, yatırımın teşvik kapsamında olup olmadığını ve hangi bölge oranının uygulanacağını belirler. Kapasite Raporu'nda bu veriler esas alınır.</p>
+  <div class="g2">
+    <div class="fi"><label>Ana Sektör <span class="req">*</span></label>
+    <select id="f_sektor"><option value="">Seçiniz...</option><option>Yazılım / Teknoloji</option><option>Üretim / İmalat</option><option>Tarım / Gıda / Hayvancılık</option><option>Tekstil / Konfeksiyon</option><option>Makine / Metal / Çelik</option><option>Enerji / Yenilenebilir</option><option>Sağlık / İlaç / Medikal</option><option>Turizm / Konaklama</option><option>Lojistik / Soğuk Zincir</option><option>Otomotiv Yan Sanayi</option><option>Kimya / Plastik / Boya</option><option>Savunma Sanayii</option><option>Elektronik / Elektrik</option><option>İnşaat Malzemeleri</option><option>Diğer</option></select>
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>Stratejik sektörler (Savunma, Sağlık/İlaç, Otomotiv) daha yüksek destek ve öncelikli yatırım statüsü alabilir.</small></div>
+    <div class="fi"><label>NACE Kodu (4 haneli) <span class="req">*</span></label><input id="f_nace" placeholder="Örn: 28.41 – Talaşlı imalat">
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>Teşvik bölgesini ve uygulanacak oranı doğrudan belirler.</small>
+    <small class="fi-doc"><i class="fas fa-search"></i><b>Nereden:</b> Vergi Levhası'nda yazar; <b>nace.com.tr</b> veya e-Devlet → Faaliyet Belgesi. Kapasite Raporu'nda da yer alır.</small></div>
+    <div class="fi"><label>Mevcut Çalışan Sayısı</label><input id="f_calisan" type="number" min="0" placeholder="SGK'ya bildirilmiş çalışan">
+    <small class="fi-doc"><i class="fas fa-file-alt"></i><b>Kaynak:</b> SGK e-Bildirge → son ay prim bordrosu (PDF). Tam başvuruda son 3 aya ait SGK dökümü istenir.</small></div>
+    <div class="fi"><label>Yatırım Türü <span class="req">*</span></label>
+    <select id="f_ytur"><option value="">Seçiniz...</option><option>Yeni Tesis Kurulumu</option><option>Kapasite Artışı</option><option>Modernizasyon / Teknoloji Yenileme</option><option>Entegrasyon (Dikey Genişleme)</option><option>Ar-Ge Merkezi Kurulumu</option><option>Tarımsal İşleme Tesisi</option><option>Lojistik / Depolama Merkezi</option><option>Kırsal Turizm Tesisi</option><option>Yenilenebilir Enerji Tesisi</option><option>Diğer</option></select>
+    <small class="fi-hint"><i class="fas fa-info-circle"></i><b>Kapasite Artışı:</b> Mevcut kapasiteyi artırmak. <b>Modernizasyon:</b> Aynı kapasitede eski makineyi yenileme. <b>Entegrasyon:</b> Üretim zincirini dikey genişletme.</small></div>
+    <div class="fi"><label>Üretim Kapasitesi (Planlanan)</label><input id="f_kapasite" placeholder="Örn: 500 ton/yıl veya 1.000.000 adet/yıl">
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>Yıllık birim ve miktar belirtin. Kapasite Raporu'nda bu değer esas alınır.</small>
+    <small class="fi-doc"><i class="fas fa-file-alt"></i><b>Tam başvuruda:</b> Kapasite Raporu (PDF) — bağlı Ticaret veya Sanayi Odası'ndan alınır (2–4 hafta, ücretli)</small></div>
+    <div class="fi"><label>Önceki Teşvik Belgesi Var mı?</label>
+    <select id="f_onceki"><option value="">Seçiniz...</option><option value="evet">Evet, aktif / kapatılmış belge var</option><option value="hayır">Hayır, ilk başvuru</option></select>
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>Varsa program adı, belge no ve durum aşağıdaki notlar alanına yazın. Çakışan yatırımlar reddedilebilir.</small></div>
+  </div>
+</div>
+<div class="form-box navy">
+  <span class="form-lbl">C — YATIRIM YERİ VE KOŞULLARI</span>
+  <p class="form-sec-note"><b>Neden önemli?</b> Yatırım yapılacak ilin <b>teşvik bölgesi</b> (1–6) hibe oranını, vergi indirimini ve SGK destek süresini doğrudan belirler. Bölge 1 (İstanbul/Ankara) → %15 katkı; Bölge 6 (Ağrı/Van) → %50 katkı + %90 vergi indirimi + 10 yıl SGK desteği.</p>
+  <div class="g2">
+    <div class="fi"><label>Yatırım İli <span class="req">*</span></label>
+    <select id="f_il" onchange="checkUyarilar()"><option value="">Seçiniz...</option><option>İstanbul</option><option>Ankara</option><option>İzmir</option><option>Bursa</option><option>Kocaeli</option><option>Adana</option><option>Antalya</option><option>Gaziantep</option><option>Kayseri</option><option>Konya</option><option>Mersin</option><option>Balıkesir</option><option>Manisa</option><option>Samsun</option><option>Trabzon</option><option>Ağrı</option><option>Van</option><option>Diyarbakır</option><option>Şanlıurfa</option><option>Elazığ</option><option>Malatya</option><option>Erzurum</option><option>Ordu</option><option>Diğer</option></select></div>
+    <div class="fi"><label>Yatırım İlçesi</label><input id="f_ilce" placeholder="Tam ilçe adı">
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>İlçe bazında öncelikli kalkınma bölgesi veya IPARD alanı söz konusu olabilir.</small></div>
+    <div class="fi"><label>OSB İçinde mi? <span class="req">*</span></label>
+    <select id="f_osb" onchange="checkUyarilar()"><option value="">Seçiniz...</option><option value="evet">Evet, OSB parselim / tahsisim var</option><option value="hayır">Hayır, OSB dışında</option><option value="plan">Planlıyorum / Tahsis sürecindeyim</option></select>
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>OSB içi yatırımlar: ek elektrik indirimi + altyapı desteği + bazı bölgelerde ilave teşvik katsayısı.</small>
+    <small class="fi-doc"><i class="fas fa-file-alt"></i><b>Tam başvuruda:</b> OSB Tahsis Belgesi (PDF) — OSB Müdürlüğü'nden alınır</small></div>
+    <div class="fi"><label>OSB Adı (varsa)</label><input id="f_osb_adi" placeholder="Örn: Ankara OSTİM OSB"></div>
+    <div class="fi"><label>Arsa / Bina Durumu <span class="req">*</span></label>
+    <select id="f_arsa"><option value="">Seçiniz...</option><option>Tapu bende mevcut (kendi mülküm)</option><option>Kiralık (sözleşmeli)</option><option>OSB tahsisli</option><option>Henüz belirsiz</option></select>
+    <small class="fi-doc"><i class="fas fa-file-alt"></i><b>Tam başvuruda:</b> Tapu belgesi (Tapu Müdürlüğü) veya noter onaylı kira sözleşmesi (min. 10 yıl tercih edilir) + İmar Durumu Belgesi (Belediye)</small></div>
+    <div class="fi"><label>Planlanan Yeni İstihdam (kişi) <span class="req">*</span></label><input id="f_istihdam" type="number" min="0" placeholder="Net yeni çalışan sayısı">
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>Teşvik belgesinde taahhüt edilecek istihdam sayısı. SGK prim desteği bu sayı üzerinden hesaplanır. Taahhüt tutulmazsa teşvik iptal edilebilir.</small></div>
+  </div>
+</div>
+<div class="form-box gold">
+  <span class="form-lbl">D — MAKİNE, EKİPMAN VE YATIRIM TUTARLARI</span>
+  <p class="form-sec-note"><b>Neden önemli?</b> Toplam sabit yatırım tutarı ve bileşenleri teşvik hesabının temelidir. Her makine kalemi için ayrı proforma fatura gereklidir.</p>
+  <div class="g2">
+    <div class="fi"><label>Toplam Sabit Yatırım (TL) <span class="req">*</span></label><input id="f_yatirim" type="number" min="0" placeholder="Makine + Bina + Ekipman toplamı">
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>Sadece sabit yatırım (makine + ekipman + bina/inşaat); arazi ve işletme sermayesi dahil edilmez. Asgari: Bölgesel Teşvik için 500.000 TL; Stratejik Yatırım için 50M USD.</small></div>
+    <div class="fi"><label>Yerli Makine / Ekipman Tutarı (TL)</label><input id="f_yerli" type="number" min="0" placeholder="Yurt içi tedarikçiden alınacak">
+    <small class="fi-doc"><i class="fas fa-file-alt"></i><b>Tam başvuruda:</b> Her makine için ayrı proforma fatura (PDF, kaşeli-imzalı, marka/model/teknik özellik belirtilmiş)</small></div>
+    <div class="fi"><label>İnşaat / Bina Bedeli (TL)</label><input id="f_insaat" type="number" min="0" placeholder="Yeni yapı veya esaslı tadilat (kira değil)">
+    <small class="fi-doc"><i class="fas fa-file-alt"></i><b>Tam başvuruda:</b> Keşif özeti + ruhsatlı mimar/mühendis raporu (PDF)</small></div>
+    <div class="fi"><label>İthal Makine Kullanılacak mı? <span class="req">*</span></label>
+    <select id="f_imp" onchange="checkUyarilar()"><option value="">Seçiniz...</option><option value="evet">Evet, yurt dışından makine geliyor</option><option value="hayır">Hayır, tüm makineler yerli</option></select></div>
+    <div class="fi"><label>İthal Makine Tutarı (USD) (CIF İstanbul)</label><input id="f_imp_usd" type="number" min="0" placeholder="CIF İstanbul değeri, USD">
+    <small class="fi-crit"><i class="fas fa-exclamation-triangle"></i><b>Zorunlu belge:</b> Her ithal makine için GTİP kodlu proforma fatura (PDF, İngilizce + Türkçe çeviri, CIF İstanbul fiyatı belirtilmiş)</small></div>
+    <div class="fi"><label>Lisans / Know-How Bedeli (varsa, TL)</label><input id="f_lisans" type="number" min="0" placeholder="Teknoloji transfer ücreti">
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>Yatırım kapsamında teknoloji lisansı alınıyorsa belirtin; teşvik matrahına dahil edilebilir.</small></div>
+  </div>
+</div>
+<div class="form-box navy">
+  <span class="form-lbl">E — FİNANSAL DURUM (Fizibilite için)</span>
+  <p class="form-sec-note"><b>Neden önemli?</b> Geri ödeme kapasitesi analizi ve fizibilite raporunda kullanılır. Yaklaşık değer girmek yeterlidir; kesin değerler tam başvuruda YMM/SMMM imzalı belgelerle sunulur.</p>
+  <div class="g3">
+    <div class="fi"><label>Yıllık Net Satışlar / Ciro (TL)</label><input id="f_ciro" type="number" min="0" placeholder="Son mali yıl">
+    <small class="fi-doc"><i class="fas fa-file-alt"></i><b>Kaynak:</b> YMM/SMMM imzalı bilanço veya KDV beyannamesi özeti (muhasebeden PDF)</small></div>
+    <div class="fi"><label>EBITDA / Faaliyet Karı (TL)</label><input id="f_ebitda" type="number" min="0" placeholder="Vergi ve amortisman öncesi kar">
+    <small class="fi-doc"><i class="fas fa-file-alt"></i><b>Kaynak:</b> YMM/SMMM imzalı gelir tablosu (PDF)</small></div>
+    <div class="fi"><label>Mevcut Banka Kredisi (TL)</label><input id="f_kredi" type="number" min="0" placeholder="Toplam finansal borç">
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>Fizibilite ve borç ödeme kapasitesi analizinde kullanılır.</small></div>
+  </div>
+</div>`},
 
-  tubitak_1507:{label:'🧪 TÜBİTAK 1507 — KOBİ Ar-Ge',fields:`
-    <div class="form-box navy"><span class="form-lbl">FİRMA VE PROJE BİLGİLERİ</span>
-    <div class="g2">
-      <div class="fi"><label>Sektör <span class="req">*</span></label><select id="f_sektor"><option>Seçiniz...</option><option>Yazılım / Teknoloji</option><option>Üretim / İmalat</option><option>Diğer</option></select></div>
-      <div class="fi"><label>Çalışan Sayısı <span class="req">*</span></label><input id="f_calisan" type="number" min="0" placeholder="Max 249 (KOBİ)"></div>
-      <div class="fi"><label>Ar-Ge Personel Sayısı</label><input id="f_arge_pers" type="number" min="0" placeholder="0"></div>
-      <div class="fi"><label>Tahmini Bütçe (TL)</label><input id="f_butce" type="number" min="0" placeholder="500.000 – 1.000.000 TL"></div>
-      <div class="fi"><label>Proje Konusu <span class="req">*</span></label><input id="f_proje_konu" placeholder="Kısaca proje konusu"></div>
-      <div class="fi"><label>Daha önce TÜBİTAK aldınız mı?</label><select id="f_onceki_tub"><option>Seçiniz...</option><option>Evet</option><option>Hayır (ilk kez)</option></select></div>
-    </div>
-    <div class="uyari mavi"><i class="fas fa-info-circle"></i> <strong>TÜBİTAK 1507:</strong> 249'dan az çalışanı olan firmalar başvurabilir. Ar-Ge'ye yeni başlayan KOBİ'ler için idealdir.</div>
-    </div>`},
+/* ============================================================
+   2. TÜBİTAK 1501 — SANAYİ AR-GE PROJELERİ DESTEĞİ
+   ============================================================ */
+tubitak_1501:{label:'🔬 TÜBİTAK 1501 — Sanayi Ar-Ge',fields:`
+<div class="form-box navy">
+  <span class="form-lbl">A — FİRMA GENEL BİLGİLERİ</span>
+  <p class="form-sec-note"><b>TÜBİTAK 1501:</b> Tüm büyüklükteki firmalar başvurabilir. %60–75 oranında hibe; proje bütçesi genellikle 1M–30M TL aralığında. Çağrı bazlı veya sürekli çağrı olarak açılır.</p>
+  <div class="g2">
+    <div class="fi"><label>Vergi No (VKN) <span class="req">*</span></label><input id="f_vergi" placeholder="10 haneli VKN"></div>
+    <div class="fi"><label>Sektör <span class="req">*</span></label>
+    <select id="f_sektor"><option value="">Seçiniz...</option><option>Yazılım / Yapay Zeka / Siber Güvenlik</option><option>Elektronik / Mikro-Elektronik</option><option>Makine / İmalat / Robotik</option><option>Kimya / Malzeme / Nano-Teknoloji</option><option>Biyoteknoloji / İlaç / Tıbbi Cihaz</option><option>Enerji / Yenilenebilir Enerji</option><option>Tarım Teknolojileri (AgriTech)</option><option>Savunma Sanayii</option><option>Otomotiv / Elektrikli Araçlar</option><option>Havacılık / Uzay</option><option>Diğer</option></select></div>
+    <div class="fi"><label>Toplam Çalışan Sayısı <span class="req">*</span></label><input id="f_calisan" type="number" min="0" placeholder="Tüm çalışanlar (SGK bildirimli)">
+    <small class="fi-doc"><i class="fas fa-file-alt"></i><b>Kaynak:</b> SGK e-Bildirge → prim bordrosu son 3 ay (PDF)</small></div>
+    <div class="fi"><label>Ar-Ge Personel Sayısı <span class="req">*</span></label><input id="f_arge_pers" type="number" min="0" placeholder="Tam/yarı zamanlı Ar-Ge çalışanı">
+    <small class="fi-doc"><i class="fas fa-file-alt"></i><b>Tam başvuruda:</b> Her Ar-Ge personeli için CV (PDF) + SGK hizmet dökümü + diploma fotokopisi</small></div>
+    <div class="fi"><label>Firma Kuruluş Tarihi</label><input id="f_kurulus" type="date"></div>
+    <div class="fi"><label>PRODİS Kuruluş Bazlı Ön Kayıt Yapıldı mı? <span class="req">*</span></label>
+    <select id="f_prodis"><option value="">Seçiniz...</option><option value="evet">Evet, ön kayıt tamamlandı</option><option value="hayır">Hayır, henüz yapılmadı</option></select>
+    <small class="fi-crit"><i class="fas fa-exclamation-triangle"></i><b>KRİTİK:</b> Ön kayıt tamamlanmadan başvuru yapılamaz! <b>eteydeb.tubitak.gov.tr</b> → PRODİS sistemi üzerinden yapılır.</small></div>
+  </div>
+</div>
+<div class="form-box gold">
+  <span class="form-lbl">B — PROJE TANIMI</span>
+  <p class="form-sec-note"><b>Neden önemli?</b> Proje tanımı, hakem değerlendirmesinin temelini oluşturur. Teknik yenilik seviyesi (TRL), ticari potansiyel ve özgünlük ön plana çıkarılmalıdır.</p>
+  <div class="g2">
+    <div class="fi"><label>Proje Başlığı <span class="req">*</span></label><input id="f_proje_baslik" placeholder="Örn: XYZ Kompozit Malzeme Üretim Sürecinin Otomasyonu">
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>Net, özgün ve teknik içerikli bir başlık seçin.</small></div>
+    <div class="fi"><label>Proje Konusu / Özeti <span class="req">*</span></label><textarea id="f_proje_konu" placeholder="Çözdüğünüz sorun, önerilen çözüm ve teknik yenilik kısaca…" style="min-height:80px"></textarea></div>
+    <div class="fi"><label>Projenin Çözmeyi Hedeflediği Sorun</label><input id="f_sorun" placeholder="Endüstride mevcut sorun / boşluk nedir?"></div>
+    <div class="fi"><label>Teknoloji Hazırlık Seviyesi (TRL)</label>
+    <select id="f_trl"><option value="">Seçiniz...</option><option>TRL 1-2 (Temel araştırma / fikir aşaması)</option><option>TRL 3-4 (Kavram kanıtlama / prototip)</option><option>TRL 5-6 (Teknoloji doğrulama / demo)</option><option>TRL 7-8 (Sistem prototipi / ön ürün)</option></select>
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>TRL 3–6 arası projeler 1501 için en uygun aralıktır.</small></div>
+    <div class="fi"><label>Proje Süresi (ay) <span class="req">*</span></label>
+    <select id="f_sure"><option value="">Seçiniz...</option><option>12 ay</option><option>18 ay</option><option>24 ay</option><option>30 ay</option><option>36 ay</option></select>
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>1501 projeleri genellikle 18–36 ay sürer.</small></div>
+    <div class="fi"><label>Tahmini Proje Bütçesi (TL) <span class="req">*</span></label><input id="f_butce" type="number" min="0" placeholder="Min ~1.000.000 TL">
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>Personel + malzeme + ekipman + seyahat + genel gider toplamı. TÜBİTAK hibe oranı ~%60-75.</small></div>
+  </div>
+</div>
+<div class="form-box navy">
+  <span class="form-lbl">C — TEKNİK ALTYAPI VE İŞBİRLİKLERİ</span>
+  <div class="g2">
+    <div class="fi"><label>Patent / Faydalı Model Var mı?</label>
+    <select id="f_patent"><option value="">Seçiniz...</option><option value="evet">Evet (tescilli veya başvuruda)</option><option value="hayır">Hayır</option></select>
+    <small class="fi-doc"><i class="fas fa-file-alt"></i><b>Varsa kaynak:</b> TürkPatent belgesi (PDF) — patent.gov.tr → e-Hizmetler</small></div>
+    <div class="fi"><label>Üniversite / Ar-Ge Merkezi İşbirliği?</label>
+    <select id="f_uni"><option value="">Seçiniz...</option><option value="evet">Evet (üniversite / TTO ile)</option><option value="hayır">Hayır</option></select>
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>Üniversite iş birliği puan bonusu sağlar; ortak çıktılar (yayın, patent) değerlendirmede öne çıkar.</small></div>
+    <div class="fi"><label>Mevcut Ar-Ge Merkezi Belgesi?</label>
+    <select id="f_argemrk"><option value="">Seçiniz...</option><option value="evet">Evet, Bakanlık onaylı Ar-Ge Merkezi belgem var</option><option value="hayır">Hayır</option></select></div>
+    <div class="fi"><label>Daha Önce TÜBİTAK Projesi Tamamlandı mı?</label>
+    <select id="f_onceki_tub"><option value="">Seçiniz...</option><option>Evet, başarıyla tamamlandı</option><option>Evet, devam ediyor</option><option>Hayır, ilk proje</option></select>
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>Geçmiş başarılı TÜBİTAK projeleri puanlamada artı etkiler.</small></div>
+    <div class="fi"><label>Yıllık Ar-Ge Harcaması (TL)</label><input id="f_arge_harcama" type="number" min="0" placeholder="Son yıl Ar-Ge harcaması">
+    <small class="fi-doc"><i class="fas fa-file-alt"></i><b>Kaynak:</b> Muhasebe → Ar-Ge harcama tablosu veya TÜBİTAK geçmiş beyannameleri</small></div>
+    <div class="fi"><label>İhracat Yapıyor musunuz?</label>
+    <select id="f_ihracat"><option value="">Seçiniz...</option><option value="evet">Evet</option><option value="hayır">Hayır</option></select></div>
+  </div>
+</div>`},
 
-  tubitak_1512:{label:'💡 TÜBİTAK 1512 — BİGG Girişimci',fields:`
-    <div class="form-box navy"><span class="form-lbl">GİRİŞİMCİ VE FİKİR BİLGİLERİ</span>
-    <div class="g2">
-      <div class="fi"><label>Doğum Tarihi</label><input id="f_dogum" type="date"></div>
-      <div class="fi"><label>Eğitim Durumu</label><select id="f_egitim_dur"><option>Seçiniz...</option><option>Lisans</option><option>Yüksek Lisans</option><option>Doktora</option><option>Lise/Önlisans</option></select></div>
-      <div class="fi"><label>Girişim Fikri / Proje Konusu <span class="req">*</span></label><input id="f_proje_konu" placeholder="Teknoloji tabanlı iş fikrinizi kısaca açıklayın"></div>
-      <div class="fi"><label>Şirket Kuruldu mu?</label><select id="f_sirket"><option>Seçiniz...</option><option>Hayır (kurmayı planlıyorum)</option><option>Evet, yeni kuruldu (son 2 yıl)</option></select></div>
-      <div class="fi"><label>Üniversite ile Bağlantı?</label><select id="f_uni"><option>Seçiniz...</option><option>Evet (öğrenci/mezun/araştırmacı)</option><option>Hayır</option></select></div>
-      <div class="fi"><label>Talep Edilen Bütçe (TL)</label><input id="f_butce" type="number" placeholder="200.000 – 400.000 TL arası"></div>
-    </div>
-    <div class="uyari mavi"><i class="fas fa-info-circle"></i> <strong>BİGG:</strong> Üniversite-sanayi işbirliği ile teknoloji tabanlı girişimler için %100 hibe. Şirket kurulmadan da başvurulabilir.</div>
-    </div>`},
+/* ============================================================
+   3. TÜBİTAK 1507 — KOBİ AR-GE BAŞLANGIÇ
+   ============================================================ */
+tubitak_1507:{label:'🧪 TÜBİTAK 1507 — KOBİ Ar-Ge',fields:`
+<div class="form-box navy">
+  <span class="form-lbl">A — FİRMA VE KOBİ DURUMU</span>
+  <p class="form-sec-note"><b>TÜBİTAK 1507:</b> Sadece <b>249'dan az çalışan</b> olan KOBİ'ler başvurabilir. Ar-Ge'ye yeni başlayan KOBİ'ler için idealdir. Hibe oranı %75'e kadar çıkabilir. Bütçe 200K–1M TL.</p>
+  <div class="g2">
+    <div class="fi"><label>Vergi No (VKN) <span class="req">*</span></label><input id="f_vergi" placeholder="10 haneli VKN"></div>
+    <div class="fi"><label>Sektör <span class="req">*</span></label>
+    <select id="f_sektor"><option value="">Seçiniz...</option><option>Yazılım / Teknoloji / Yapay Zeka</option><option>Makine / Elektronik / Otomasyon</option><option>Kimya / Malzeme</option><option>Tarım / Gıda Teknolojisi</option><option>Sağlık / Medikal</option><option>Enerji / Çevre</option><option>Diğer Üretim/İmalat</option></select></div>
+    <div class="fi"><label>Toplam Çalışan Sayısı <span class="req">*</span></label><input id="f_calisan" type="number" min="0" placeholder="Max 249 (KOBİ şartı)">
+    <small class="fi-crit"><i class="fas fa-exclamation-triangle"></i>250 ve üzeri çalışan → 1507 için uygun değil; 1501 değerlendirin.</small></div>
+    <div class="fi"><label>Ar-Ge Personel Sayısı</label><input id="f_arge_pers" type="number" min="0" placeholder="En az 1 Ar-Ge personeli önerilir"></div>
+    <div class="fi"><label>Firma Kuruluş Tarihi</label><input id="f_kurulus" type="date">
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>Yeni firmalar 1507'ye başvurabilir; ancak teknik kapasitelerini ispatlamaları gerekir.</small></div>
+    <div class="fi"><label>PRODİS Ön Kayıt Yapıldı mı? <span class="req">*</span></label>
+    <select id="f_prodis"><option value="">Seçiniz...</option><option value="evet">Evet, ön kayıt tamamlandı</option><option value="hayır">Hayır</option></select>
+    <small class="fi-crit"><i class="fas fa-exclamation-triangle"></i><b>Zorunlu:</b> <b>eteydeb.tubitak.gov.tr</b> → PRODİS ön kaydı tamamlanmadan başvuru yapılamaz.</small></div>
+  </div>
+</div>
+<div class="form-box gold">
+  <span class="form-lbl">B — PROJE BİLGİLERİ</span>
+  <div class="g2">
+    <div class="fi"><label>Proje Başlığı <span class="req">*</span></label><input id="f_proje_baslik" placeholder="Özgün ve teknik içerikli başlık"></div>
+    <div class="fi"><label>Proje Konusu <span class="req">*</span></label><textarea id="f_proje_konu" placeholder="Sorun, çözüm önerisi ve teknik yenilik…" style="min-height:75px"></textarea></div>
+    <div class="fi"><label>Proje Süresi</label>
+    <select id="f_sure"><option value="">Seçiniz...</option><option>12 ay</option><option>18 ay</option><option>24 ay</option></select>
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>1507 projeleri genellikle 12–24 ay sürer.</small></div>
+    <div class="fi"><label>Tahmini Proje Bütçesi (TL) <span class="req">*</span></label><input id="f_butce" type="number" min="0" placeholder="200.000 – 1.000.000 TL">
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>Personel, malzeme, alet/teçhizat ve hizmet alımı bütçesi. TÜBİTAK ~%75 hibe sağlar.</small></div>
+    <div class="fi"><label>Üniversite / TTO İş Birliği?</label>
+    <select id="f_uni"><option value="">Seçiniz...</option><option value="evet">Evet</option><option value="hayır">Hayır</option></select></div>
+    <div class="fi"><label>Patent / Faydalı Model Var mı?</label>
+    <select id="f_patent"><option value="">Seçiniz...</option><option value="evet">Evet</option><option value="hayır">Hayır</option></select></div>
+    <div class="fi"><label>Daha Önce TÜBİTAK Desteği Alındı mı?</label>
+    <select id="f_onceki_tub"><option value="">Seçiniz...</option><option>Evet, başarıyla tamamlandı</option><option>Hayır, ilk başvuru</option></select></div>
+    <div class="fi"><label>Yıllık Ciro (TL)</label><input id="f_ciro" type="number" min="0" placeholder="Son mali yıl">
+    <small class="fi-doc"><i class="fas fa-file-alt"></i><b>Kaynak:</b> YMM/SMMM imzalı bilanço (PDF)</small></div>
+  </div>
+</div>`},
 
-  kosgeb_girisimci:{label:'🚀 KOSGEB Girişimci Desteği',fields:`
-    <div class="form-box navy"><span class="form-lbl">GİRİŞİMCİ BİLGİLERİ</span>
-    <div class="g2">
-      <div class="fi"><label>Doğum Tarihi <span class="req">*</span></label><input id="f_dogum" type="date"></div>
-      <div class="fi"><label>Cinsiyet</label><select id="f_cinsiyet"><option>Seçiniz...</option><option>Erkek</option><option>Kadın</option></select></div>
-      <div class="fi"><label>Girişimcilik Eğitimi (32 saat) <span class="req">*</span></label><select id="f_gir_egitim" onchange="checkUyarilar()"><option>Seçiniz...</option><option value="evet">Evet, aldım</option><option value="hayır">Hayır, almadım</option></select></div>
-      <div class="fi"><label>KOSGEB Kaydı <span class="req">*</span></label><select id="f_kosgeb" onchange="checkUyarilar()"><option>Seçiniz...</option><option value="evet">Evet</option><option value="hayır">Hayır</option></select></div>
-      <div class="fi"><label>İş Fikri / Faaliyet Konusu <span class="req">*</span></label><input id="f_proje_konu" placeholder="Ne üretecek / satacaksınız?"></div>
-      <div class="fi"><label>Şirket Kuruldu mu?</label><select id="f_sirket"><option>Seçiniz...</option><option>Hayır</option><option>Evet (son 3 yıl)</option></select></div>
-      <div class="fi"><label>Talep Edilen Destek (TL)</label><input id="f_yatirim" type="number" placeholder="Max 1.500.000 TL"></div>
-      <div class="fi"><label>Yatırım İli</label><select id="f_il"><option>Seçiniz...</option><option>İstanbul</option><option>Ankara</option><option>İzmir</option><option>Diğer</option></select></div>
-    </div>
-    <div class="uyari kirmizi"><i class="fas fa-exclamation-triangle"></i> <strong>Zorunlu:</strong> KOSGEB onaylı 32 saatlik girişimcilik eğitimini tamamlamadan başvuru yapılamaz!</div>
-    </div>`},
+/* ============================================================
+   4. TÜBİTAK 1512 — BİGG GİRİŞİMCİLİK
+   ============================================================ */
+tubitak_1512:{label:'💡 TÜBİTAK 1512 — BİGG Girişimci',fields:`
+<div class="form-box navy">
+  <span class="form-lbl">A — GİRİŞİMCİ KİŞİSEL BİLGİLERİ</span>
+  <p class="form-sec-note"><b>TÜBİTAK 1512 BİGG:</b> Teknoloji tabanlı bireysel girişimciler için %100 hibe (200K–400K TL). Şirket kurulmadan da başvurulabilir. Üniversite mezunu/öğrencisi/araştırmacısı olmak avantaj sağlar.</p>
+  <div class="g2">
+    <div class="fi"><label>TC Kimlik Numarası <span class="req">*</span></label><input id="f_tc" placeholder="11 haneli TC kimlik no"></div>
+    <div class="fi"><label>Doğum Tarihi <span class="req">*</span></label><input id="f_dogum" type="date">
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>≤35 yaş genç girişimci → bazı çağrılarda öncelik.</small></div>
+    <div class="fi"><label>Eğitim Durumu <span class="req">*</span></label>
+    <select id="f_egitim_dur"><option value="">Seçiniz...</option><option>Lisans (devam ediyor)</option><option>Lisans (mezun)</option><option>Yüksek Lisans (devam ediyor)</option><option>Yüksek Lisans (mezun)</option><option>Doktora (devam ediyor)</option><option>Doktora (mezun)</option><option>Lise / Önlisans</option></select></div>
+    <div class="fi"><label>Üniversite ve Bölüm</label><input id="f_uni_bolum" placeholder="Örn: ODTÜ – Bilgisayar Mühendisliği">
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>Üniversite bağlantısı (öğrenci, mezun, araştırmacı) BİGG için önemli avantaj.</small></div>
+    <div class="fi"><label>Üniversite / TTO Bağlantısı Var mı?</label>
+    <select id="f_uni"><option value="">Seçiniz...</option><option value="evet">Evet (TTO veya kuluçka merkezi ile)</option><option value="hayır">Hayır, bağımsız başvuru</option></select>
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>TTO üzerinden başvuru, destek alım sürecini kolaylaştırır.</small></div>
+    <div class="fi"><label>Sektör / Alan <span class="req">*</span></label>
+    <select id="f_sektor"><option value="">Seçiniz...</option><option>Yazılım / Uygulama / SaaS</option><option>Yapay Zeka / Makine Öğrenmesi</option><option>Biyoteknoloji / Sağlık Teknolojisi</option><option>Temiz Enerji / ClimateTech</option><option>AgriTech / Gıda Teknolojisi</option><option>Savunma / Uzay</option><option>FinTech</option><option>Diğer DeepTech</option></select></div>
+  </div>
+</div>
+<div class="form-box gold">
+  <span class="form-lbl">B — GİRİŞİM FİKRİ VE PLAN</span>
+  <div class="g2">
+    <div class="fi"><label>Girişim / Proje Adı</label><input id="f_proje_baslik" placeholder="Girişiminizin adı (varsa)"></div>
+    <div class="fi"><label>Girişim Fikri / Çözümü <span class="req">*</span></label><textarea id="f_proje_konu" placeholder="Ne sorunu çözüyorsunuz? Ürün/hizmet nasıl çalışıyor? Neden şu anda ve bu ekiple? (3–5 cümle)" style="min-height:90px"></textarea></div>
+    <div class="fi"><label>Şirket Kuruldu mu?</label>
+    <select id="f_sirket"><option value="">Seçiniz...</option><option>Hayır, kurmayı planlıyorum</option><option>Evet, yeni kuruldu (son 2 yıl içinde)</option></select>
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>Şirket kurulmadan başvurulabilir; kazanılması durumunda 6 ay içinde kurulması gerekir.</small></div>
+    <div class="fi"><label>Talep Edilen Destek Tutarı (TL)</label><input id="f_butce" type="number" min="0" placeholder="200.000 – 400.000 TL">
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>Personel, alet/malzeme, seyahat, hizmet alımı kalemlerinin tahmini toplamı.</small></div>
+    <div class="fi"><label>Patent / Fikri Mülkiyet Var mı?</label>
+    <select id="f_patent"><option value="">Seçiniz...</option><option value="evet">Evet (başvuruda veya tescilli)</option><option value="hayır">Hayır</option></select></div>
+    <div class="fi"><label>Mevcut Prototip / MVP Durumu</label>
+    <select id="f_prototip"><option value="">Seçiniz...</option><option>Henüz yok (fikir aşaması)</option><option>Kavram ispatı / mock-up hazır</option><option>Çalışan prototip var</option><option>MVP / beta sürüm var</option></select></div>
+  </div>
+</div>`},
 
-  kosgeb_kobigel:{label:'🏢 KOSGEB KOBİGEL',fields:`
-    <div class="form-box navy"><span class="form-lbl">FİRMA BİLGİLERİ</span>
-    <div class="g2">
-      <div class="fi"><label>Sektör <span class="req">*</span></label><select id="f_sektor"><option>Seçiniz...</option><option>Üretim</option><option>Hizmet</option><option>Ticaret</option><option>Tarım</option><option>Teknoloji</option></select></div>
-      <div class="fi"><label>Firma Kuruluş Tarihi</label><input id="f_kurulus" type="date"></div>
-      <div class="fi"><label>Çalışan Sayısı <span class="req">*</span></label><input id="f_calisan" type="number" min="0" placeholder="Max 249"></div>
-      <div class="fi"><label>KOSGEB Kaydı <span class="req">*</span></label><select id="f_kosgeb" onchange="checkUyarilar()"><option>Seçiniz...</option><option value="evet">Evet</option><option value="hayır">Hayır</option></select></div>
-      <div class="fi"><label>Proje Konusu <span class="req">*</span></label><input id="f_proje_konu" placeholder="Nerede destek istiyorsunuz?"></div>
-      <div class="fi"><label>Talep Edilen Destek (TL)</label><input id="f_yatirim" type="number" placeholder="1.000.000 – 2.000.000 TL"></div>
-      <div class="fi"><label>İl</label><select id="f_il"><option>Seçiniz...</option><option>İstanbul</option><option>Ankara</option><option>İzmir</option><option>Diğer</option></select></div>
-      <div class="fi"><label>Önceki KOSGEB Desteği?</label><select id="f_onceki"><option>Seçiniz...</option><option>Evet</option><option>Hayır</option></select></div>
-    </div></div>`},
+/* ============================================================
+   5. KOSGEB GİRİŞİMCİ DESTEĞİ
+   ============================================================ */
+kosgeb_girisimci:{label:'🚀 KOSGEB Girişimci Desteği',fields:`
+<div class="form-box navy">
+  <span class="form-lbl">A — GİRİŞİMCİ VE FİRMA BİLGİLERİ</span>
+  <p class="form-sec-note"><b>KOSGEB Girişimci Desteği:</b> Son 2 yılda kurulmuş işletmelere max <b>1.500.000 TL geri ödemesiz hibe</b>. Makine, ekipman, yazılım, kira ve personel destekler. <b>Girişimcilik Eğitim Sertifikası (32 saat) ZORUNLUDUR.</b></p>
+  <div class="g2">
+    <div class="fi"><label>TC Kimlik No <span class="req">*</span></label><input id="f_tc" placeholder="11 haneli TC kimlik no"></div>
+    <div class="fi"><label>Doğum Tarihi <span class="req">*</span></label><input id="f_dogum" type="date">
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>≤30 yaş → genç girişimci önceliği. Kadın → ek puan.</small></div>
+    <div class="fi"><label>Cinsiyet</label>
+    <select id="f_cinsiyet" onchange="checkUyarilar()"><option value="">Seçiniz...</option><option>Erkek</option><option>Kadın</option></select>
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>Kadın girişimci → KOSGEB'de ek puan ve öncelik.</small></div>
+    <div class="fi"><label>Eğitim Durumu</label>
+    <select id="f_egitim_dur"><option value="">Seçiniz...</option><option>İlköğretim</option><option>Lise / Meslek Lisesi</option><option>Önlisans</option><option>Lisans</option><option>Yüksek Lisans / Doktora</option></select></div>
+    <div class="fi"><label>Firma Kuruluş Tarihi <span class="req">*</span></label><input id="f_kurulus" type="date">
+    <small class="fi-crit"><i class="fas fa-exclamation-triangle"></i><b>Şart:</b> Firma son 2 yıl içinde kurulmuş olmalıdır. Daha eski firmalar Girişimci Desteği'ne başvuramaz.</small></div>
+    <div class="fi"><label>KOSGEB Kaydı Var mı? <span class="req">*</span></label>
+    <select id="f_kosgeb" onchange="checkUyarilar()"><option value="">Seçiniz...</option><option value="evet">Evet, aktif kayıt var</option><option value="hayır">Hayır</option></select>
+    <small class="fi-doc"><i class="fas fa-search"></i><b>Kayıt / sorgulama:</b> kobi.kosgeb.gov.tr → e-Hizmetler → KOBİ Bilgi Sistemi</small></div>
+    <div class="fi"><label>Girişimcilik Eğitim Sertifikası (32 saat) <span class="req">*</span></label>
+    <select id="f_egitim" onchange="checkUyarilar()"><option value="">Seçiniz...</option><option value="evet">Evet, KOSGEB onaylı sertifikam var</option><option value="hayır">Hayır, almadım</option></select>
+    <small class="fi-crit"><i class="fas fa-graduation-cap"></i><b>ZORUNLU ŞART:</b> KOSGEB onaylı 32 saatlik girişimcilik eğitim sertifikası olmadan başvuru kesinlikle yapılamaz! Ücretsiz kayıt: <b>kosgeb.gov.tr → Eğitim Takvimi</b></small></div>
+  </div>
+</div>
+<div class="form-box gold">
+  <span class="form-lbl">B — SEKTÖR VE İŞ PLANI</span>
+  <div class="g2">
+    <div class="fi"><label>Sektör <span class="req">*</span></label>
+    <select id="f_sektor"><option value="">Seçiniz...</option><option>Yazılım / Teknoloji</option><option>Üretim / İmalat</option><option>Tarım / Gıda</option><option>Tekstil / Moda</option><option>Hizmet / Danışmanlık</option><option>Sağlık</option><option>Turizm / Yiyecek-İçecek</option><option>E-Ticaret / Perakende</option><option>Diğer</option></select></div>
+    <div class="fi"><label>İş Fikri / Faaliyet Konusu <span class="req">*</span></label><textarea id="f_proje_konu" placeholder="Ürün/hizmet nedir? Hedef müşteri kimdir? Neden bu pazar? (3–5 cümle)" style="min-height:80px"></textarea></div>
+    <div class="fi"><label>Yatırım Yapılacak İl <span class="req">*</span></label>
+    <select id="f_il"><option value="">Seçiniz...</option><option>İstanbul</option><option>Ankara</option><option>İzmir</option><option>Bursa</option><option>Kocaeli</option><option>Adana</option><option>Antalya</option><option>Gaziantep</option><option>Kayseri</option><option>Konya</option><option>Samsun</option><option>Trabzon</option><option>Erzurum</option><option>Diyarbakır</option><option>Diğer</option></select></div>
+    <div class="fi"><label>İstihdam Planı (Kişi)</label><input id="f_istihdam" type="number" min="0" placeholder="Destekle birlikte alınacak çalışan sayısı">
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>Personel gideri desteği kapsamında belirtilen çalışan sayısı taahhüt içerir.</small></div>
+    <div class="fi"><label>Talep Edilen Destek Tutarı (TL)</label><input id="f_yatirim" type="number" min="0" placeholder="Max 1.500.000 TL">
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>Makine, ekipman, yazılım lisansı, kira ve personel giderleri desteklenir.</small></div>
+    <div class="fi"><label>Destekten Talep Edilecek Kalemler</label>
+    <select id="f_destek_kalem"><option value="">Seçiniz... (birden fazla alanı nota yazın)</option><option>Makine / Ekipman alımı</option><option>Yazılım ve lisans</option><option>Kira (6 aya kadar)</option><option>Personel (net ücret 6 ay)</option><option>Danışmanlık hizmetleri</option><option>Hepsi / Karma</option></select></div>
+  </div>
+  <div class="uyari mavi"><i class="fas fa-info-circle"></i> <strong>Jüri Sunumu:</strong> Başvuru kabul edilirse jüri önünde iş planı sunumu yapılacaktır. Proforma faturalar, pazar araştırması ve finansal projeksiyon hazır tutun.</div>
+</div>
+<div class="form-box navy">
+  <span class="form-lbl">C — FİNANSAL DURUM (Yeni firmalar için yaklaşık)</span>
+  <div class="g2">
+    <div class="fi"><label>Makine/Ekipman Listesi ve Tahmini Bütçe</label><textarea id="f_makine_liste" placeholder="Örn: CNC tezgahı – 250.000 TL, yazılım lisansı – 50.000 TL, kira 6 ay – 60.000 TL" style="min-height:70px"></textarea>
+    <small class="fi-doc"><i class="fas fa-file-alt"></i><b>Tam başvuruda:</b> Her kalem için ayrı proforma fatura (PDF, kaşeli-imzalı, tedarikçiden)</small></div>
+    <div class="fi"><label>Bankada Öz Kaynak / Nakit (TL)</label><input id="f_ozkaynak" type="number" min="0" placeholder="Destek dışı öz kaynağınız">
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>Toplam yatırımın %40'ına kadar öz kaynak katkısı beklenir.</small></div>
+  </div>
+</div>`},
 
-  ihracat:{label:'🌍 İhracat Destekleri',fields:`
-    <div class="form-box navy"><span class="form-lbl">MEVCUT DURUM VE HEDEFLER</span>
-    <div class="g2">
-      <div class="fi"><label>Sektör <span class="req">*</span></label><select id="f_sektor"><option>Seçiniz...</option><option>Üretim / İmalat</option><option>Tekstil</option><option>Makine / Metal</option><option>Tarım / Gıda</option><option>Diğer</option></select></div>
-      <div class="fi"><label>Mevcut İhracat Durumu <span class="req">*</span></label><select id="f_ihracat"><option>Seçiniz...</option><option>Evet, ihracat yapıyorum</option><option>Hayır, yeni başlayacağım</option></select></div>
-      <div class="fi"><label>Hedef Ülkeler <span class="req">*</span></label><input id="f_ulkeler" placeholder="Almanya, ABD, İngiltere..."></div>
-      <div class="fi"><label>İhracatçı Birliği Üyesi?</label><select id="f_ihbirlik" onchange="checkUyarilar()"><option>Seçiniz...</option><option value="evet">Evet</option><option value="hayır">Hayır</option></select></div>
-      <div class="fi"><label>Hangi Destek İsteniyor? <span class="req">*</span></label><select id="f_ihracat_tip"><option>Seçiniz...</option><option>Fuar Katılım Desteği</option><option>Pazar Araştırması</option><option>Yurt Dışı Ofis/Mağaza</option><option>UR-GE Projesi</option><option>E-İhracat</option></select></div>
-      <div class="fi"><label>Planlanan Fuar / Pazar Tarihi</label><input id="f_fuar_tarih" type="date"></div>
-      <div class="fi"><label>Yıllık Ciro (TL)</label><input id="f_ciro" type="number" min="0" placeholder="0"></div>
-      <div class="fi"><label>Yıllık İhracat Cirosu (USD)</label><input id="f_ihciro" type="number" min="0" placeholder="0"></div>
-    </div>
-    <div class="uyari kirmizi"><i class="fas fa-exclamation-triangle"></i> <strong>ZORUNLU:</strong> Fuar katılımı ve yurt dışı ofis desteği için kolaydestek.ticaret.gov.tr üzerinden ÖN İZİN alınmadan yapılan faaliyetler desteklenmez!</div>
-    </div>`},
+/* ============================================================
+   6. KOSGEB KOBİGEL
+   ============================================================ */
+kosgeb_kobigel:{label:'🏢 KOSGEB KOBİGEL',fields:`
+<div class="form-box navy">
+  <span class="form-lbl">A — FİRMA PROFİLİ</span>
+  <p class="form-sec-note"><b>KOSGEB KOBİGEL:</b> 1–249 çalışanı olan KOBİ'lere proje bazlı <b>1M–2M TL hibe desteği</b>. Üretim, hizmet, tarım ve teknoloji sektörlerinde uygulanabilir. KOSGEB kaydı ve KOBİ beyannamesi zorunludur.</p>
+  <div class="g2">
+    <div class="fi"><label>Vergi No (VKN) <span class="req">*</span></label><input id="f_vergi" placeholder="10 haneli VKN"></div>
+    <div class="fi"><label>Sektör <span class="req">*</span></label>
+    <select id="f_sektor"><option value="">Seçiniz...</option><option>Üretim / İmalat</option><option>Hizmet / Danışmanlık</option><option>Tarım / Gıda</option><option>Teknoloji / Yazılım</option><option>Turizm</option><option>Lojistik</option><option>Sağlık</option><option>Diğer</option></select></div>
+    <div class="fi"><label>Firma Kuruluş Tarihi <span class="req">*</span></label><input id="f_kurulus" type="date">
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>KOBİGEL için asgari 1 yıl faaliyet şartı aranır.</small></div>
+    <div class="fi"><label>Toplam Çalışan Sayısı <span class="req">*</span></label><input id="f_calisan" type="number" min="0" placeholder="1 – 249 (KOBİ şartı)">
+    <small class="fi-crit"><i class="fas fa-exclamation-triangle"></i>250 ve üzeri çalışan → KOBİ statüsü dışında, KOBİGEL uygun değil.</small></div>
+    <div class="fi"><label>KOSGEB Kaydı <span class="req">*</span></label>
+    <select id="f_kosgeb" onchange="checkUyarilar()"><option value="">Seçiniz...</option><option value="evet">Evet, aktif</option><option value="hayır">Hayır</option></select>
+    <small class="fi-doc"><i class="fas fa-search"></i><b>Kayıt / sorgulama:</b> kobi.kosgeb.gov.tr → e-Hizmetler</small></div>
+    <div class="fi"><label>Önceki KOSGEB Desteği Var mı?</label>
+    <select id="f_onceki"><option value="">Seçiniz...</option><option value="evet">Evet (detay nota yazın)</option><option value="hayır">Hayır</option></select>
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>Önceki destek kapandıysa yeni başvuru yapılabilir; açık destek varsa ek başvuru kısıtlanabilir.</small></div>
+    <div class="fi"><label>Yıllık Ciro (TL)</label><input id="f_ciro" type="number" min="0" placeholder="Son mali yıl">
+    <small class="fi-doc"><i class="fas fa-file-alt"></i><b>Kaynak:</b> YMM/SMMM imzalı bilanço (PDF)</small></div>
+  </div>
+</div>
+<div class="form-box gold">
+  <span class="form-lbl">B — PROJE VE DESTEK TALEBİ</span>
+  <div class="g2">
+    <div class="fi"><label>Proje Konusu / Destek Amacı <span class="req">*</span></label><textarea id="f_proje_konu" placeholder="Örn: Üretim hattı modernizasyonu için CNC tezgahı alımı ve yazılım entegrasyonu" style="min-height:75px"></textarea></div>
+    <div class="fi"><label>Hedeflenen Destek Türü</label>
+    <select id="f_destek_tur"><option value="">Seçiniz...</option><option>Makine / Ekipman Alımı</option><option>Yazılım / ERP / CRM</option><option>Danışmanlık / Eğitim</option><option>Test / Belgelendirme</option><option>Sertifikasyon (ISO, CE)</option><option>Kalıp / Aparat</option><option>Karma (birden fazla kalem)</option></select></div>
+    <div class="fi"><label>Talep Edilen Destek Tutarı (TL) <span class="req">*</span></label><input id="f_yatirim" type="number" min="0" placeholder="1.000.000 – 2.000.000 TL">
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>Destek oranı %60'a kadar çıkabilir. Kalan %40 öz kaynak ile karşılanmalıdır.</small></div>
+    <div class="fi"><label>Yatırım / Faaliyet İli</label>
+    <select id="f_il"><option value="">Seçiniz...</option><option>İstanbul</option><option>Ankara</option><option>İzmir</option><option>Bursa</option><option>Kocaeli</option><option>Gaziantep</option><option>Kayseri</option><option>Konya</option><option>Samsun</option><option>Diğer</option></select></div>
+    <div class="fi"><label>Planlanan İstihdam Artışı (kişi)</label><input id="f_istihdam" type="number" min="0" placeholder="Destekle yaratılacak yeni çalışan sayısı"></div>
+    <div class="fi"><label>İhracat Yapıyor musunuz?</label>
+    <select id="f_ihracat"><option value="">Seçiniz...</option><option value="evet">Evet</option><option value="hayır">Hayır</option></select></div>
+  </div>
+  <div class="uyari mavi"><i class="fas fa-info-circle"></i> <strong>Hazırlık:</strong> Başvuru öncesi makine/hizmet proforma faturaları, proje iş planı ve son yıl bilanço hazır olmalıdır.</div>
+</div>`},
 
-  ipard:{label:'🌾 IPARD / TKDK Destekleri',fields:`
-    <div class="form-box navy"><span class="form-lbl">TARIMSAL YATIRIM BİLGİLERİ</span>
-    <div class="g2">
-      <div class="fi"><label>Yatırım Konusu <span class="req">*</span></label><select id="f_ipard_konu"><option>Seçiniz...</option><option>Süt Üretimi ve İşleme</option><option>Kırmızı Et Üretimi ve İşleme</option><option>Kanatlı Et Üretimi ve İşleme</option><option>Meyve-Sebze İşleme</option><option>Kırsal Turizm (Pansiyon/Restoran)</option><option>Yenilenebilir Enerji (Biyogaz)</option><option>Arıcılık</option><option>Tıbbi ve Aromatik Bitkiler</option></select></div>
-      <div class="fi"><label>Yatırım Tutarı (TL) <span class="req">*</span></label><input id="f_yatirim" type="number" min="0" placeholder="0"></div>
-      <div class="fi"><label>İl <span class="req">*</span></label><input id="f_il_ipard" placeholder="Yatırım yapılacak il (81 il geçerli)"></div>
-      <div class="fi"><label>Arazi/Tesis Durumu</label><select id="f_arazi"><option>Seçiniz...</option><option>Tapu bende mevcut</option><option>Kiralık (sözleşmeli)</option><option>Henüz belirsiz</option></select></div>
-      <div class="fi"><label>Mevcut Kapasite / Stok</label><input id="f_kapasite" placeholder="Örn: 50 büyükbaş, 2 ha arazi"></div>
-      <div class="fi"><label>Hedef Kapasite (yatırım sonrası)</label><input id="f_hedef_kapasite" placeholder="Örn: 200 büyükbaş"></div>
-      <div class="fi"><label>Çiftçi / Kooperatif Kaydı?</label><select id="f_ciftci"><option>Seçiniz...</option><option>Evet (çiftçi kayıt belgeli)</option><option>Hayır</option></select></div>
-      <div class="fi"><label>Çağrı Dönemine Başvurmak İstediğiniz Yıl</label><select id="f_cagri_yil"><option>2026</option><option>2027</option><option>Bilmiyorum</option></select></div>
-    </div>
-    <div class="uyari mavi"><i class="fas fa-info-circle"></i> <strong>IPARD III:</strong> Çağrı ilanı dönemi yılda 1-2 kez açılır. Çiftçi Kayıt Sistemi (ÇKS) kaydı veya kooperatif üyeliği büyük avantaj sağlar.</div>
-    </div>`},
+/* ============================================================
+   7. İHRACAT DESTEKLERİ
+   ============================================================ */
+ihracat:{label:'🌍 İhracat Destekleri',fields:`
+<div class="form-box navy">
+  <span class="form-lbl">A — FİRMA VE İHRACAT PROFİLİ</span>
+  <p class="form-sec-note"><b>İhracat Destekleri (Ticaret Bakanlığı / Kolay Destek):</b> Fuar katılımı, pazar araştırması, yurt dışı ofis/mağaza, UR-GE, e-ihracat ve tanıtım destekleri. <b>Fuar ve yurt dışı ofis desteği için ÖN İZİN ZORUNLUDUR.</b></p>
+  <div class="g2">
+    <div class="fi"><label>Vergi No (VKN) / TC <span class="req">*</span></label><input id="f_vergi" placeholder="VKN veya TC"></div>
+    <div class="fi"><label>Ana Sektör / Ürün Grubu <span class="req">*</span></label>
+    <select id="f_sektor"><option value="">Seçiniz...</option><option>Üretim / İmalat</option><option>Tekstil / Hazır Giyim / Deri</option><option>Makine / Metal / Çelik</option><option>Tarım / Gıda / İçecek</option><option>Kimya / Plastik / Boya</option><option>Elektronik / Elektrik</option><option>Mobilya / Orman Ürünleri</option><option>Sağlık / Medikal / Kozmetik</option><option>İnşaat Malzemeleri</option><option>Hizmet İhracatı (Yazılım, Danışmanlık)</option><option>Diğer</option></select></div>
+    <div class="fi"><label>Mevcut İhracat Durumu <span class="req">*</span></label>
+    <select id="f_ihracat"><option value="">Seçiniz...</option><option>Evet, aktif ihracatçıyım</option><option>Hayır, ilk kez ihracat yapacağım</option><option>Geçmişte yaptım, şu an yapmıyorum</option></select></div>
+    <div class="fi"><label>Yıllık İhracat Cirosu (USD)</label><input id="f_ihciro" type="number" min="0" placeholder="Son 12 ay FOB ihracat">
+    <small class="fi-doc"><i class="fas fa-file-alt"></i><b>Kaynak:</b> Gümrük beyannamesi özeti veya TCMB döviz alım belgesi dökümü (muhasebeden PDF)</small></div>
+    <div class="fi"><label>İhracatçı Birliği Üyesi misiniz? <span class="req">*</span></label>
+    <select id="f_ihbirlik" onchange="checkUyarilar()"><option value="">Seçiniz...</option><option value="evet">Evet</option><option value="hayır">Hayır</option></select>
+    <small class="fi-crit"><i class="fas fa-exclamation-triangle"></i>Kolay Destek kapsamındaki fuar ve pazar araştırması destekleri için birlik üyeliği zorunludur. (OAİB, İTKİB, DKIB, vb.)</small></div>
+    <div class="fi"><label>Hangi Birlik? (varsa)</label><input id="f_birlik_adi" placeholder="Örn: OAİB, İTKİB, GSHİB…"></div>
+  </div>
+</div>
+<div class="form-box gold">
+  <span class="form-lbl">B — TALEP EDİLEN DESTEK TÜRÜ</span>
+  <p class="form-sec-note">Aşağıdan birden fazla destek türü seçebilirsiniz. Her destek türü için farklı ön koşul ve belgeler söz konusudur.</p>
+  <div class="g2">
+    <div class="fi"><label>Hangi Destek İsteniyor? <span class="req">*</span></label>
+    <select id="f_ihracat_tip"><option value="">Seçiniz...</option><option>Yurt Dışı Fuar Katılım Desteği</option><option>Pazar Araştırması / Alım Heyeti</option><option>Yurt Dışı Ofis / Mağaza Açma Desteği</option><option>UR-GE (Uluslararası Rekabetçiliğin Geliştirilmesi) Projesi</option><option>E-İhracat Desteği</option><option>Uluslararası Nitelikli Fuar Organizasyonu</option><option>Marka / Tanıtım Desteği</option><option>Birden fazla destek istiyorum</option></select></div>
+    <div class="fi"><label>Hedef Ülkeler / Pazarlar <span class="req">*</span></label><input id="f_ulkeler" placeholder="Almanya, BAE, ABD, Japonya…">
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>Öncelikli 2–3 ülkeyi belirtin; pazar araştırması raporunda bu ülkeler esas alınır.</small></div>
+    <div class="fi"><label>Planlanan Fuar Adı ve Tarihi</label><input id="f_fuar_adi" placeholder="Örn: HANNOVER MESSE, Nisan 2026">
+    <small class="fi-crit"><i class="fas fa-exclamation-triangle"></i><b>⚠️ KRİTİK:</b> Fuar desteği için fuara gitmeden ÖNCE <b>kolaydestek.ticaret.gov.tr</b> üzerinden ön izin alınması şarttır. Sonradan başvuru kesinlikle kabul edilmez!</small></div>
+    <div class="fi"><label>Fuar Ön İzni Alındı mı?</label>
+    <select id="f_fuar" onchange="checkUyarilar()"><option value="">Seçiniz...</option><option value="evet_izin">Evet, ön izin aldım</option><option value="evet_almadim">Evet, katılacağım ama ön izin almadım</option><option value="hayır">Hayır, fuar desteği istemiyorum</option></select></div>
+    <div class="fi"><label>Yurt Dışı Ofis / Depo Planı</label>
+    <select id="f_yurtdisi_ofis"><option value="">Seçiniz...</option><option value="evet">Evet, ofis / showroom / depo açmak istiyorum</option><option value="hayır">Hayır</option></select>
+    <small class="fi-warn"><i class="fas fa-info-circle"></i>Yurt dışı ofis desteği için de açılıştan önce ön izin zorunludur.</small></div>
+    <div class="fi"><label>UR-GE Projesi İlginiz Var mı?</label>
+    <select id="f_urge"><option value="">Seçiniz...</option><option value="evet">Evet, sektörel işbirliği ile UR-GE projesine katılmak istiyorum</option><option value="hayır">Hayır</option></select>
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>UR-GE: En az 5 firmanın sektörel işbirliğiyle hazırladığı, 3 yıla kadar desteklenen ihracat geliştirme projesi.</small></div>
+  </div>
+</div>
+<div class="form-box navy">
+  <span class="form-lbl">C — FİNANSAL VE TİCARİ BİLGİLER</span>
+  <div class="g2">
+    <div class="fi"><label>Yıllık Net Ciro (TL)</label><input id="f_ciro" type="number" min="0" placeholder="Son mali yıl"></div>
+    <div class="fi"><label>Hedef İhracat Tutarı (USD / yıl)</label><input id="f_hedef_ihracat" type="number" min="0" placeholder="1 yıl içinde hedeflenen FOB ihracat">
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>Pazar araştırması ve fizibilite raporunda bu hedef kullanılır.</small></div>
+    <div class="fi"><label>Üretim / Hizmet Kapasitesi</label><input id="f_kapasite" placeholder="Örn: 500 ton/yıl veya yıllık 10.000 birim">
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>İhracat kapasitesi değerlendirmesinde kullanılır.</small></div>
+    <div class="fi"><label>Mevcut Uluslararası Sertifikalar</label><input id="f_sertifika" placeholder="ISO 9001, CE, FDA, Halal, Organic…">
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>Uluslararası sertifikalar hedef pazarlara giriş kolaylığı sağlar; raporda değerlendirilir.</small></div>
+  </div>
+</div>`},
 
-  genel:{label:'❓ Genel Danışmanlık',fields:`
-    <div class="form-box navy"><span class="form-lbl">GENEL BİLGİLER</span>
-    <div class="g2">
-      <div class="fi"><label>Sektör</label><select id="f_sektor"><option>Seçiniz...</option><option>Yazılım / Teknoloji</option><option>Üretim / İmalat</option><option>Tarım / Gıda</option><option>Tekstil</option><option>Makine / Metal</option><option>Enerji</option><option>Sağlık</option><option>Turizm</option><option>Lojistik</option><option>Diğer</option></select></div>
-      <div class="fi"><label>Firma Büyüklüğü</label><select id="f_buyukluk"><option>Seçiniz...</option><option>Girişim (henüz kurulmadı)</option><option>Mikro (1-9 çalışan)</option><option>Küçük (10-49)</option><option>Orta (50-249)</option><option>Büyük (250+)</option></select></div>
-      <div class="fi"><label>Tahmini Yatırım Tutarı</label><select id="f_yatirim_aralik"><option>Seçiniz...</option><option>500.000 TL altı</option><option>500K – 2M TL</option><option>2 – 10M TL</option><option>10 – 50M TL</option><option>50M TL üzeri</option></select></div>
-      <div class="fi"><label>İlgilendiğiniz Destek Türü</label><select id="f_ilgi"><option>Seçiniz...</option><option>Hibe (geri ödemesiz)</option><option>Geri ödemeli destek</option><option>Vergi indirimi</option><option>Bilmiyorum, danışmanım</option></select></div>
-    </div></div>`}
+/* ============================================================
+   8. IPARD / TKDK
+   ============================================================ */
+ipard:{label:'🌾 IPARD / TKDK Destekleri',fields:`
+<div class="form-box navy">
+  <span class="form-lbl">A — BAŞVURU SAHİBİ VE YATIRIM KONUSU</span>
+  <p class="form-sec-note"><b>IPARD III (2023–2027):</b> AB destekli, %50–75 hibe oranı, 81 ilde geçerli. Tarım, hayvancılık, gıda işleme, kırsal turizm ve yenilenebilir enerji alanlarında. <b>Çağrı ilanı dönemlerinde başvurulur (yılda 1–2 kez).</b> Yaş sınırı: 18–65.</p>
+  <div class="g2">
+    <div class="fi"><label>TC Kimlik No <span class="req">*</span></label><input id="f_tc" placeholder="11 haneli TC kimlik no">
+    <small class="fi-crit"><i class="fas fa-exclamation-triangle"></i>Yaş sınırı: <b>18–65</b> yaş arası. 65 yaş üstü başvuru yapamaz.</small></div>
+    <div class="fi"><label>Doğum Tarihi <span class="req">*</span></label><input id="f_dogum" type="date"></div>
+    <div class="fi"><label>Vergi No (VKN) (şirket ise)</label><input id="f_vergi" placeholder="Şirket başvurularında"></div>
+    <div class="fi"><label>Başvuru Tipi <span class="req">*</span></label>
+    <select id="f_bas_tip"><option value="">Seçiniz...</option><option>Gerçek kişi (çiftçi / girişimci)</option><option>Şirket (Ltd., A.Ş., vb.)</option><option>Kooperatif / Birlik</option></select></div>
+    <div class="fi"><label>Yatırım Konusu <span class="req">*</span></label>
+    <select id="f_ipard_konu"><option value="">Seçiniz...</option><option>Süt Üretimi ve İşleme Tesisi</option><option>Kırmızı Et Üretimi ve İşleme Tesisi</option><option>Kanatlı Et Üretimi ve İşleme Tesisi</option><option>Meyve-Sebze İşleme, Depolama ve Paketleme</option><option>Su Ürünleri (Balık) Yetiştiriciliği ve İşleme</option><option>Kırsal Turizm (Butik Otel, Pansiyon, Restoran)</option><option>Yenilenebilir Enerji (Biyogaz, Güneş, Rüzgar)</option><option>Arıcılık ve Arı Ürünleri</option><option>Tıbbi ve Aromatik Bitkiler Üretimi ve İşleme</option><option>Sulama Altyapısı</option><option>Tarım Makineleri ve Ekipmanları</option><option>Diğer Tarımsal Yatırım</option></select></div>
+    <div class="fi"><label>Yatırım İli <span class="req">*</span></label><input id="f_il_ipard" placeholder="81 ilin tamamı IPARD kapsamındadır"></div>
+    <div class="fi"><label>Yatırım İlçesi</label><input id="f_ilce" placeholder="Tam ilçe adı"></div>
+    <div class="fi"><label>Başvurmak İstediğiniz Çağrı Yılı</label>
+    <select id="f_cagri_yil"><option value="">Seçiniz...</option><option>2026 (açık / yaklaşan çağrı)</option><option>2027</option><option>Bilmiyorum, bilgi almak istiyorum</option></select></div>
+  </div>
+</div>
+<div class="form-box gold">
+  <span class="form-lbl">B — MEVCUT KAPASİTE VE ARAZİ DURUMU</span>
+  <p class="form-sec-note"><b>Neden önemli?</b> IPARD'da mevcut kapasite ve arazi/tesis belgesi başvuruyu güçlendirir. Çiftçi Kayıt Sistemi (ÇKS) kaydı veya kooperatif üyeliği puan avantajı sağlar.</p>
+  <div class="g2">
+    <div class="fi"><label>Mevcut Kapasite / Varlık <span class="req">*</span></label><input id="f_kapasite" placeholder="Örn: 50 büyükbaş, 5 ha arazi, 100 kovan">
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>Mevcut üretim altyapısını ve varlıklarını belirtin.</small></div>
+    <div class="fi"><label>Hedef Kapasite (Yatırım Sonrası) <span class="req">*</span></label><input id="f_hedef_kapasite" placeholder="Örn: 200 büyükbaş, 500 ton/yıl işleme">
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>Yatırım tamamlandığında ulaşılacak kapasite.</small></div>
+    <div class="fi"><label>Arazi / Tesis Durumu <span class="req">*</span></label>
+    <select id="f_arazi"><option value="">Seçiniz...</option><option>Tapu bende mevcut (kendi mülküm)</option><option>Kiralık (noter onaylı sözleşmeli, min. 10 yıl)</option><option>Ortak mülkiyet</option><option>Henüz belirsiz</option></select>
+    <small class="fi-doc"><i class="fas fa-file-alt"></i><b>Tam başvuruda:</b> Tapu belgesi (Tapu Müdürlüğü) veya noter onaylı kira sözleşmesi (PDF) + İmar Durumu Belgesi (Belediye/İl Tarım Müdürlüğü)</small></div>
+    <div class="fi"><label>Çiftçi Kayıt Sistemi (ÇKS) Kaydı?</label>
+    <select id="f_cks"><option value="">Seçiniz...</option><option value="evet">Evet, ÇKS belgem var</option><option value="hayır">Hayır</option></select>
+    <small class="fi-doc"><i class="fas fa-file-alt"></i><b>Nereden alınır:</b> Tarım ve Orman İl / İlçe Müdürlüğü — ÇKS belgesi (PDF)</small></div>
+    <div class="fi"><label>TÜRKVET / Hayvancılık Kaydı (varsa)?</label>
+    <select id="f_turkvet"><option value="">Seçiniz...</option><option value="evet">Evet, TÜRKVET işletme kayıtlıyım</option><option value="hayır">Hayır</option><option value="ilgisiz">Hayvancılık yatırımı değil</option></select>
+    <small class="fi-doc"><i class="fas fa-file-alt"></i><b>Nereden alınır:</b> Tarım ve Orman İl Müdürlüğü — TÜRKVET işletme tescil belgesi (PDF)</small></div>
+    <div class="fi"><label>Kooperatif / Birlik Üyeliği?</label>
+    <select id="f_koop"><option value="">Seçiniz...</option><option value="evet">Evet</option><option value="hayır">Hayır</option></select>
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>Kooperatif / birlik üyeliği bazı IPARD tedbirlerinde ek puan sağlar.</small></div>
+  </div>
+</div>
+<div class="form-box navy">
+  <span class="form-lbl">C — YATIRIM TUTARI VE FİNANSMAN</span>
+  <div class="g2">
+    <div class="fi"><label>Toplam Yatırım Tutarı (TL) <span class="req">*</span></label><input id="f_yatirim" type="number" min="0" placeholder="Makine + inşaat + ekipman toplamı">
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>IPARD III hibe oranı %50 (bazı tedbirlerde %65–75). Min. yatırım tutarı: ~100.000 TL; max: tedbirler arası farklıdır.</small></div>
+    <div class="fi"><label>Makine / Ekipman Kalemi ve Tutarı (TL)</label><textarea id="f_makine_liste" placeholder="Örn: Süt soğutma tankı – 300.000 TL, Pastörizatör – 450.000 TL" style="min-height:65px"></textarea>
+    <small class="fi-doc"><i class="fas fa-file-alt"></i><b>Tam başvuruda:</b> Her kalem için ayrı proforma fatura (PDF, kaşeli-imzalı)</small></div>
+    <div class="fi"><label>İnşaat / Yapı Bedeli (TL)</label><input id="f_insaat" type="number" min="0" placeholder="Yeni bina veya esaslı tadilat">
+    <small class="fi-doc"><i class="fas fa-file-alt"></i><b>Tam başvuruda:</b> Ruhsatlı mimar/mühendis tarafından hazırlanmış mimari proje ve keşif özeti (PDF)</small></div>
+    <div class="fi"><label>ÇED (Çevresel Etki Değerlendirmesi) Gerekli mi?</label>
+    <select id="f_ced"><option value="">Seçiniz...</option><option value="evet">Evet, ÇED belgesi var</option><option value="muaf">Muafiyet belgesi var</option><option value="bilmiyorum">Bilmiyorum</option></select>
+    <small class="fi-doc"><i class="fas fa-file-alt"></i><b>Nereden alınır:</b> Büyük tesisler için Çevre ve Şehircilik İl Müdürlüğü. Küçük tesisler "ÇED Gerekli Değildir" kararı alır.</small></div>
+    <div class="fi"><label>Öz Finansman / Banka Kredisi Planı</label>
+    <select id="f_finansman"><option value="">Seçiniz...</option><option>Tamamen öz kaynak</option><option>Kısmen banka kredisi, kısmen öz kaynak</option><option>Tarım kredi (TKK / Ziraat Bankası)</option><option>Henüz belirsiz</option></select>
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>IPARD hibe %50 öder; kalan %50 öz kaynak veya kredi ile karşılanmalıdır.</small></div>
+    <div class="fi"><label>Vergi / SGK Borcu Var mı?</label>
+    <select id="f_borc"><option value="">Seçiniz...</option><option value="hayır">Hayır, borç yok</option><option value="evet">Evet, borç var</option></select>
+    <small class="fi-crit"><i class="fas fa-exclamation-triangle"></i><b>Şart:</b> Başvuru anında vergi ve SGK borcu bulunmamalıdır. Borç varsa yapılandırma yapılmalıdır.</small></div>
+  </div>
+</div>`},
+
+/* ============================================================
+   9. GENEL DANIŞMANLIK / PROGRAM TESPİTİ
+   ============================================================ */
+genel:{label:'❓ Genel Danışmanlık — Program Tespiti',fields:`
+<div class="form-box navy">
+  <span class="form-lbl">A — FİRMA GENEL PROFİLİ</span>
+  <p class="form-sec-note">Hangi programın size uygun olduğundan emin değilseniz bu formu doldurun. Danışmanımız mevcut durumunuzu değerlendirerek en uygun 2–3 programı size önerecektir.</p>
+  <div class="g2">
+    <div class="fi"><label>Sektör</label>
+    <select id="f_sektor"><option value="">Seçiniz...</option><option>Yazılım / Teknoloji</option><option>Üretim / İmalat</option><option>Tarım / Gıda / Hayvancılık</option><option>Tekstil</option><option>Makine / Metal</option><option>Enerji</option><option>Sağlık</option><option>Turizm</option><option>Lojistik</option><option>Diğer</option></select></div>
+    <div class="fi"><label>Firma Büyüklüğü</label>
+    <select id="f_buyukluk"><option value="">Seçiniz...</option><option>Henüz kurulmadı (girişim fikri)</option><option>Mikro (1–9 çalışan)</option><option>Küçük (10–49 çalışan)</option><option>Orta (50–249 çalışan)</option><option>Büyük (250+ çalışan)</option></select></div>
+    <div class="fi"><label>Tahmini Yatırım / Proje Tutarı</label>
+    <select id="f_yatirim_aralik"><option value="">Seçiniz...</option><option>500.000 TL altı</option><option>500K – 2M TL</option><option>2M – 10M TL</option><option>10M – 50M TL</option><option>50M TL üzeri</option></select></div>
+    <div class="fi"><label>Firma Kuruluş Tarihi</label><input id="f_kurulus" type="date">
+    <small class="fi-hint"><i class="fas fa-info-circle"></i>≤2 yıl → KOSGEB Girişimci; ≥1 yıl → KOBİGEL; ≥3 yıl → YTB; herhangi bir yaş → TÜBİTAK, IPARD.</small></div>
+    <div class="fi"><label>İhracat Yapıyor musunuz?</label>
+    <select id="f_ihracat"><option value="">Seçiniz...</option><option value="evet">Evet</option><option value="hayır">Hayır / Hedefliyoruz</option></select></div>
+    <div class="fi"><label>Ar-Ge / İnovasyon Faaliyeti Var mı?</label>
+    <select id="f_arge"><option value="">Seçiniz...</option><option value="evet">Evet, Ar-Ge projemiz var</option><option value="hayır">Hayır</option></select></div>
+    <div class="fi"><label>Tarımsal Faaliyet Var mı?</label>
+    <select id="f_tarim"><option value="">Seçiniz...</option><option value="evet">Evet</option><option value="hayır">Hayır</option></select></div>
+    <div class="fi"><label>İlgilendiğiniz Destek Türü</label>
+    <select id="f_ilgi"><option value="">Seçiniz...</option><option>Geri ödemesiz hibe (makine, ekipman)</option><option>Ar-Ge proje hibes</option><option>Yatırım katkısı ve vergi indirimi</option><option>İhracat desteği</option><option>Tarımsal yatırım hibesi</option><option>Bilmiyorum, sizi dinlemek istiyorum</option></select></div>
+  </div>
+</div>
+<div class="form-box gold">
+  <span class="form-lbl">B — ÖNCELİKLİ HEDEF VE BEKLENTİLER</span>
+  <div class="fi"><label>Bize Kısaca Anlatın</label>
+  <textarea id="f_proje_konu" placeholder="Planladığınız yatırım, projeniz veya almak istediğiniz destek hakkında kısa bilgi verin… Hangi soruyu cevaplamak istiyorsunuz?" style="min-height:90px"></textarea></div>
+  <div class="g2">
+    <div class="fi"><label>En Kısa Ne Zaman Başlayabilirsiniz?</label>
+    <select id="f_baslangic"><option value="">Seçiniz...</option><option>Hemen (1 ay içinde)</option><option>1–3 ay içinde</option><option>3–6 ay içinde</option><option>6 ay sonra</option></select></div>
+    <div class="fi"><label>Daha Önce Teşvik / Hibe Aldınız mı?</label>
+    <select id="f_onceki"><option value="">Seçiniz...</option><option value="evet">Evet</option><option value="hayır">Hayır, ilk kez başvuruyorum</option></select></div>
+  </div>
+</div>`}
 };
-
 function selectSrv(srv){
   secilenHizmet=srv;
   // Seçilen butonu işaretle
@@ -1253,11 +1652,70 @@ function getFormData(){
 function checkUyarilar(){
   const div=el('formUyarilar');if(!div)return;
   let h='';
-  if(gv('f_imp')==='evet') h+=`<div class="uyari sari"><i class="fas fa-info-circle"></i> <strong>İthal Makine:</strong> Her makine için GTİP kodlu proforma fatura zorunludur.</div>`;
-  if(gv('f_ihbirlik')==='hayır'&&gv('f_ihracat')==='Evet') h+=`<div class="uyari sari"><i class="fas fa-globe"></i> İhracat destekleri için İhracatçı Birliği üyeliği gereklidir.</div>`;
-  if(gv('f_kosgeb')==='hayır') h+=`<div class="uyari sari"><i class="fas fa-building"></i> KOSGEB destekleri için e-hizmet.kosgeb.gov.tr üzerinden firma kaydı yaptırın.</div>`;
-  if(gv('f_gir_egitim')==='hayır') h+=`<div class="uyari kirmizi"><i class="fas fa-graduation-cap"></i> KOSGEB Girişimci Desteği için <strong>KOSGEB onaylı 32 saatlik eğitim şarttır</strong>. Kayıtlı kurumlara başvurun.</div>`;
-  if(gv('f_osb')==='evet') h+=`<div class="uyari mavi"><i class="fas fa-check-circle"></i> OSB içi yatırımlar ek vergi ve elektrik avantajlarından yararlanır.</div>`;
+
+  // İthal Makine
+  if(gv('f_imp')==='evet')
+    h+=`<div class="uyari sari"><i class="fas fa-info-circle"></i> <strong>İthal Makine:</strong> Her makine için ayrı <strong>GTİP kodlu proforma fatura</strong> (PDF, İngilizce + Türkçe çeviri, CIF İstanbul fiyatlı) zorunludur.</div>`;
+
+  // Fuar ön izin almadı ama katılacak
+  if(gv('f_fuar')==='evet_almadim')
+    h+=`<div class="uyari kirmizi"><i class="fas fa-exclamation-triangle"></i> <strong>⚠️ FUAR ÖN İZNİ ALINMADI!</strong> Fuara gitmeden ÖNCE <strong>kolaydestek.ticaret.gov.tr</strong> üzerinden ön izin alın. Aksi hâlde fuar desteği alınamaz!</div>`;
+
+  // Fuar ön izin bilgisi genel
+  if(gv('f_ihracat_tip')==='Yurt Dışı Fuar Katılım Desteği')
+    h+=`<div class="uyari kirmizi"><i class="fas fa-exclamation-triangle"></i> <strong>⚠️ ÖN İZİN ZORUNLU:</strong> Fuar katılım desteği için fuara gitmeden önce <strong>kolaydestek.ticaret.gov.tr</strong> üzerinden ön izin alınması şarttır!</div>`;
+
+  // İhracatçı birliği yok ama ihracat desteği istiyor
+  if(gv('f_ihbirlik')==='hayır')
+    h+=`<div class="uyari sari"><i class="fas fa-globe"></i> <strong>İhracatçı Birliği Üyeliği:</strong> Kolay Destek kapsamındaki fuar ve pazar araştırması destekleri için birlik üyeliği (OAİB, İTKİB, DKIB vb.) zorunludur.</div>`;
+
+  // KOSGEB kaydı yok
+  if(gv('f_kosgeb')==='hayır')
+    h+=`<div class="uyari sari"><i class="fas fa-building"></i> <strong>KOSGEB Kaydı Yok:</strong> Tüm KOSGEB destekleri için aktif kayıt şarttır. <strong>kobi.kosgeb.gov.tr</strong> → e-Hizmetler → KOBİ Bilgi Sistemi</div>`;
+
+  // Girişimci eğitimi yok
+  if(gv('f_egitim')==='hayır')
+    h+=`<div class="uyari kirmizi"><i class="fas fa-graduation-cap"></i> <strong>⚠️ Girişimcilik Eğitimi Eksik:</strong> KOSGEB Girişimci Desteği için <strong>KOSGEB onaylı 32 saatlik eğitim sertifikası</strong> zorunludur. Ücretsiz kayıt: <strong>kosgeb.gov.tr → Eğitim Takvimi</strong></div>`;
+
+  // PRODİS ön kaydı yok
+  if(gv('f_prodis')==='hayır')
+    h+=`<div class="uyari kirmizi"><i class="fas fa-flask"></i> <strong>⚠️ PRODİS Ön Kaydı Yapılmamış:</strong> TÜBİTAK başvurusu öncesi <strong>eteydeb.tubitak.gov.tr</strong> → PRODİS Kuruluş Bazlı Ön Kayıt tamamlanmalıdır. Bu adım atlanırsa başvuru yapılamaz!</div>`;
+
+  // OSB avantajı
+  if(gv('f_osb')==='evet')
+    h+=`<div class="uyari mavi"><i class="fas fa-check-circle"></i> <strong>OSB Avantajı:</strong> OSB içi yatırımlar ek elektrik indirimi, altyapı desteği ve bazı bölgelerde ilave teşvik katsayısı avantajından yararlanır. Tam başvuruda OSB Tahsis Belgesi (PDF) istenecektir.</div>`;
+
+  // OSB planlıyor
+  if(gv('f_osb')==='plan')
+    h+=`<div class="uyari mavi"><i class="fas fa-info-circle"></i> <strong>OSB Tahsisi:</strong> Süreç tamamlandığında OSB Müdürlüğü'nden Tahsis Belgesi (PDF) alınması gerekecektir.</div>`;
+
+  // Cinsiyet kadın
+  if(gv('f_cinsiyet')==='Kadın')
+    h+=`<div class="uyari mavi"><i class="fas fa-star"></i> <strong>Kadın Girişimci Önceliği:</strong> KOSGEB programlarında ek puan, bazı IPARD çağrılarında özel kontenjan hakkınız bulunmaktadır.</div>`;
+
+  // Vergi/SGK borcu var
+  if(gv('f_borc')==='evet')
+    h+=`<div class="uyari kirmizi"><i class="fas fa-exclamation-triangle"></i> <strong>⚠️ Vergi/SGK Borcu:</strong> IPARD başvuru anında vergi ve SGK borcunun bulunmaması şarttır. Yapılandırma yaptırın.</div>`;
+
+  // 250+ çalışan → KOBİ dışı
+  const cal = parseInt(gv('f_calisan')||'0');
+  if(cal>=250 && (secilenHizmet==='tubitak_1507'||secilenHizmet==='kosgeb_girisimci'||secilenHizmet==='kosgeb_kobigel'))
+    h+=`<div class="uyari kirmizi"><i class="fas fa-exclamation-triangle"></i> <strong>⚠️ KOBİ Sınırı Aşıldı:</strong> 250+ çalışan ile bu programa başvurulamaz. TÜBİTAK 1501 veya Yatırım Teşvik Belgesi değerlendirilebilir.</div>`;
+
+  // Bölge bilgisi (YTB için)
+  if(secilenHizmet==='yatirim'){
+    const il=gv('f_il')||'';
+    const b6=['Ağrı','Van','Muş','Bitlis','Iğdır','Hakkari','Şırnak','Bayburt'];
+    const b5=['Diyarbakır','Şanlıurfa','Siirt','Batman','Adıyaman','Elazığ','Malatya','Bingöl','Tunceli','Erzurum','Erzincan','Artvin','Ardahan','Kars'];
+    const b1=['İstanbul','Ankara','İzmir','Bursa','Kocaeli','Antalya'];
+    if(b6.some(x=>il.includes(x)))
+      h+=`<div class="uyari mavi"><i class="fas fa-map-marker-alt"></i> <strong>Bölge 6 — Maksimum Teşvik:</strong> %50 yatırım katkısı + %90 vergi indirimi + 10 yıl SGK desteği + faiz desteği!</div>`;
+    else if(b5.some(x=>il.includes(x)))
+      h+=`<div class="uyari mavi"><i class="fas fa-map-marker-alt"></i> <strong>Bölge 5:</strong> %40 katkı + %80 vergi indirimi + 7 yıl SGK + faiz desteği.</div>`;
+    else if(b1.some(x=>il.includes(x)))
+      h+=`<div class="uyari sari"><i class="fas fa-map-marker-alt"></i> <strong>Bölge 1 — Temel Teşvik:</strong> %15 yatırım katkısı. Üst bölgelerdeki illerde daha yüksek oranlar geçerlidir.</div>`;
+  }
+
   div.innerHTML=h;
 }
 
@@ -2339,23 +2797,4 @@ function renderDokumanlar(){
           <p>${d.aciklama||''} ${d.hizmet&&d.hizmet!=='tumu'?'<span style="background:#E8EDF5;color:#2E4A7D;padding:2px 7px;border-radius:20px;font-size:10px">'+d.hizmet+'</span>':''} <span style="color:#9CA3AF;font-size:10px">${d.tarih||''}</span></p>
         </div>
         <div class="doc-actions">
-          <a href="${d.url}" target="_blank" class="btn-navy btn-sm" style="text-decoration:none"><i class="fas fa-external-link-alt"></i> Aç / İndir</a>
-        </div>
-      </div>`;
-    }).join('')}
-    </div>`;
-  }).join('');
-}
-
-// ================================================================
-// 12. INIT
-// ================================================================
-document.addEventListener('DOMContentLoaded',()=>{
-  renderHomeBlog();
-  updateVisCounter();
-  renderDuyuruBanner();
-  trackVisit('anaSayfa');
-});
-</script>
-</body>
-</html>
+          <a href="${d.url}" target="_blank" class="btn-navy btn-sm" style="text-decoration:none"><i class="fas fa-external-link-alt
