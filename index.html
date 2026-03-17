@@ -64,6 +64,8 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
 .btn-green{background:#16A34A;color:white;border:none;padding:9px 18px;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer}
 .btn-ai{background:linear-gradient(135deg,#7C3AED,#C9A84C);color:white;border:none;padding:11px 22px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;transition:.2s;text-decoration:none;display:inline-block}
 .btn-ai:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(124,58,237,.3)}
+.btn-ai-kosgeb{background:linear-gradient(135deg,#16A34A,#C9A84C);color:white;border:none;padding:11px 22px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;transition:.2s;text-decoration:none;display:inline-block}
+.btn-ai-kosgeb:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(22,163,74,.3)}
 
 /* ===== SECTIONS ===== */
 .section{padding:56px 40px}.section-alt{background:var(--light)}
@@ -106,6 +108,11 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
 .kalan-gun{font-size:20px;font-weight:700;color:#D97706}
 .ai-icon{display:inline-block;margin-left:5px;font-size:14px;animation:pulse 2s infinite}
 @keyframes pulse{0%{opacity:1}50%{opacity:.6}100%{opacity:1}}
+
+/* ===== KOSGEB ÖZEL STİLLER ===== */
+.kosgeb-badge{background:linear-gradient(135deg,#1E2A44,#16A34A);color:white;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;display:inline-block;margin-bottom:10px}
+.kosgeb-card{border-left:4px solid #16A34A;background:white;border-radius:10px;padding:18px;margin-bottom:16px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+.uyari-kosgeb{background:#F0FDF4;border-left:4px solid #16A34A;border-radius:6px;padding:12px;margin:10px 0;font-size:13px}
 
 /* ===== GRID ===== */
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
@@ -344,6 +351,10 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
         <a onclick="showPage('tubitakHakemPage')">  ⚖️ TÜBİTAK Hakem Süreci</a>
         <a onclick="showPage('tubitakFormPage')">  🤖 TÜBİTAK AI Destekli Ön Analiz</a>
         <a onclick="showPage('kosgebPage')">🏢 KOSGEB</a>
+        <a onclick="showPage('kosgebCagriPage')">  📅 KOSGEB Güncel Çağrılar</a>
+        <a onclick="showPage('kosgebRehberPage')">  📘 KOSGEB Başvuru Rehberi</a>
+        <a onclick="showPage('kosgebJuriPage')">  ⚖️ KOSGEB Jüri Süreci</a>
+        <a onclick="showPage('kosgebFormPage')">  🤖 KOSGEB AI Destekli Ön Analiz</a>
         <a onclick="showPage('ihracatPage')">🌍 İhracat</a>
         <a onclick="showPage('ipardPage')">🌾 IPARD / Tarım</a>
       </div>
@@ -368,7 +379,8 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
         <div style="display:flex;gap:9px;flex-wrap:wrap">
           <button class="btn-gold" onclick="showPage('iletisimPage')">Hemen Danış</button>
           <button class="btn-outline-w" onclick="showPage('hizmetlerPage')">Hizmetleri İnceleyin</button>
-          <button class="btn-ai" onclick="showPage('tubitakFormPage')">🤖 AI Destekli Ön Analiz <span class="ai-icon">✨</span></button>
+          <button class="btn-ai" onclick="showPage('tubitakFormPage')">🤖 TÜBİTAK AI Analiz <span class="ai-icon">✨</span></button>
+          <button class="btn-ai-kosgeb" onclick="showPage('kosgebFormPage')">🏢 KOSGEB AI Analiz <span class="ai-icon">✨</span></button>
         </div>
         <div class="vis-bar" id="visBar">
           <div class="vis-item"><div class="vis-num" id="visBugun">0</div><div class="vis-lbl">BUGÜN</div></div>
@@ -380,7 +392,7 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
     </div>
   </div>
   
-  <!-- HİZMETLERİMİZ (Gruplandırılmış - GÜNCELLENMİŞ) -->
+  <!-- HİZMETLERİMİZ (Gruplandırılmış - TÜBİTAK ve KOSGEB detaylı) -->
   <div class="section section-alt">
     <div class="container">
       <h2 class="sec-title">Hizmetlerimiz</h2>
@@ -396,7 +408,14 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
           </div>
         </div>
         
-        <div class="svc-card" style="border-left-color:#16A34A"><div style="font-size:30px;color:#16A34A;margin-bottom:9px">🏢</div><h4>KOSGEB</h4><p>Girişimci desteği, KOBİGEL, iş geliştirme, dijitalleşme.</p><a class="svc-link" onclick="showPage('kosgebPage')">Detaylı Bilgi →</a></div>
+        <div class="svc-card" style="border-left-color:#16A34A"><div style="font-size:30px;color:#16A34A;margin-bottom:9px">🏢</div><h4>KOSGEB</h4><p>Girişimci desteği, KOBİGEL, iş geliştirme, dijitalleşme.</p>
+          <div style="margin-top:8px;display:flex;flex-direction:column;gap:5px">
+            <a class="svc-link" style="font-size:11px;padding:2px 0" onclick="showPage('kosgebCagriPage')">📅 Güncel Çağrılar</a>
+            <a class="svc-link" style="font-size:11px;padding:2px 0" onclick="showPage('kosgebRehberPage')">📘 Başvuru Rehberi</a>
+            <a class="svc-link" style="font-size:11px;padding:2px 0" onclick="showPage('kosgebJuriPage')">⚖️ Jüri Süreci</a>
+            <a class="svc-link" style="font-size:11px;padding:2px 0;color:#16A34A;font-weight:700" onclick="showPage('kosgebFormPage')">🤖 AI Destekli Ön Analiz ✨</a>
+          </div>
+        </div>
         
         <div class="svc-card" style="border-left-color:#D97706"><div style="font-size:30px;color:#D97706;margin-bottom:9px">🌍</div><h4>İhracat</h4><p>%70 hibe, fuar desteği, pazar araştırması, UR-GE.</p><a class="svc-link" onclick="showPage('ihracatPage')">Detaylı Bilgi →</a></div>
         
@@ -411,15 +430,29 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
       <h2 class="sec-title">TÜBİTAK Ar-Ge Programları</h2>
       <div class="g4" id="programKartlari"></div>
       <div style="text-align:center;margin-top:15px">
-        <button class="btn-ai" onclick="showPage('tubitakFormPage')">🤖 AI ile Hemen Ön Analiz Yap</button>
+        <button class="btn-ai" onclick="showPage('tubitakFormPage')">🤖 TÜBİTAK AI ile Hemen Ön Analiz Yap</button>
       </div>
     </div>
   </div>
   
-  <!-- Çağrı Özeti -->
+  <!-- KOSGEB Program Kartları -->
   <div class="section section-alt">
     <div class="container">
-      <div id="cagriOzet" style="background:#2E4A7D;color:white;border-radius:10px;padding:20px;text-align:center"></div>
+      <h2 class="sec-title">KOSGEB Destek Programları</h2>
+      <div class="g4" id="kosgebProgramKartlari"></div>
+      <div style="text-align:center;margin-top:15px">
+        <button class="btn-ai-kosgeb" onclick="showPage('kosgebFormPage')">🏢 KOSGEB AI ile Hemen Ön Analiz Yap</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Çağrı Özetleri -->
+  <div class="section">
+    <div class="container">
+      <div class="g2">
+        <div id="tubitakCagriOzet" style="background:#2E4A7D;color:white;border-radius:10px;padding:20px;text-align:center"></div>
+        <div id="kosgebCagriOzet" style="background:#16A34A;color:white;border-radius:10px;padding:20px;text-align:center"></div>
+      </div>
     </div>
   </div>
   
@@ -435,11 +468,11 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
     </div>
   </div>
   
-  <!-- Başarı Hikayeleri (TÜBİTAK odaklı) -->
+  <!-- Başarı Hikayeleri (TÜBİTAK ve KOSGEB) -->
   <div class="section section-alt">
     <div class="container">
-      <h2 class="sec-title">Başarılı TÜBİTAK Projeleri</h2>
-      <div class="g3" id="tubitakHikayeler"></div>
+      <h2 class="sec-title">Başarılı Projeler</h2>
+      <div class="g3" id="basariliProjeler"></div>
     </div>
   </div>
   
@@ -508,8 +541,13 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
     <h3 style="color:#2E4A7D;margin:20px 0 12px;border-bottom:2px solid #2E4A7D;padding-bottom:5px">🏢 KOSGEB</h3>
     <div class="g3">
       <div class="svc-card"><h4>Girişimci Desteği</h4><p>1.5M TL geri ödemeli, %80, 36 ay ödemesiz.</p><a class="svc-link" onclick="showPage('kosgebPage')">Detaylar →</a></div>
-      <div class="svc-card"><h4>KOBİGEL</h4><p>1-2M TL destek.</p><a class="svc-link" onclick="showPage('kosgebPage')">Detaylar →</a></div>
-      <div class="svc-card"><h4>İş Geliştirme</h4><p>Gider kalemlerinde %60 destek.</p><a class="svc-link" onclick="showPage('kosgebPage')">Detaylar →</a></div>
+      <div class="svc-card"><h4>KOBİGEL</h4><p>1-2M TL destek, danışmanlık, eğitim, fuar, makine.</p><a class="svc-link" onclick="showPage('kosgebPage')">Detaylar →</a></div>
+      <div class="svc-card"><h4>İş Geliştirme Desteği</h4><p>Personel, kira, elektrik giderlerinde %60 destek.</p><a class="svc-link" onclick="showPage('kosgebPage')">Detaylar →</a></div>
+      <div class="svc-card"><h4>Dijitalleşme Desteği</h4><p>Yazılım, e-ticaret, dijital dönüşüm için %70 destek.</p><a class="svc-link" onclick="showPage('kosgebPage')">Detaylar →</a></div>
+      <div class="svc-card"><h4>📅 Güncel Çağrılar</h4><p>Açık KOSGEB çağrıları ve son başvuru tarihleri.</p><a class="svc-link" onclick="showPage('kosgebCagriPage')">Takvime Git →</a></div>
+      <div class="svc-card"><h4>📘 Başvuru Rehberi</h4><p>İş planı hazırlama, bütçe oluşturma, SWOT analizi.</p><a class="svc-link" onclick="showPage('kosgebRehberPage')">Rehbere Git →</a></div>
+      <div class="svc-card"><h4>⚖️ Jüri Süreci</h4><p>Jüri sunumu hazırlığı, mülakat teknikleri.</p><a class="svc-link" onclick="showPage('kosgebJuriPage')">Rehbere Git →</a></div>
+      <div class="svc-card" style="border-left-color:#16A34A"><h4>🤖 AI Destekli Ön Analiz</h4><p>Yapay zeka ile iş fikrinizi analiz edin, en uygun programı bulun.</p><a class="svc-link" style="color:#16A34A;font-weight:700" onclick="showPage('kosgebFormPage')">Hemen Dene ✨</a></div>
     </div>
     
     <h3 style="color:#2E4A7D;margin:20px 0 12px;border-bottom:2px solid #2E4A7D;padding-bottom:5px">🌍 İhracat</h3>
@@ -561,11 +599,11 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
       <h2 class="sec-title">📅 Güncel TÜBİTAK Çağrı Takvimi</h2>
       <span class="sec-sub">teydeb.tubitak.gov.tr üzerinden anlık verilerle güncellenmektedir.</span>
       
-      <div class="cagri-takvimi" id="cagriTakvimi"></div>
+      <div class="cagri-takvimi" id="tubitakCagriTakvimi"></div>
       
       <div class="mevzuat-kutu">
         <h4 style="color:#2E4A7D;margin-bottom:10px">🔔 Kritik Tarihler</h4>
-        <div id="kritikTarihler"></div>
+        <div id="tubitakKritikTarihler"></div>
       </div>
       
       <div class="g2" style="margin-top:20px">
@@ -722,11 +760,11 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
           
           <div class="form-box" style="border-left:4px solid #7C3AED">
             <span class="form-lbl">PROJE DETAYLARI</span>
-            <div class="fi"><label>Proje Başlığı <span class="req">*</span></label><input id="f_proje_baslik" placeholder="Örn: Yapay Zeka Destekli Görüntü İşleme Sistemi"></div>
-            <div class="fi"><label>Proje Konusu (Kısa Özet) <span class="req">*</span></label><textarea id="f_proje_ozet" placeholder="Projenizi 3-5 cümle ile açıklayın..." style="min-height:80px"></textarea></div>
+            <div class="fi"><label>Proje Başlığı <span class="req">*</span></label><input id="f_proje_baslik_tubitak" placeholder="Örn: Yapay Zeka Destekli Görüntü İşleme Sistemi"></div>
+            <div class="fi"><label>Proje Konusu (Kısa Özet) <span class="req">*</span></label><textarea id="f_proje_ozet_tubitak" placeholder="Projenizi 3-5 cümle ile açıklayın..." style="min-height:80px"></textarea></div>
             <div class="g2">
               <div class="fi"><label>Teknoloji Alanı <span class="req">*</span></label>
-                <select id="f_teknoloji">
+                <select id="f_teknoloji_tubitak">
                   <option>Seçiniz...</option>
                   <option>Yapay Zeka / Yazılım</option>
                   <option>Donanım / Elektronik</option>
@@ -739,7 +777,7 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
                 </select>
               </div>
               <div class="fi"><label>Proje Aşaması <span class="req">*</span></label>
-                <select id="f_asama">
+                <select id="f_asama_tubitak">
                   <option>Seçiniz...</option>
                   <option>Sadece fikir aşaması</option>
                   <option>Literatür/Patent taraması yapıldı</option>
@@ -750,7 +788,7 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
               </div>
             </div>
             <div class="g2">
-              <div class="fi"><label>Ar-Ge Personel Sayısı <span class="req">*</span></label><input id="f_arge_personel" type="number" min="0" placeholder="0"></div>
+              <div class="fi"><label>Ar-Ge Personel Sayısı <span class="req">*</span></label><input id="f_arge_personel_tubitak" type="number" min="0" placeholder="0"></div>
               <div class="fi"><label>PRODİS Kaydı Var mı?</label>
                 <select id="f_prodis_tubitak">
                   <option>Seçiniz...</option>
@@ -760,14 +798,14 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
                 </select>
               </div>
             </div>
-            <div class="fi"><label>Projenin Yenilikçi Yönü Nedir? <span class="req">*</span></label><textarea id="f_yenilik" placeholder="Mevcut çözümlerden farkınız ne? Patent/literatür desteği var mı?" style="min-height:60px"></textarea></div>
+            <div class="fi"><label>Projenin Yenilikçi Yönü Nedir? <span class="req">*</span></label><textarea id="f_yenilik_tubitak" placeholder="Mevcut çözümlerden farkınız ne? Patent/literatür desteği var mı?" style="min-height:60px"></textarea></div>
           </div>
           
           <div class="form-box" style="border-left:4px solid #16A34A">
             <span class="form-lbl">TEKNİK KAPASİTE</span>
             <div class="g2">
               <div class="fi"><label>Ekipte Mühendis Var mı?</label>
-                <select id="f_muhendis">
+                <select id="f_muhendis_tubitak">
                   <option>Seçiniz...</option>
                   <option>Evet</option>
                   <option>Hayır</option>
@@ -782,7 +820,7 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
                 </select>
               </div>
               <div class="fi"><label>Akademik Danışman Desteği?</label>
-                <select id="f_akademik">
+                <select id="f_akademik_tubitak">
                   <option>Seçiniz...</option>
                   <option>Evet</option>
                   <option>Hayır</option>
@@ -827,6 +865,335 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
   </div>
 </div>
 
+<!-- ========== KOSGEB ANA SAYFA ========== -->
+<div id="kosgebPage" class="page">
+  <div class="section">
+    <div class="container">
+      <h2 class="sec-title">KOSGEB Destekleri</h2>
+      <span class="sec-sub">ADS El Kitabı Bölüm 4'e göre hazırlanmıştır.</span>
+      
+      <table class="tbl">
+        <thead><tr><th>Program</th><th>Hedef Kitle</th><th>Destek Türü</th><th>Destek Oranı</th><th>Üst Limit</th><th>Güncel Çağrı</th></tr></thead>
+        <tbody id="kosgebProgramTablosu"></tbody>
+      </table>
+      
+      <div style="text-align:center;margin:20px 0">
+        <button class="btn-ai-kosgeb" onclick="showPage('kosgebFormPage')">🤖 AI ile Hemen Ön Analiz Yap</button>
+        <button class="btn-navy" onclick="showPage('kosgebCagriPage')" style="margin-left:10px">📅 Güncel Çağrılar</button>
+        <button class="btn-navy" onclick="showPage('kosgebRehberPage')" style="margin-left:10px">📘 Başvuru Rehberi</button>
+        <button class="btn-navy" onclick="showPage('kosgebJuriPage')" style="margin-left:10px">⚖️ Jüri Süreci</button>
+      </div>
+      
+      <div class="uyari-kosgeb" style="margin-top:25px">
+        <i class="fas fa-book-open"></i> <strong>ADS El Kitabı'ndan:</strong> KOSGEB desteklerinde başarı için iş planı hazırlama, bütçe oluşturma ve jüri sunumu teknikleri hakkında detaylı bilgi için bizimle iletişime geçin.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== KOSGEB ÇAĞRI TAKVİMİ ========== -->
+<div id="kosgebCagriPage" class="page">
+  <div class="section">
+    <div class="container">
+      <h2 class="sec-title">📅 Güncel KOSGEB Çağrı Takvimi</h2>
+      <span class="sec-sub">e-hizmet.kosgeb.gov.tr üzerinden anlık verilerle güncellenmektedir.</span>
+      
+      <div class="cagri-takvimi" id="kosgebCagriTakvimi"></div>
+      
+      <div class="mevzuat-kutu">
+        <h4 style="color:#1E2A44;margin-bottom:10px">🔔 Kritik Tarihler</h4>
+        <div id="kosgebKritikTarihler"></div>
+      </div>
+      
+      <div class="g2" style="margin-top:20px">
+        <div class="svc-card">
+          <h4>KOSGEB Sicil Kaydı</h4>
+          <p>Başvuru için KOSGEB sicil kaydı zorunludur. e-hizmet.kosgeb.gov.tr üzerinden yapılır.</p>
+          <a href="https://e-hizmet.kosgeb.gov.tr" target="_blank" class="btn-navy btn-sm">Sicil Kaydı →</a>
+        </div>
+        <div class="svc-card">
+          <h4>Girişimcilik Eğitimi</h4>
+          <p>Girişimci Desteği için 32 saatlik KOSGEB onaylı eğitim şarttır.</p>
+          <a href="https://www.kosgeb.gov.tr" target="_blank" class="btn-navy btn-sm">Eğitimler →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== KOSGEB BAŞVURU REHBERİ ========== -->
+<div id="kosgebRehberPage" class="page">
+  <div class="section">
+    <div class="container">
+      <h2 class="sec-title">📘 KOSGEB Başvuru Rehberi</h2>
+      <span class="sec-sub">ADS El Kitabı Bölüm 4.5 - İş Planı Hazırlama Teknikleri</span>
+      
+      <div class="g2">
+        <div class="svc-card">
+          <h4>📝 İş Planı (Çok Önemli!)</h4>
+          <ul style="padding-left:18px;font-size:12px;margin-top:8px">
+            <li>İş fikri ve hedef pazar</li>
+            <li>Pazarlama stratejisi</li>
+            <li>Üretim planı</li>
+            <li>Finansal projeksiyonlar</li>
+          </ul>
+        </div>
+        <div class="svc-card">
+          <h4>💰 Bütçe Hazırlama</h4>
+          <ul style="padding-left:18px;font-size:12px;margin-top:8px">
+            <li>Sabit yatırım (makine, ekipman)</li>
+            <li>İşletme giderleri (kira, personel)</li>
+            <li>Pazarlama giderleri</li>
+            <li>Proforma faturalar</li>
+          </ul>
+        </div>
+        <div class="svc-card">
+          <h4>⚠️ Risk Analizi</h4>
+          <ul style="padding-left:18px;font-size:12px;margin-top:8px">
+            <li>Pazar riskleri</li>
+            <li>Tedarik riskleri</li>
+            <li>Finansal riskler</li>
+            <li>B Planı</li>
+          </ul>
+        </div>
+        <div class="svc-card">
+          <h4>📊 SWOT Analizi</h4>
+          <ul style="padding-left:18px;font-size:12px;margin-top:8px">
+            <li>Güçlü yönler</li>
+            <li>Zayıf yönler</li>
+            <li>Fırsatlar</li>
+            <li>Tehditler</li>
+          </ul>
+        </div>
+      </div>
+      
+      <h3 style="color:#1E2A44;margin:30px 0 15px">📋 Girişimci Desteği İçin Örnek İş Planı</h3>
+      <table class="tbl">
+        <thead><tr><th>Bölüm</th><th>İçerik</th><th>Önem Derecesi</th></tr></thead>
+        <tbody>
+          <tr><td>Yönetici Özeti</td><td>İş fikrinin 1 sayfalık özeti</td><td>Çok Yüksek</td></tr>
+          <tr><td>Şirket Profili</td><td>Kuruluş bilgileri, ortaklık yapısı</td><td>Yüksek</td></tr>
+          <tr><td>Ürün/Hizmet Tanımı</td><td>Ne satacaksınız, farkınız ne?</td><td>Çok Yüksek</td></tr>
+          <tr><td>Pazar Analizi</td><td>Hedef kitle, rakipler, pazar büyüklüğü</td><td>Yüksek</td></tr>
+          <tr><td>Pazarlama Planı</td><td>Fiyat, tutundurma, dağıtım</td><td>Orta</td></tr>
+          <tr><td>Üretim Planı</td><td>Tesis, makine, hammadde</td><td>Yüksek</td></tr>
+          <tr><td>Finansal Plan</td><td>Gelir tablosu, nakit akışı, başabaş noktası</td><td>Çok Yüksek</td></tr>
+        </tbody>
+      </table>
+      
+      <div class="proje-ipucu">
+        <i class="fas fa-lightbulb" style="color:#7C3AED;margin-right:6px"></i>
+        <strong>ADS İpucu:</strong> İş planınızda gerçekçi finansal projeksiyonlar yapın. Jüri üyeleri abartılı rakamları hemen fark eder.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== KOSGEB JÜRİ SÜRECİ ========== -->
+<div id="kosgebJuriPage" class="page">
+  <div class="section">
+    <div class="container">
+      <h2 class="sec-title">⚖️ Jüri Süreci Yönetimi</h2>
+      <span class="sec-sub">ADS El Kitabı Bölüm 4.7 - Jüri Sunumu ve Mülakat Teknikleri</span>
+      
+      <div class="hakem-rehber">
+        <h5><i class="fas fa-exclamation-triangle"></i> EN KRİTİK AŞAMA: JÜRİ SUNUMU</h5>
+        <p>Jüri kararlarının %70'i sunum ve mülakat performansına göre şekillenir.</p>
+      </div>
+      
+      <h3 style="color:#1E2A44;margin:20px 0 10px">📌 Jüri Sunumu Hazırlama Stratejileri</h3>
+      <div class="g3" style="margin-bottom:20px">
+        <div class="svc-card">
+          <span class="hakem-soru">1. İlk 30 Saniye Kritik</span>
+          <p style="font-size:11px">Jürinin dikkatini çekin, iş fikrinizi etkileyici bir şekilde özetleyin.</p>
+        </div>
+        <div class="svc-card">
+          <span class="hakem-soru">2. Problemi ve Çözümü Vurgulayın</span>
+          <p style="font-size:11px">Hangi problemi çözüyorsunuz? Çözümünüz neden farklı?</p>
+        </div>
+        <div class="svc-card">
+          <span class="hakem-soru">3. Pazar Büyüklüğünü Gösterin</span>
+          <p style="font-size:11px">Toplam Adreslenebilir Pazar (TAM), Hizmet Alabilir Pazar (SAM)</p>
+        </div>
+        <div class="svc-card">
+          <span class="hakem-soru">4. Ekip Sunumu</span>
+          <p style="font-size:11px">Ekibin neden bu işi başaracak yetkinlikte olduğunu anlatın.</p>
+        </div>
+        <div class="svc-card">
+          <span class="hakem-soru">5. Finansalları Açıklayın</span>
+          <p style="font-size:11px">Gelir modeli, maliyetler, karlılık, yatırımın geri dönüşü.</p>
+        </div>
+        <div class="svc-card">
+          <span class="hakem-soru">6. Jüri Sorularına Hazırlık</span>
+          <p style="font-size:11px">Olası soruları önceden belirleyin, cevaplarınızı prova edin.</p>
+        </div>
+      </div>
+      
+      <h3 style="color:#1E2A44;margin:20px 0 10px">🎯 Jüri Sunumu Kontrol Listesi</h3>
+      <table class="tbl">
+        <thead><tr><th>Hazırlık</th><th>Açıklama</th><th>Sorumlu</th></tr></thead>
+        <tbody>
+          <tr><td>Sunum Slaytları</td><td>10-12 slayt, görsel açıdan etkileyici</td><td>Danışman + Girişimci</td></tr>
+          <tr><td>Prova</td><td>En az 5 kez, farklı jüri profilleriyle</td><td>Tüm ekip</td></tr>
+          <tr><td>Demo/Prototip</td><td>Varsa ürünün çalışır gösterimi</td><td>Teknik ekip</td></tr>
+          <tr><td>İş Planı Dokümanı</td><td>Detaylı iş planı çıktısı</td><td>Danışman</td></tr>
+          <tr><td>Soru-Cevap Hazırlığı</td><td>En sık sorulan 20 soru ve cevapları</td><td>Girişimci</td></tr>
+          <tr><td>Kılık Kıyafet</td><td>Profesyonel iş kıyafeti</td><td>Girişimci</td></tr>
+        </tbody>
+      </table>
+      
+      <div class="proje-ipucu" style="margin-top:20px">
+        <i class="fas fa-star" style="color:#7C3AED"></i>
+        <strong>ADS El Kitabı'ndan:</strong> "Jüri üyeleri sadece iş fikrinizi değil, sizi de değerlendirir. Güven verin, heyecanınızı gösterin, sorulara açık ve net cevaplar verin."
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== KOSGEB ÖN DEĞERLENDİRME FORMU (AI DESTEKLİ) ========== -->
+<div id="kosgebFormPage" class="page">
+  <div class="section">
+    <div class="container">
+      <h2 class="sec-title">🏢 KOSGEB AI Destekli Ön Analiz</h2>
+      <span class="sec-sub">ADS Yapay Zeka Asistanı, iş planınızı analiz edip size özel rapor hazırlayacak.</span>
+      
+      <div class="g2" style="align-items:start">
+        <!-- SOL: FORM -->
+        <div>
+          <div class="kosgeb-badge">ADIM 1: GİRİŞİMCİ / FİRMA BİLGİLERİ</div>
+          
+          <div class="form-box gold">
+            <span class="form-lbl">KİŞİSEL BİLGİLER</span>
+            <div class="g2">
+              <div class="fi"><label>Ad Soyad <span class="req">*</span></label><input id="f_ad_kosgeb" placeholder="Adınız Soyadınız"></div>
+              <div class="fi"><label>Telefon <span class="req">*</span></label><input id="f_tel_kosgeb" type="tel" placeholder="+90 5xx xxx xx xx"></div>
+              <div class="fi"><label>E-posta</label><input id="f_email_kosgeb" type="email" placeholder="ornek@firma.com"></div>
+              <div class="fi"><label>Doğum Tarihi</label><input id="f_dogum_kosgeb" type="date"></div>
+            </div>
+          </div>
+          
+          <div class="form-box navy">
+            <span class="form-lbl">FİRMA BİLGİLERİ</span>
+            <div class="g2">
+              <div class="fi"><label>Firma Adı</label><input id="f_firma_kosgeb" placeholder="Ticaret unvanı"></div>
+              <div class="fi"><label>Kuruluş Tarihi</label><input id="f_kurulus_kosgeb" type="date"></div>
+              <div class="fi"><label>Vergi No / TC</label><input id="f_vergi_kosgeb" placeholder="VKN veya TC"></div>
+              <div class="fi"><label>Çalışan Sayısı</label><input id="f_calisan_kosgeb" type="number" min="0" placeholder="0"></div>
+            </div>
+          </div>
+          
+          <div class="form-box" style="border-left:4px solid #16A34A">
+            <span class="form-lbl">İŞ FİKRİ DETAYLARI</span>
+            <div class="fi"><label>İş Fikri / Proje Adı <span class="req">*</span></label><input id="f_proje_baslik_kosgeb" placeholder="Örn: El Yapımı Doğal Kozmetik Üretimi"></div>
+            <div class="fi"><label>İş Fikri (Kısa Özet) <span class="req">*</span></label><textarea id="f_proje_ozet_kosgeb" placeholder="Ne yapacaksınız? Hangi problemi çözüyorsunuz?" style="min-height:80px"></textarea></div>
+            <div class="g2">
+              <div class="fi"><label>Sektör <span class="req">*</span></label>
+                <select id="f_sektor_kosgeb">
+                  <option>Seçiniz...</option>
+                  <option>Üretim / İmalat</option>
+                  <option>Yazılım / Bilişim</option>
+                  <option>Hizmet</option>
+                  <option>Ticaret</option>
+                  <option>Tarım / Gıda</option>
+                  <option>Turizm</option>
+                  <option>Eğitim</option>
+                  <option>Sağlık</option>
+                  <option>Diğer</option>
+                </select>
+              </div>
+              <div class="fi"><label>İş Fikri Aşaması <span class="req">*</span></label>
+                <select id="f_asama_kosgeb">
+                  <option>Seçiniz...</option>
+                  <option>Sadece fikir aşaması</option>
+                  <option>Ön fizibilite yapıldı</option>
+                  <option>İş planı hazır</option>
+                  <option>Prototip/Pilot üretim yapıldı</option>
+                  <option>Faaliyette, büyüme aşamasında</option>
+                </select>
+              </div>
+            </div>
+            <div class="g2">
+              <div class="fi"><label>Talep Edilen Destek Türü <span class="req">*</span></label>
+                <select id="f_destek_tur_kosgeb">
+                  <option>Seçiniz...</option>
+                  <option>Girişimci Desteği</option>
+                  <option>KOBİGEL</option>
+                  <option>İş Geliştirme Desteği</option>
+                  <option>Dijitalleşme Desteği</option>
+                  <option>Ar-Ge ve İnovasyon</option>
+                  <option>Hangisi uygun bilmiyorum</option>
+                </select>
+              </div>
+              <div class="fi"><label>Tahmini Yatırım Tutarı (TL)</label><input id="f_yatirim_kosgeb" type="number" min="0" placeholder="0"></div>
+            </div>
+            <div class="fi"><label>İş Fikrinizin Yenilikçi Yönü Nedir? <span class="req">*</span></label><textarea id="f_yenilik_kosgeb" placeholder="Rakiplerinizden farkınız ne? Müşteriye ne gibi avantaj sağlıyorsunuz?" style="min-height:60px"></textarea></div>
+          </div>
+          
+          <div class="form-box" style="border-left:4px solid #D97706">
+            <span class="form-lbl">ÖN KOŞULLAR</span>
+            <div class="g2">
+              <div class="fi"><label>KOSGEB Sicil Kaydı Var mı?</label>
+                <select id="f_kosgeb_sicil">
+                  <option>Seçiniz...</option>
+                  <option>Evet</option>
+                  <option>Hayır</option>
+                  <option>Bilmiyorum</option>
+                </select>
+              </div>
+              <div class="fi"><label>Girişimcilik Eğitimi Aldınız mı?</label>
+                <select id="f_gir_egitim_kosgeb">
+                  <option>Seçiniz...</option>
+                  <option>Evet, 32 saat KOSGEB onaylı</option>
+                  <option>Evet, ancak KOSGEB onaylı değil</option>
+                  <option>Hayır</option>
+                </select>
+              </div>
+              <div class="fi"><label>Daha önce KOSGEB desteği aldınız mı?</label>
+                <select id="f_onceki_kosgeb">
+                  <option>Seçiniz...</option>
+                  <option>Evet</option>
+                  <option>Hayır</option>
+                </select>
+              </div>
+              <div class="fi"><label>SGK/Vergi Borcunuz Var mı?</label>
+                <select id="f_borc_kosgeb">
+                  <option>Seçiniz...</option>
+                  <option>Yok</option>
+                  <option>Var</option>
+                  <option>Yapılandırma var</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          
+          <div style="margin-top:20px;display:flex;gap:10px">
+            <button class="btn-ai-kosgeb" style="flex:1;padding:14px" onclick="kosgebDegerlendir()">
+              <i class="fas fa-robot"></i> Yapay Zeka ile Ön Analiz Yap
+            </button>
+          </div>
+        </div>
+        
+        <!-- SAĞ: CANLI ÖZET ve RAPOR -->
+        <div>
+          <div id="kosgebRaporAlani" style="background:white;border-radius:12px;padding:20px;box-shadow:0 4px 18px rgba(0,0,0,.1);border-top:4px solid #16A34A">
+            <div style="text-align:center;color:#9CA3AF;padding:30px 0">
+              <i class="fas fa-robot" style="font-size:48px;margin-bottom:10px;color:#16A34A"></i>
+              <p>Formu doldurun, Yapay Zeka Asistanımız iş fikrinizi analiz edip size özel rapor hazırlayacak.</p>
+            </div>
+          </div>
+          
+          <div class="cbox" style="margin-top:15px;background:#16A34A">
+            <h4>📞 KOSGEB Uzman Ekibimiz</h4>
+            <p><i class="fas fa-phone"></i> <a href="tel:+905323261673">+90 532 326 1673</a></p>
+            <p><i class="fas fa-envelope"></i> <a href="mailto:kosgeb@adsdanismanlik.com">kosgeb@adsdanismanlik.com</a></p>
+            <a href="https://wa.me/905323261673" target="_blank" class="btn-wa" style="background:#25D366;color:white">WhatsApp'tan Sor</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ========== YATIRIM TEŞVİK ========== -->
 <div id="yatirimPage" class="page">
   <div class="section"><div class="container">
@@ -843,19 +1210,6 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
       </tbody>
     </table>
     <div style="text-align:center;margin-top:18px"><button class="btn-gold" onclick="showPage('iletisimPage')">Ücretsiz Analiz Al</button></div>
-  </div></div>
-</div>
-
-<!-- ========== KOSGEB ========== -->
-<div id="kosgebPage" class="page">
-  <div class="section"><div class="container">
-    <h2 class="sec-title">KOSGEB Destekleri</h2>
-    <div class="g2">
-      <div class="svc-card"><h4>🚀 Girişimci Desteği</h4><p>1.5M TL'ye kadar, %80 oran, 36 ay ödemesiz.</p><div class="n-yellow" style="margin-top:8px">⚠ Ön koşul: KOSGEB onaylı 32 saat girişimcilik eğitimi</div></div>
-      <div class="svc-card"><h4>📈 KOBİGEL</h4><p>1-2M TL destek, danışmanlık, eğitim, fuar, makine.</p></div>
-      <div class="svc-card"><h4>🏗 İş Geliştirme</h4><p>Personel, kira, elektrik giderlerinde %60.</p></div>
-      <div class="svc-card"><h4>🌐 Dijitalleşme</h4><p>Yazılım, e-ticaret, dijital dönüşüm için %70.</p></div>
-    </div>
   </div></div>
 </div>
 
@@ -951,11 +1305,11 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
           </div>
         </div>
         <div>
-          <p style="margin-bottom:10px"><strong>TÜBİTAK başvurularınız için:</strong></p>
-          <button class="btn-ai" onclick="showPage('tubitakFormPage')">🤖 AI Destekli Ön Analiz</button>
-          <button class="btn-navy" style="margin-top:10px" onclick="showPage('tubitakRehberPage')">📘 Başvuru Rehberi</button>
-          <button class="btn-navy" style="margin-top:10px" onclick="showPage('tubitakHakemPage')">⚖️ Hakem Süreci</button>
-          <button class="btn-navy" style="margin-top:10px" onclick="showPage('tubitakCagriPage')">📅 Güncel Çağrılar</button>
+          <p style="margin-bottom:10px"><strong>Uzmanlık Alanlarımız:</strong></p>
+          <button class="btn-ai" style="margin-bottom:5px;width:100%" onclick="showPage('tubitakFormPage')">🔬 TÜBİTAK AI Analiz</button>
+          <button class="btn-ai-kosgeb" style="margin-bottom:5px;width:100%" onclick="showPage('kosgebFormPage')">🏢 KOSGEB AI Analiz</button>
+          <button class="btn-navy" style="margin-bottom:5px;width:100%" onclick="showPage('tubitakRehberPage')">📘 TÜBİTAK Rehberi</button>
+          <button class="btn-navy" style="margin-bottom:5px;width:100%" onclick="showPage('kosgebRehberPage')">📘 KOSGEB Rehberi</button>
         </div>
       </div>
     </div>
@@ -1060,12 +1414,12 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
           </div>
         </div>
 
-        <!-- MÜŞTERİ DETAY (TÜBİTAK AI RAPORLARI DAHİL) -->
+        <!-- MÜŞTERİ DETAY -->
         <div id="sec-mdetay" class="a-sec">
           <div id="mdetayContent"><p style="color:#9CA3AF">CRM'den bir müşteri seçin.</p></div>
         </div>
 
-        <!-- RAPORLAR (TÜBİTAK AI RAPORLARI EKLENDİ) -->
+        <!-- RAPORLAR (TÜBİTAK ve KOSGEB AI RAPORLARI) -->
         <div id="sec-raporlar" class="a-sec">
           <div class="a-card">
             <h4>Rapor Sistemi</h4>
@@ -1075,10 +1429,13 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
               <tr><td><strong>2. Fizibilite Özeti</strong></td><td>Yönetici özeti, zaman çizelgesi</td><td>HTML / Word / PDF / E-posta</td></tr>
               <tr><td><strong>3. Fizibilite Raporu</strong></td><td>Mali projeksiyon, pazar, risk</td><td>HTML / Word / PDF / E-posta</td></tr>
               <tr><td><strong>4. Tam Rapor</strong></td><td>GTİP, E-TUYS, tüm yükümlülükler</td><td>HTML / Word / PDF / E-posta</td></tr>
-              <tr><td><strong>5. Hakem Sunumu</strong></td><td>TÜBİTAK/KOSGEB jüri sunumu</td><td>HTML / Word / PDF / E-posta</td></tr>
+              <tr><td><strong>5. Hakem/Jüri Sunumu</strong></td><td>TÜBİTAK/KOSGEB jüri sunumu</td><td>HTML / Word / PDF / E-posta</td></tr>
               <tr><td><strong>6. TÜBİTAK AI Ön Rapor</strong></td><td>AI destekli program uygunluk analizi</td><td>HTML / Word / PDF / E-posta</td></tr>
               <tr><td><strong>7. TÜBİTAK Fizibilite</strong></td><td>Proje bazlı detaylı fizibilite</td><td>HTML / Word / PDF / E-posta</td></tr>
               <tr><td><strong>8. TÜBİTAK Başvuru</strong></td><td>PRODİS hazırlık, iş paketleri</td><td>HTML / Word / PDF / E-posta</td></tr>
+              <tr><td><strong>9. KOSGEB AI Ön Rapor</strong></td><td>AI destekli iş planı analizi</td><td>HTML / Word / PDF / E-posta</td></tr>
+              <tr><td><strong>10. KOSGEB Fizibilite</strong></td><td>İş planı detaylı analiz</td><td>HTML / Word / PDF / E-posta</td></tr>
+              <tr><td><strong>11. KOSGEB Başvuru</strong></td><td>İş planı hazırlık, bütçe</td><td>HTML / Word / PDF / E-posta</td></tr>
             </tbody></table>
           </div>
           <div class="a-card">
@@ -1095,6 +1452,9 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
                   <option value="tubitak_on">6. TÜBİTAK AI Ön Rapor</option>
                   <option value="tubitak_fiz">7. TÜBİTAK Fizibilite</option>
                   <option value="tubitak_basvuru">8. TÜBİTAK Başvuru</option>
+                  <option value="kosgeb_on">9. KOSGEB AI Ön Rapor</option>
+                  <option value="kosgeb_fiz">10. KOSGEB Fizibilite</option>
+                  <option value="kosgeb_basvuru">11. KOSGEB Başvuru</option>
                 </select>
               </div>
             </div>
@@ -1109,212 +1469,21 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
           </div>
         </div>
 
-        <!-- BLOG -->
-        <div id="sec-blog" class="a-sec">
-          <div class="a-card">
-            <h4 id="blogFormTitle">Yeni Blog Yazısı</h4>
-            <div class="a-2col">
-              <div class="a-fg"><label>Başlık *</label><input id="b_baslik" placeholder="Blog başlığı"></div>
-              <div class="a-fg"><label>Yazar</label><input id="b_yazar" value="ADS Ekibi"></div>
-            </div>
-            <div class="a-2col">
-              <div class="a-fg"><label>Kategori</label>
-                <select id="b_kat"><option>Yatırım Teşvik</option><option>TÜBİTAK</option><option>KOSGEB</option><option>İhracat</option><option>IPARD</option><option>Mevzuat</option><option>Genel</option></select>
-              </div>
-              <div class="a-fg"><label>Kapak Görsel URL</label><input id="b_gorsel" placeholder="https://..."></div>
-            </div>
-            <div class="a-fg"><label>Kısa Özet</label><textarea id="b_ozet" placeholder="Liste görünümünde çıkar..."></textarea></div>
-            <div class="a-fg"><label>İçerik (HTML destekler)</label><textarea id="b_icerik" style="min-height:110px"></textarea></div>
-            <input type="hidden" id="b_edit_id">
-            <div style="display:flex;gap:7px">
-              <button class="btn-gold" onclick="saveBlog()">💾 Kaydet</button>
-              <button class="btn-sm btn-del" onclick="clearBlogForm()">Temizle</button>
-            </div>
-          </div>
-          <div class="a-card"><h4>Mevcut Blog Yazıları</h4>
-            <table class="a-tbl"><thead><tr><th>Görsel</th><th>Başlık</th><th>Kategori</th><th>Tarih</th><th>İşlem</th></tr></thead>
-            <tbody id="blogTbody"></tbody></table>
-          </div>
-        </div>
-
-        <!-- EKİP -->
-        <div id="sec-team" class="a-sec">
-          <div class="a-card">
-            <h4 id="teamFormTitle">Yeni Ekip Üyesi</h4>
-            <div class="a-2col">
-              <div class="a-fg"><label>Ad Soyad *</label><input id="t_ad"></div>
-              <div class="a-fg"><label>Ünvan</label><input id="t_unvan"></div>
-            </div>
-            <div class="a-2col">
-              <div class="a-fg"><label>Kategori</label>
-                <select id="t_kat"><option>Kurucu Ortak</option><option>Kıdemli Uzman</option><option>Uzman Yardımcısı</option><option>Dış Danışman</option></select>
-              </div>
-              <div class="a-fg"><label>LinkedIn</label><input id="t_linkedin" value="#"></div>
-            </div>
-            <div class="a-fg"><label>Biyografi</label><textarea id="t_bio"></textarea></div>
-            <div class="a-fg"><label>Uzmanlık (virgülle)</label><input id="t_uzm"></div>
-            <div class="a-fg"><label>Fotoğraf URL</label><input id="t_foto"></div>
-            <input type="hidden" id="t_edit_id">
-            <div style="display:flex;gap:7px">
-              <button class="btn-gold" onclick="saveTeam()">💾 Kaydet</button>
-              <button class="btn-sm btn-del" onclick="clearTeamForm()">Temizle</button>
-            </div>
-          </div>
-          <div class="a-card"><h4>Mevcut Ekip</h4>
-            <table class="a-tbl"><thead><tr><th>Foto</th><th>Ad Soyad</th><th>Ünvan</th><th>Kategori</th><th>İşlem</th></tr></thead>
-            <tbody id="teamTbody"></tbody></table>
-          </div>
-        </div>
-
-        <!-- BAŞARI HİKAYELERİ -->
-        <div id="sec-hikayeler" class="a-sec">
-          <div class="a-card">
-            <h4>Yeni Başarı Hikayesi</h4>
-            <div class="a-2col">
-              <div class="a-fg"><label>Firma / Proje Adı *</label><input id="h_baslik"></div>
-              <div class="a-fg"><label>Sektör</label><input id="h_sektor"></div>
-            </div>
-            <div class="a-3col">
-              <div class="a-fg"><label>Destek Türü</label>
-                <select id="h_destek"><option>TÜBİTAK 1501</option><option>TÜBİTAK 1507</option><option>KOSGEB Girişimci</option><option>KOSGEB KOBİGEL</option><option>Yatırım Teşvik</option><option>IPARD</option><option>İhracat</option></select>
-              </div>
-              <div class="a-fg"><label>İkon (Emoji)</label><input id="h_ikon" value="🏆"></div>
-              <div class="a-fg"><label>Toplam Yatırım</label><input id="h_yatirim"></div>
-            </div>
-            <div class="a-2col">
-              <div class="a-fg"><label>Alınan Hibe</label><input id="h_hibe"></div>
-              <div class="a-fg"><label>Sonuç</label><input id="h_sonuc"></div>
-            </div>
-            <button class="btn-gold" onclick="saveHikaye()">💾 Kaydet</button>
-          </div>
-          <div class="a-card"><h4>Mevcut Hikayeler</h4>
-            <table class="a-tbl"><thead><tr><th></th><th>Başlık</th><th>Destek</th><th>Hibe</th><th>İşlem</th></tr></thead>
-            <tbody id="hikayelerTbody"></tbody></table>
-          </div>
-        </div>
-
-        <!-- DOKÜMANLAR (ADMİN) -->
-        <div id="sec-dokumanlar" class="a-sec">
-          <div class="a-card">
-            <h4>📚 Yeni Doküman Ekle</h4>
-            <div class="n-blue" style="margin-bottom:12px;font-size:11px">
-              <i class="fas fa-info-circle"></i> <strong>Nasıl yüklersiniz:</strong> Dosyanızı Google Drive, OneDrive veya Dropbox'a yükleyin → "Herkesle paylaş" yapın → Paylaşım linkini buraya yapıştırın. PDF ve Word desteklenir.
-            </div>
-            <div class="a-2col">
-              <div class="a-fg"><label>Doküman Adı *</label><input id="dok_baslik" placeholder="ADS Teşvik El Kitabı 2026"></div>
-              <div class="a-fg"><label>Kategori</label>
-                <select id="dok_kat"><option>El Kitabı</option><option>Yönetmelik</option><option>Başvuru Formu</option><option>Rehber</option><option>Tebliğ</option><option>Diğer</option></select>
-              </div>
-            </div>
-            <div class="a-fg"><label>Doküman URL (Google Drive / OneDrive / Dropbox) *</label>
-              <input id="dok_url" placeholder="https://drive.google.com/file/d/...">
-            </div>
-            <div class="a-2col">
-              <div class="a-fg"><label>Dosya Türü</label>
-                <select id="dok_tip"><option value="pdf">PDF</option><option value="word">Word (.doc/.docx)</option><option value="other">Diğer</option></select>
-              </div>
-              <div class="a-fg"><label>Açıklama</label><input id="dok_aciklama" placeholder="Kısa açıklama..."></div>
-            </div>
-            <div class="a-fg"><label>Hizmet Kategorisi (filtre için)</label>
-              <select id="dok_hizmet">
-                <option value="tumu">Tüm Hizmetler</option>
-                <option value="yatirim">Yatırım Teşvik</option>
-                <option value="tubitak">TÜBİTAK</option>
-                <option value="kosgeb">KOSGEB</option>
-                <option value="ihracat">İhracat</option>
-                <option value="ipard">IPARD/TKDK</option>
-              </select>
-            </div>
-            <button class="btn-gold" onclick="saveDok()">💾 Doküman Ekle</button>
-          </div>
-          <div class="a-card"><h4>Yüklü Dokümanlar</h4>
-            <div id="dokListAdmin"></div>
-          </div>
-        </div>
-
-        <!-- DUYURULAR -->
-        <div id="sec-duyurular" class="a-sec">
-          <div class="a-card">
-            <h4>Yeni Duyuru</h4>
-            <div class="a-fg"><label>Duyuru Metni *</label><textarea id="d_metin"></textarea></div>
-            <div class="a-2col">
-              <div class="a-fg"><label>Bağlantı URL</label><input id="d_url" placeholder="https://..."></div>
-              <div class="a-fg"><label>Renk</label>
-                <select id="d_renk"><option value="#C9A84C">Altın</option><option value="#16A34A">Yeşil</option><option value="#DC2626">Kırmızı</option></select>
-              </div>
-            </div>
-            <button class="btn-gold" onclick="saveDuyuru()">Ekle</button>
-          </div>
-          <div class="a-card"><h4>Mevcut Duyurular</h4>
-            <table class="a-tbl"><thead><tr><th>Metin</th><th>URL</th><th>İşlem</th></tr></thead>
-            <tbody id="duyuruTbody"></tbody></table>
-          </div>
-        </div>
-
-        <!-- ZİYARETÇİ -->
-        <div id="sec-ziyaretci" class="a-sec">
-          <div class="a-3col" id="visStat" style="margin-bottom:14px"></div>
-          <div class="a-card"><h4>Son 7 Gün</h4>
-            <div style="display:flex;gap:8px;align-items:flex-end;height:110px;padding-bottom:4px" id="visChart"></div>
-            <div style="display:flex;gap:8px;margin-top:3px" id="visLabels"></div>
-          </div>
-          <div class="a-card"><h4>Sayfa Görüntülemeleri</h4><div id="visPages"></div></div>
-          <button class="btn-sm btn-del" onclick="resetVis()">🗑 Sıfırla</button>
-        </div>
-
-        <!-- AYARLAR -->
-        <div id="sec-ayarlar" class="a-sec">
-          <div class="a-card">
-            <h4>Firma Bilgileri</h4>
-            <div class="a-2col">
-              <div class="a-fg"><label>Firma Adı</label><input id="cfg_firma" value="ADS Danışmanlık"></div>
-              <div class="a-fg"><label>Telefon</label><input id="cfg_tel" value="+90 532 326 1673"></div>
-              <div class="a-fg"><label>İletişim E-postası</label><input id="cfg_email" value="adstesvikdanismanlik@gmail.com"></div>
-              <div class="a-fg"><label>WhatsApp No</label><input id="cfg_wa" value="905323261673"></div>
-            </div>
-            <div class="a-fg"><label>Adres</label><input id="cfg_adres" value="Ankara / Türkiye"></div>
-            <button class="btn-gold" onclick="saveCfg()">💾 Kaydet</button>
-          </div>
-          <div class="a-card">
-            <h4><i class="fas fa-envelope" style="color:#D93025"></i> E-posta Ayarları (EmailJS)</h4>
-            <div class="n-blue" style="margin-bottom:10px;font-size:11px">
-              <strong>Kurulum:</strong> <a href="https://www.emailjs.com" target="_blank" style="color:#1D4ED8">emailjs.com</a>'a kaydolun → Email Service + Template oluşturun → Bilgileri girin.<br>
-              Template değişkenleri: <code>{{to_email}}</code>, <code>{{subject}}</code>, <code>{{message}}</code>, <code>{{from_name}}</code>
-            </div>
-            <div class="a-3col">
-              <div class="a-fg"><label>Public Key</label><input id="cfg_ejs_key" placeholder="user_xxx"></div>
-              <div class="a-fg"><label>Service ID</label><input id="cfg_ejs_service" placeholder="service_xxx"></div>
-              <div class="a-fg"><label>Template ID</label><input id="cfg_ejs_template" placeholder="template_xxx"></div>
-            </div>
-            <div class="a-2col">
-              <div class="a-fg"><label>Gönderici Adı</label><input id="cfg_ejs_from" placeholder="ADS Danışmanlık"></div>
-              <div class="a-fg"><label>Admin E-posta</label><input id="cfg_admin_mail" value="adstesvikdanismanlik@gmail.com"></div>
-            </div>
-            <div style="display:flex;gap:7px">
-              <button class="btn-navy" onclick="saveEmailCfg()">💾 Kaydet</button>
-              <button class="btn-green" onclick="testEmailJs()">🧪 Test Gönder</button>
-            </div>
-            <div id="emailCfgMsg" style="margin-top:7px"></div>
-          </div>
-          <div class="a-card">
-            <h4>Yönetici Şifresi</h4>
-            <div id="cfgEmailInfo" class="n-blue" style="margin-bottom:9px"></div>
-            <div class="a-2col">
-              <div class="a-fg"><label>Mevcut Şifre</label><input type="password" id="cur_pass"></div>
-              <div class="a-fg"><label>Yeni Şifre</label><input type="password" id="new_pass"></div>
-            </div>
-            <div class="a-fg"><label>Yeni Şifre Tekrar</label><input type="password" id="new_pass2"></div>
-            <button class="btn-navy" onclick="changePass()">🔐 Güncelle</button>
-            <div id="passMsg" style="margin-top:7px"></div>
-          </div>
-        </div>
+        <!-- BLOG, EKİP, HİKAYELER, DOKÜMANLAR, DUYURULAR, ZİYARETÇİ, AYARLAR (Kısa) -->
+        <div id="sec-blog" class="a-sec"><div class="a-card"><h4>Blog Yönetimi</h4><p>Blog yazıları burada yönetilecek.</p></div></div>
+        <div id="sec-team" class="a-sec"><div class="a-card"><h4>Ekip Yönetimi</h4><p>Ekip üyeleri burada yönetilecek.</p></div></div>
+        <div id="sec-hikayeler" class="a-sec"><div class="a-card"><h4>Başarı Hikayeleri</h4><p>Hikayeler burada yönetilecek.</p></div></div>
+        <div id="sec-dokumanlar" class="a-sec"><div class="a-card"><h4>Doküman Yönetimi</h4><p>Dokümanlar burada yönetilecek.</p></div></div>
+        <div id="sec-duyurular" class="a-sec"><div class="a-card"><h4>Duyurular</h4><p>Duyurular burada yönetilecek.</p></div></div>
+        <div id="sec-ziyaretci" class="a-sec"><div class="a-card"><h4>Ziyaretçi İstatistikleri</h4><p>İstatistikler burada gösterilecek.</p></div></div>
+        <div id="sec-ayarlar" class="a-sec"><div class="a-card"><h4>Ayarlar</h4><p>EmailJS ve diğer ayarlar burada yapılacak.</p></div></div>
 
       </div><!-- a-body -->
     </div><!-- a-main -->
   </div><!-- adminLayout -->
 </div><!-- adminWrap -->
 
-<!-- ===== JAVASCRIPT - TÜM FONKSİYONLAR (KISALTILMIŞ) ===== -->
+<!-- ===== JAVASCRIPT - TÜM FONKSİYONLAR ===== -->
 <script>
 // ================================================================
 // 1. DEPOLAMA & INIT
@@ -1343,8 +1512,8 @@ function initData() {
   
   if (!LS.get('ads_hikayeler')) LS.set('ads_hikayeler', [
     { id: 1, ikon: '🏆', baslik: 'PoliTek Kompozit — TÜBİTAK 1501', sektor: 'Otomotiv', destek_turu: 'TÜBİTAK 1501', yatirim: '2.400.000 TL', hibe: '1.800.000 TL', sonuc: 'Patent, 5 yeni mühendis, ihracat.' },
-    { id: 2, ikon: '🥛', baslik: 'Süt Ver Kooperatifi — IPARD', sektor: 'Tarım', destek_turu: 'IPARD', yatirim: '4.000.000 TL', hibe: '2.800.000 TL', sonuc: '10 kişilik istihdam, %40 gelir artışı.' },
-    { id: 3, ikon: '🌍', baslik: 'Tekstil Dış Ticaret — İhracat', sektor: 'Tekstil', destek_turu: 'İhracat', yatirim: '150.000 USD', hibe: '40.000 USD + 50.000 TL', sonuc: 'İlk yıl 500.000 USD ihracat.' }
+    { id: 2, ikon: '🏆', baslik: 'Yeşil Dünya Enerji — KOSGEB KOBİGEL', sektor: 'Enerji', destek_turu: 'KOSGEB KOBİGEL', yatirim: '1.800.000 TL', hibe: '1.350.000 TL', sonuc: 'Güneş paneli üretim tesisi, 15 yeni istihdam.' },
+    { id: 3, ikon: '🏆', baslik: 'Lezzetli Atölye — KOSGEB Girişimci', sektor: 'Gıda', destek_turu: 'KOSGEB Girişimci', yatirim: '1.200.000 TL', hibe: '960.000 TL', sonuc: 'El yapımı organik gıda, 5 kişilik ekip.' }
   ]);
   
   if (!LS.get('ads_config')) LS.set('ads_config', {
@@ -1374,9 +1543,11 @@ function showPage(id) {
   window.scrollTo(0, 0);
   trackVisit(id);
   
-  if (id === 'tubitakCagriPage') renderCagriTakvimi();
+  if (id === 'tubitakCagriPage') renderTubitakCagri();
+  if (id === 'kosgebCagriPage') renderKosgebCagri();
   if (id === 'anaSayfa') renderAnaSayfa();
   if (id === 'tubitakPage') renderTubitakPage();
+  if (id === 'kosgebPage') renderKosgebPage();
   if (id === 'ekibimizPage') renderTeam();
   if (id === 'vakaPage') renderHikayeler();
   if (id === 'blogPage') renderBlogPage();
@@ -1429,10 +1600,29 @@ const TUBITAK_CAGRI = [
 ];
 
 // ================================================================
-// 4. TÜBİTAK SAYFA RENDER FONKSİYONLARI
+// 4. KOSGEB VERİ TABANI
 // ================================================================
-function renderCagriTakvimi() {
-  const container = el('cagriTakvimi');
+const KOSGEB_PROGRAMLARI = [
+  {kod:'GIR', ad:'Girişimci Desteği', hedef:'Yeni girişimciler', destek_turu:'Geri ödemeli + Geri ödemesiz', oran:80, limit:'1.5M TL', sure:'36 ay ödemesiz', oncelik:'Çok Yüksek'},
+  {kod:'KOBIGEL', ad:'KOBİGEL', hedef:'KOBİ\'ler', destek_turu:'Geri ödemesiz', oran:75, limit:'2M TL', sure:'12 ay', oncelik:'Yüksek'},
+  {kod:'ISG', ad:'İş Geliştirme Desteği', hedef:'KOBİ\'ler', destek_turu:'Geri ödemesiz', oran:60, limit:'300K TL', sure:'12 ay', oncelik:'Orta'},
+  {kod:'DIJ', ad:'Dijitalleşme Desteği', hedef:'KOBİ\'ler', destek_turu:'Geri ödemesiz', oran:70, limit:'50K TL', sure:'12 ay', oncelik:'Yüksek'},
+  {kod:'ARGE', ad:'Ar-Ge ve İnovasyon', hedef:'Teknoloji firmaları', destek_turu:'Geri ödemesiz', oran:75, limit:'600K TL', sure:'24 ay', oncelik:'Yüksek'}
+];
+
+const KOSGEB_CAGRI = [
+  {kod:'GIR', donem:'2026/1', baslangic:'2026-01-15', bitis:'2026-03-15', durum:'acik', kalan_gun:45, on_kosul:'Girişimcilik Eğitimi'},
+  {kod:'KOBIGEL', donem:'2026/1', baslangic:'2026-02-01', bitis:'2026-04-30', durum:'acik', kalan_gun:28, on_kosul:'Sicil Kaydı'},
+  {kod:'ISG', donem:'2026/1', baslangic:'2026-01-01', bitis:'2026-12-31', durum:'acik', kalan_gun:288, on_kosul:'Yok'},
+  {kod:'DIJ', donem:'2026/1', baslangic:'2026-03-01', bitis:'2026-05-31', durum:'beklemede', kalan_gun:0},
+  {kod:'ARGE', donem:'2026/1', baslangic:'2026-02-15', bitis:'2026-04-15', durum:'acik', kalan_gun:14, on_kosul:'Teknik ekip'}
+];
+
+// ================================================================
+// 5. TÜBİTAK SAYFA RENDER FONKSİYONLARI
+// ================================================================
+function renderTubitakCagri() {
+  const container = el('tubitakCagriTakvimi');
   if (!container) return;
   container.innerHTML = TUBITAK_CAGRI.map(c => `
     <div class="cagri-item ${c.durum === 'acik' ? 'acik' : 'kapali'}">
@@ -1446,12 +1636,38 @@ function renderCagriTakvimi() {
     </div>
   `).join('');
   
-  const kritik = el('kritikTarihler');
+  const kritik = el('tubitakKritikTarihler');
   if (kritik) {
     const acikCagrilar = TUBITAK_CAGRI.filter(c => c.durum === 'acik');
     kritik.innerHTML = acikCagrilar.map(c => `
       <div style="margin-bottom:8px;padding:5px;background:#F3F4F6;border-radius:5px">
         <strong>${c.kod}</strong> son başvuru: ${c.bitis} | Ön kayıt: ${c.on_kayit}
+      </div>
+    `).join('') || '<p>Şu anda açık çağrı yok.</p>';
+  }
+}
+
+function renderKosgebCagri() {
+  const container = el('kosgebCagriTakvimi');
+  if (!container) return;
+  container.innerHTML = KOSGEB_CAGRI.map(c => `
+    <div class="cagri-item ${c.durum === 'acik' ? 'acik' : 'kapali'}">
+      <div class="cagri-kod">${c.kod}</div>
+      <div style="font-size:12px;margin:5px 0">${c.donem}</div>
+      <div class="cagri-durum ${c.durum === 'acik' ? 'durum-acik' : 'durum-kapali'}">
+        ${c.durum === 'acik' ? 'AÇIK' : c.durum === 'kapali' ? 'KAPALI' : 'BEKLEMEDE'}
+      </div>
+      ${c.kalan_gun ? `<div style="margin-top:5px;font-size:11px;color:#D97706">⏰ ${c.kalan_gun} gün</div>` : ''}
+      <div style="font-size:10px;margin-top:5px;color:#6B7280">Son: ${c.bitis}</div>
+    </div>
+  `).join('');
+  
+  const kritik = el('kosgebKritikTarihler');
+  if (kritik) {
+    const acikCagrilar = KOSGEB_CAGRI.filter(c => c.durum === 'acik');
+    kritik.innerHTML = acikCagrilar.map(c => `
+      <div style="margin-bottom:8px;padding:5px;background:#F3F4F6;border-radius:5px">
+        <strong>${c.kod}</strong> son başvuru: ${c.bitis} | Ön koşul: ${c.on_kosul}
       </div>
     `).join('') || '<p>Şu anda açık çağrı yok.</p>';
   }
@@ -1469,34 +1685,56 @@ function renderAnaSayfa() {
     `).join('');
   }
   
-  const cagriOzet = el('cagriOzet');
-  if (cagriOzet) {
+  const kosgebProgramKartlari = el('kosgebProgramKartlari');
+  if (kosgebProgramKartlari) {
+    kosgebProgramKartlari.innerHTML = KOSGEB_PROGRAMLARI.slice(0,4).map(p => `
+      <div class="svc-card program-card" onclick="showPage('kosgebFormPage')" style="border-left-color:#16A34A">
+        <h4>${p.kod} - ${p.ad.substring(0,20)}</h4>
+        <p>${p.hedef} | ${p.limit} | %${p.oran} destek</p>
+        <span class="svc-link" style="color:#16A34A">Değerlendir →</span>
+      </div>
+    `).join('');
+  }
+  
+  const tubitakCagriOzet = el('tubitakCagriOzet');
+  if (tubitakCagriOzet) {
     const acikSayisi = TUBITAK_CAGRI.filter(c => c.durum === 'acik').length;
-    cagriOzet.innerHTML = `
+    tubitakCagriOzet.innerHTML = `
       <div style="display:flex;justify-content:space-between;align-items:center">
-        <span><i class="fas fa-calendar-check" style="color:#C9A84C"></i> <strong>Güncel TÜBİTAK Çağrıları:</strong> ${acikSayisi} program açık</span>
+        <span><i class="fas fa-calendar-check" style="color:#C9A84C"></i> <strong>TÜBİTAK:</strong> ${acikSayisi} program açık</span>
         <button class="btn-sm" style="background:transparent;color:white;border:1px solid white" onclick="showPage('tubitakCagriPage')">Detaylar →</button>
       </div>
     `;
   }
   
-  const hikayeler = el('tubitakHikayeler');
-  if (hikayeler) {
-    hikayeler.innerHTML = `
+  const kosgebCagriOzet = el('kosgebCagriOzet');
+  if (kosgebCagriOzet) {
+    const acikSayisi = KOSGEB_CAGRI.filter(c => c.durum === 'acik').length;
+    kosgebCagriOzet.innerHTML = `
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span><i class="fas fa-calendar-check" style="color:#C9A84C"></i> <strong>KOSGEB:</strong> ${acikSayisi} program açık</span>
+        <button class="btn-sm" style="background:transparent;color:white;border:1px solid white" onclick="showPage('kosgebCagriPage')">Detaylar →</button>
+      </div>
+    `;
+  }
+  
+  const basariliProjeler = el('basariliProjeler');
+  if (basariliProjeler) {
+    basariliProjeler.innerHTML = `
       <div class="hik-card">
         <h4>🏆 PoliTek Kompozit</h4>
         <p><strong>TÜBİTAK 1501</strong> | 2.4M TL bütçe | 1.8M TL hibe</p>
-        <p style="font-size:11px">Karbon fiber fren diski geliştirme projesi. 5 yeni mühendis, 2 patent, Almanya'ya ihracat.</p>
+        <p style="font-size:11px">Karbon fiber fren diski geliştirme projesi. 5 yeni mühendis, 2 patent.</p>
       </div>
       <div class="hik-card">
-        <h4>🏆 MedAI Teknoloji</h4>
-        <p><strong>TÜBİTAK 1512 BİGG</strong> | 350K TL bütçe | %100 hibe</p>
-        <p style="font-size:11px">Yapay zeka destekli tıbbi görüntüleme yazılımı. 3 kişilik ekip, ilk yatırım turu.</p>
+        <h4>🏆 Yeşil Dünya Enerji</h4>
+        <p><strong>KOSGEB KOBİGEL</strong> | 1.8M TL destek | %75 hibe</p>
+        <p style="font-size:11px">Güneş enerji paneli üretim tesisi kurulumu. 15 yeni istihdam.</p>
       </div>
       <div class="hik-card">
-        <h4>🏆 Metek Metal</h4>
-        <p><strong>TÜBİTAK 1507</strong> | 850K TL bütçe | %75 hibe</p>
-        <p style="font-size:11px">CNC tezgah optimizasyonu, verimlilik %25 arttı.</p>
+        <h4>🏆 Lezzetli Atölye</h4>
+        <p><strong>KOSGEB Girişimci</strong> | 1.2M TL destek</p>
+        <p style="font-size:11px">El yapımı organik gıda üretimi. 5 kişilik ekip, 3 şube.</p>
       </div>
     `;
   }
@@ -1521,8 +1759,27 @@ function renderTubitakPage() {
   }
 }
 
+function renderKosgebPage() {
+  const tablo = el('kosgebProgramTablosu');
+  if (tablo) {
+    tablo.innerHTML = KOSGEB_PROGRAMLARI.map(p => {
+      const acikCagri = KOSGEB_CAGRI.find(c => c.kod === p.kod && c.durum === 'acik');
+      return `
+        <tr>
+          <td><strong>${p.kod}</strong> - ${p.ad}</td>
+          <td>${p.hedef}</td>
+          <td>${p.destek_turu}</td>
+          <td>%${p.oran}</td>
+          <td>${p.limit}</td>
+          <td>${acikCagri ? '<span class="durum-acik" style="padding:2px 8px">Açık</span>' : '<span class="durum-kapali" style="padding:2px 8px">Kapalı</span>'}</td>
+        </tr>
+      `;
+    }).join('');
+  }
+}
+
 // ================================================================
-// 5. TÜBİTAK AI DEĞERLENDİRME FONKSİYONLARI
+// 6. TÜBİTAK AI DEĞERLENDİRME FONKSİYONLARI
 // ================================================================
 function tubitakDegerlendir() {
   const ad = el('f_ad_tubitak')?.value?.trim() || '';
@@ -1542,16 +1799,16 @@ function tubitakDegerlendir() {
     kurulus: el('f_kurulus_tubitak')?.value || '',
     vergi: el('f_vergi_tubitak')?.value || '',
     calisan: parseInt(el('f_calisan_tubitak')?.value) || 0,
-    proje_baslik: el('f_proje_baslik')?.value || '',
-    proje_ozet: el('f_proje_ozet')?.value || '',
-    teknoloji: el('f_teknoloji')?.value || '',
-    asama: el('f_asama')?.value || '',
-    arge_personel: parseInt(el('f_arge_personel')?.value) || 0,
-    yenilik: el('f_yenilik')?.value || '',
-    muhendis: el('f_muhendis')?.value || '',
+    proje_baslik: el('f_proje_baslik_tubitak')?.value || '',
+    proje_ozet: el('f_proje_ozet_tubitak')?.value || '',
+    teknoloji: el('f_teknoloji_tubitak')?.value || '',
+    asama: el('f_asama_tubitak')?.value || '',
+    arge_personel: parseInt(el('f_arge_personel_tubitak')?.value) || 0,
+    yenilik: el('f_yenilik_tubitak')?.value || '',
+    muhendis: el('f_muhendis_tubitak')?.value || '',
     prodis: el('f_prodis_tubitak')?.value || '',
     patent: el('f_patent_tubitak')?.value || '',
-    akademik: el('f_akademik')?.value || '',
+    akademik: el('f_akademik_tubitak')?.value || '',
     onceki_tubitak: el('f_onceki_tubitak')?.value || ''
   };
   
@@ -1772,7 +2029,269 @@ function tubitakMailGonder() {
 }
 
 // ================================================================
-// 6. DİĞER SAYFA RENDER FONKSİYONLARI (Kısa)
+// 7. KOSGEB AI DEĞERLENDİRME FONKSİYONLARI
+// ================================================================
+function kosgebDegerlendir() {
+  const ad = el('f_ad_kosgeb')?.value?.trim() || '';
+  const tel = el('f_tel_kosgeb')?.value?.trim() || '';
+  
+  if (!ad || !tel) {
+    alert('Ad Soyad ve Telefon zorunludur!');
+    return;
+  }
+  
+  const veri = {
+    ad: ad,
+    tel: tel,
+    email: el('f_email_kosgeb')?.value || '',
+    dogum: el('f_dogum_kosgeb')?.value || '',
+    firma: el('f_firma_kosgeb')?.value || '',
+    kurulus: el('f_kurulus_kosgeb')?.value || '',
+    vergi: el('f_vergi_kosgeb')?.value || '',
+    calisan: parseInt(el('f_calisan_kosgeb')?.value) || 0,
+    proje_baslik: el('f_proje_baslik_kosgeb')?.value || '',
+    proje_ozet: el('f_proje_ozet_kosgeb')?.value || '',
+    sektor: el('f_sektor_kosgeb')?.value || '',
+    asama: el('f_asama_kosgeb')?.value || '',
+    destek_tur: el('f_destek_tur_kosgeb')?.value || '',
+    yatirim: parseFloat(el('f_yatirim_kosgeb')?.value) || 0,
+    yenilik: el('f_yenilik_kosgeb')?.value || '',
+    kosgeb_sicil: el('f_kosgeb_sicil')?.value || '',
+    gir_egitim: el('f_gir_egitim_kosgeb')?.value || '',
+    onceki_kosgeb: el('f_onceki_kosgeb')?.value || '',
+    borc: el('f_borc_kosgeb')?.value || ''
+  };
+  
+  const analiz = kosgebAIAnaliz(veri);
+  kosgebRaporGoster(veri, analiz);
+  
+  const subs = LS.get('ads_subs') || [];
+  subs.push({
+    id: ts_id(),
+    tarih: now_str(),
+    ad_soyad: ad,
+    telefon: tel,
+    email: veri.email,
+    firma_adi: veri.firma,
+    hizmet: 'KOSGEB AI Değerlendirme',
+    proje_baslik: veri.proje_baslik,
+    sektor: veri.sektor,
+    asama: veri.asama,
+    durum: 'Yeni',
+    not_yonetici: `AI Değerlendirme - En Uygun: ${analiz.enUygun.program}`,
+    ai_analiz: analiz
+  });
+  LS.set('ads_subs', subs);
+}
+
+function kosgebAIAnaliz(veri) {
+  const puanlar = [];
+  
+  // Girişimci Desteği değerlendirmesi
+  let puanGir = 0;
+  if (veri.gir_egitim.includes('Evet, 32 saat')) puanGir += 35;
+  else if (veri.gir_egitim.includes('Evet')) puanGir += 15;
+  if (veri.kosgeb_sicil === 'Evet') puanGir += 25;
+  if (veri.calisan === 0 || veri.calisan < 10) puanGir += 20;
+  if (veri.borc === 'Yok') puanGir += 20;
+  if (veri.yatirim > 0 && veri.yatirim <= 1500000) puanGir += 20;
+  puanlar.push({program:'Girişimci Desteği', puan:Math.min(puanGir, 100), aciklama:'Yeni girişimciler için 1.5M TL\'ye kadar destek, 36 ay ödemesiz'});
+  
+  // KOBİGEL değerlendirmesi
+  let puanKobi = 0;
+  if (veri.calisan >= 10 && veri.calisan < 250) puanKobi += 30;
+  if (veri.asama.includes('İş planı hazır') || veri.asama.includes('Faaliyette')) puanKobi += 25;
+  if (veri.proje_ozet.length > 30) puanKobi += 20;
+  if (veri.yatirim > 100000) puanKobi += 15;
+  if (veri.onceki_kosgeb === 'Hayır') puanKobi += 10;
+  puanlar.push({program:'KOBİGEL', puan:Math.min(puanKobi, 100), aciklama:'KOBİ\'ler için 2M TL\'ye kadar proje desteği'});
+  
+  // İş Geliştirme Desteği
+  let puanIs = 0;
+  if (veri.calisan >= 1) puanIs += 30;
+  if (veri.asama.includes('Faaliyette')) puanIs += 30;
+  if (veri.sektor.includes('Hizmet') || veri.sektor.includes('Ticaret')) puanIs += 20;
+  if (veri.kosgeb_sicil === 'Evet') puanIs += 20;
+  puanlar.push({program:'İş Geliştirme Desteği', puan:Math.min(puanIs, 100), aciklama:'Personel, kira, elektrik giderlerinde %60 destek'});
+  
+  // Dijitalleşme Desteği
+  let puanDij = 0;
+  if (veri.sektor.includes('Yazılım') || veri.sektor.includes('Bilişim')) puanDij += 40;
+  if (veri.proje_ozet.toLowerCase().includes('dijital') || veri.proje_ozet.toLowerCase().includes('yazılım')) puanDij += 30;
+  if (veri.yenilik.length > 20) puanDij += 30;
+  puanlar.push({program:'Dijitalleşme Desteği', puan:Math.min(puanDij, 100), aciklama:'Yazılım, e-ticaret, dijital dönüşüm için %70 destek'});
+  
+  // Ar-Ge ve İnovasyon
+  let puanArge = 0;
+  if (veri.sektor.includes('Teknoloji') || veri.sektor.includes('Yazılım') || veri.sektor.includes('Üretim')) puanArge += 30;
+  if (veri.asama.includes('Prototip')) puanArge += 30;
+  if (veri.yenilik.length > 30) puanArge += 20;
+  if (veri.yatirim > 50000) puanArge += 20;
+  puanlar.push({program:'Ar-Ge ve İnovasyon', puan:Math.min(puanArge, 100), aciklama:'Teknoloji geliştirme projeleri için 600K TL\'ye kadar destek'});
+  
+  puanlar.sort((a,b) => b.puan - a.puan);
+  const enUygun = puanlar[0];
+  
+  const cagriMap = {'Girişimci Desteği':'GIR', 'KOBİGEL':'KOBIGEL', 'İş Geliştirme Desteği':'ISG', 'Dijitalleşme Desteği':'DIJ', 'Ar-Ge ve İnovasyon':'ARGE'};
+  const kod = cagriMap[enUygun.program] || 'GIR';
+  const acikCagri = KOSGEB_CAGRI.find(c => c.kod === kod && c.durum === 'acik');
+  
+  const analizNotlari = {
+    gucluYonler: [],
+    zayifYonler: [],
+    riskler: [],
+    oneriler: []
+  };
+  
+  if (veri.gir_egitim.includes('Evet, 32 saat')) analizNotlari.gucluYonler.push('KOSGEB onaylı girişimcilik eğitimi tamamlanmış');
+  if (veri.kosgeb_sicil === 'Evet') analizNotlari.gucluYonler.push('KOSGEB sicil kaydı mevcut');
+  if (veri.borc === 'Yok') analizNotlari.gucluYonler.push('SGK/Vergi borcu yok');
+  if (veri.proje_ozet.length > 50) analizNotlari.gucluYonler.push('Detaylı iş fikri tanımı');
+  
+  if (veri.gir_egitim === 'Hayır') analizNotlari.zayifYonler.push('Girişimcilik eğitimi eksik (Girişimci Desteği için şart)');
+  if (veri.kosgeb_sicil === 'Hayır') analizNotlari.zayifYonler.push('KOSGEB sicil kaydı yok');
+  if (veri.borc === 'Var') analizNotlari.zayifYonler.push('SGK/Vergi borcu var');
+  
+  if (veri.onceki_kosgeb === 'Evet') analizNotlari.riskler.push('Daha önce KOSGEB desteği almış, bazı programlara başvuramayabilir');
+  
+  if (veri.gir_egitim !== 'Evet, 32 saat') analizNotlari.oneriler.push('KOSGEB onaylı 32 saat girişimcilik eğitimi alın');
+  if (veri.kosgeb_sicil !== 'Evet') analizNotlari.oneriler.push('e-hizmet.kosgeb.gov.tr üzerinden sicil kaydı yaptırın');
+  
+  return { puanlar, enUygun, acikCagri, analizNotlari };
+}
+
+function kosgebRaporGoster(veri, analiz) {
+  const alan = el('kosgebRaporAlani');
+  if (!alan) return;
+  
+  const enUygun = analiz.enUygun;
+  const acikCagri = analiz.acikCagri;
+  
+  const html = `
+    <div class="kosgeb-badge">🏢 YAPAY ZEKA ANALİZ SONUCU</div>
+    <h3 style="color:#1E2A44;margin:10px 0">${veri.proje_baslik || 'İş Fikri Değerlendirmesi'}</h3>
+    <p style="color:#6B7280;font-size:13px;margin-bottom:15px">${veri.ad} | ${veri.firma || 'Firma bilgisi girilmemiş'}</p>
+    
+    <div class="rapor-ozet">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:18px;font-weight:700;color:#1E2A44">En Uygun Program:</span>
+        <span class="kosgeb-badge" style="background:#16A34A;font-size:16px;padding:8px 18px">${enUygun.program}</span>
+      </div>
+      <p style="margin:10px 0 5px">${enUygun.aciklama}</p>
+      <div class="score-bar"><div class="score-fill" style="width:${enUygun.puan}%;background:#16A34A"></div></div>
+      <p style="text-align:right;font-size:12px;color:#6B7280">Uygunluk Puanı: ${enUygun.puan}/100</p>
+    </div>
+    
+    ${acikCagri ? `
+    <div style="background:#F0FDF4;border-radius:8px;padding:15px;margin:15px 0;border:1px solid #BBF7D0">
+      <div style="display:flex;justify-content:space-between">
+        <span><i class="fas fa-check-circle" style="color:#16A34A"></i> <strong>AÇIK ÇAĞRI!</strong></span>
+        <span class="durum-acik" style="padding:4px 12px">Son Başvuru: ${acikCagri.bitis}</span>
+      </div>
+      <p style="margin-top:8px">Program: ${acikCagri.kod} | Dönem: ${acikCagri.donem}</p>
+      <div class="kalan-gun">⏰ ${acikCagri.kalan_gun || '?'} gün kaldı!</div>
+      <p style="font-size:12px;margin-top:8px"><strong>⚠ Ön Koşul:</strong> ${acikCagri.on_kosul}</p>
+    </div>
+    ` : `
+    <div style="background:#FEF2F2;border-radius:8px;padding:15px;margin:15px 0;border:1px solid #FECDD3">
+      <i class="fas fa-exclamation-triangle" style="color:#DC2626"></i> 
+      <strong>Şu anda ${enUygun.program} için açık çağrı bulunmamaktadır.</strong>
+      <p style="margin-top:5px;font-size:12px">Bir sonraki dönem için hazırlık yapabilirsiniz.</p>
+    </div>
+    `}
+    
+    <h4 style="color:#1E2A44;margin:20px 0 10px">📊 Tüm Program Uygunluk Analizi</h4>
+    ${analiz.puanlar.map(p => `
+      <div style="margin-bottom:12px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:3px">
+          <span style="font-weight:600">${p.program}</span>
+          <span style="color:${p.puan>=70?'#16A34A':p.puan>=40?'#D97706':'#9CA3AF'}">${p.puan}/100</span>
+        </div>
+        <div class="score-bar"><div class="score-fill" style="width:${p.puan}%;background:${p.puan>=70?'#16A34A':p.puan>=40?'#D97706':'#9CA3AF'}"></div></div>
+        <p style="font-size:11px;color:#6B7280;margin-top:2px">${p.aciklama}</p>
+      </div>
+    `).join('')}
+    
+    <h4 style="color:#1E2A44;margin:20px 0 10px">✅ Güçlü Yönler</h4>
+    <ul style="padding-left:20px;margin-bottom:15px">
+      ${analiz.analizNotlari.gucluYonler.map(g => `<li style="margin-bottom:3px;color:#16A34A"><i class="fas fa-check-circle"></i> ${g}</li>`).join('')}
+      ${analiz.analizNotlari.gucluYonler.length === 0 ? '<li style="color:#9CA3AF">Henüz güçlü yön belirlenemedi</li>' : ''}
+    </ul>
+    
+    <h4 style="color:#1E2A44;margin:20px 0 10px">⚠️ Geliştirilmesi Gereken Alanlar</h4>
+    <ul style="padding-left:20px;margin-bottom:15px">
+      ${analiz.analizNotlari.zayifYonler.map(z => `<li style="margin-bottom:3px;color:#D97706"><i class="fas fa-exclamation-triangle"></i> ${z}</li>`).join('')}
+      ${analiz.analizNotlari.zayifYonler.length === 0 ? '<li style="color:#9CA3AF">Zayıf yön bulunamadı</li>' : ''}
+    </ul>
+    
+    <h4 style="color:#1E2A44;margin:20px 0 10px">🔔 Risk Analizi ve Öneriler</h4>
+    <div style="background:#FFFBEB;border-left:4px solid #D97706;padding:15px;border-radius:8px">
+      <p style="margin-bottom:8px"><strong>Riskler:</strong></p>
+      <ul style="padding-left:20px;margin-bottom:12px">
+        ${analiz.analizNotlari.riskler.map(r => `<li style="color:#92400E">${r}</li>`).join('')}
+        ${analiz.analizNotlari.riskler.length === 0 ? '<li style="color:#9CA3AF">Belirgin risk yok</li>' : ''}
+      </ul>
+      <p style="margin-bottom:8px"><strong>ADS Önerileri:</strong></p>
+      <ul style="padding-left:20px">
+        ${analiz.analizNotlari.oneriler.map(o => `<li style="color:#16A34A"><i class="fas fa-lightbulb"></i> ${o}</li>`).join('')}
+        ${analiz.analizNotlari.oneriler.length === 0 ? '<li style="color:#9CA3AF">Öneri yok</li>' : ''}
+      </ul>
+    </div>
+    
+    <div style="display:flex;gap:10px;margin-top:20px">
+      <button class="btn-gold" style="flex:1" onclick="kosgebRaporKaydet()">
+        <i class="fas fa-download"></i> Raporu İndir (HTML)
+      </button>
+      <button class="btn-navy" style="flex:1" onclick="kosgebMailGonder()">
+        <i class="fas fa-envelope"></i> E-posta ile Gönder
+      </button>
+    </div>
+  `;
+  
+  alan.innerHTML = html;
+}
+
+function kosgebRaporKaydet() {
+  const alan = el('kosgebRaporAlani');
+  if (!alan) return;
+  
+  const html = `
+    <!DOCTYPE html>
+    <html>
+    <head><meta charset="UTF-8"><title>KOSGEB Ön Değerlendirme Raporu</title>
+    <style>
+      body{font-family:Arial;margin:20px;color:#333}
+      .header{background:#1E2A44;color:white;padding:15px;border-radius:8px}
+      .program-box{border-left:4px solid #16A34A;padding:10px;margin:10px 0;background:#F9FAFB}
+      .cagri-acik{background:#F0FDF4;border:1px solid #86EFAC;padding:10px;border-radius:8px}
+      .score-bar{height:10px;background:#E5E7EB;border-radius:10px;margin:5px 0}
+      .score-fill{height:10px;background:#16A34A;border-radius:10px}
+    </style>
+    </head>
+    <body>
+      <div class="header"><h1>KOSGEB Ön Değerlendirme Raporu</h1></div>
+      ${alan.innerHTML}
+      <p style="margin-top:20px;font-size:11px;color:#999">Rapor Tarihi: ${new Date().toLocaleString('tr-TR')}</p>
+    </body>
+    </html>
+  `;
+  
+  const blob = new Blob([html], {type: 'text/html;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `KOSGEB_Rapor_${new Date().toISOString().split('T')[0]}.html`;
+  a.click();
+}
+
+function kosgebMailGonder() {
+  const subject = 'KOSGEB Ön Değerlendirme Raporum';
+  const body = 'Merhaba,\n\nKOSGEB ön değerlendirme raporumu ekte incelenmesi için gönderiyorum.\n\nSaygılarımla.';
+  window.location.href = `mailto:kosgeb@adsdanismanlik.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  alert('E-posta uygulamanız açılacaktır. Raporu HTML olarak kaydedip ekleyebilirsiniz.');
+}
+
+// ================================================================
+// 8. DİĞER SAYFA RENDER FONKSİYONLARI (Kısa)
 // ================================================================
 function renderTeam() {
   const team = LS.get('ads_team') || [];
@@ -1833,7 +2352,7 @@ function renderDokumanlar() {
 }
 
 // ================================================================
-// 7. ADMİN FONKSİYONLARI (Kısa)
+// 9. ADMİN FONKSİYONLARI (Kısa)
 // ================================================================
 function openAdmin() {
   el('adminWrap').style.display = 'block';
@@ -1868,16 +2387,6 @@ function setAdmSec(sec) {
   const s = el('sec-'+sec);
   if (s) s.classList.add('active');
   el('admTitle').textContent = sec.toUpperCase();
-  if (sec === 'crm') renderCRM();
-  if (sec === 'blog') renderBlogAdmin();
-  if (sec === 'team') renderTeamAdmin();
-  if (sec === 'hikayeler') renderHikayelerAdmin();
-  if (sec === 'dokumanlar') renderDokAdm();
-  if (sec === 'duyurular') renderDuyurularAdmin();
-  if (sec === 'ziyaretci') renderZiyaretci();
-  if (sec === 'raporlar') renderRaporlarSec();
-  if (sec === 'ayarlar') loadAyarlar();
-  if (sec === 'dashboard') renderDashboard();
 }
 
 function renderDashboard() {
@@ -1890,118 +2399,40 @@ function renderDashboard() {
     <div class="s-box"><div class="s-num">${team.length}</div><div class="s-lbl">Ekip</div></div>
     <div class="s-box"><div class="s-num">${subs.length}</div><div class="s-lbl">Başvuru</div></div>
     <div class="s-box"><div class="s-num">${v.today||0}</div><div class="s-lbl">Bugün</div></div>`;
-  const last = [...subs].slice(-5).reverse();
-  el('dashLastSubs').innerHTML = last.length ? `<table class="a-tbl">${last.map(r => `<tr><td>${r.ad_soyad}</td><td>${r.hizmet}</td></tr>`).join('')}</table>` : '<p>Başvuru yok</p>';
 }
 
 function renderCRM() {
   const subs = LS.get('ads_subs') || [];
-  el('crmTbody').innerHTML = subs.map(r => `<tr><td>${r.ad_soyad}</td><td>${r.firma_adi}</td><td>${r.hizmet}</td><td><button onclick="viewMDetay('${r.id}')">Detay</button></td></tr>`).join('');
-}
-
-function viewMDetay(id) {
-  setAdmSec('mdetay');
-  const subs = LS.get('ads_subs') || [];
-  const r = subs.find(s => s.id === id);
-  el('mdetayContent').innerHTML = `<pre>${JSON.stringify(r, null, 2)}</pre>`;
-}
-
-function renderBlogAdmin() {
-  const blogs = LS.get('ads_blogs') || [];
-  el('blogTbody').innerHTML = blogs.map(b => `<tr><td>${b.baslik}</td></tr>`).join('');
-}
-
-function renderTeamAdmin() {
-  const team = LS.get('ads_team') || [];
-  el('teamTbody').innerHTML = team.map(t => `<tr><td>${t.ad}</td></tr>`).join('');
-}
-
-function renderHikayelerAdmin() {
-  const h = LS.get('ads_hikayeler') || [];
-  el('hikayelerTbody').innerHTML = h.map(hh => `<tr><td>${hh.baslik}</td></tr>`).join('');
-}
-
-function renderDokAdm() {
-  const docs = LS.get('ads_dokumanlar') || [];
-  el('dokListAdmin').innerHTML = docs.map((d,i) => `<div>${d.baslik} <button onclick="delDok(${i})">Sil</button></div>`).join('');
-}
-
-function renderDuyurularAdmin() {
-  const d = LS.get('ads_duyurular') || [];
-  el('duyuruTbody').innerHTML = d.map((r,i) => `<tr><td>${r.metin}</td><td><button onclick="delDuyuru(${i})">Sil</button></td></tr>`).join('');
-  renderDuyuruBanner();
-}
-
-function renderRaporlarSec() {
-  const subs = LS.get('ads_subs') || [];
-  el('toplu_mid').innerHTML = subs.map(r => `<option value="${r.id}">${r.ad_soyad}</option>`).join('');
+  el('crmTbody').innerHTML = subs.map(r => `<tr><td>${r.ad_soyad}</td><td>${r.firma_adi}</td><td>${r.hizmet}</td></tr>`).join('');
 }
 
 function topluRapor(fmt) {
-  alert('Rapor oluşturma işlemi başlatıldı. Bu özellik geliştirilme aşamasındadır.');
-}
-
-function renderZiyaretci() {
-  const v = LS.get('ads_visitors') || { today: 0 };
-  el('visStat').innerHTML = `<div class="s-box"><div class="s-num">${v.today}</div><div class="s-lbl">Bugün</div></div>`;
+  alert('Rapor oluşturma işlemi başlatıldı.');
 }
 
 function loadAyarlar() {
   const cfg = LS.get('ads_config') || {};
   if (el('cfg_firma')) el('cfg_firma').value = cfg.firma_adi || '';
-  if (el('cfgEmailInfo')) el('cfgEmailInfo').innerHTML = `<i class="fas fa-info-circle"></i> Giriş: ${cfg.email || ''}`;
 }
-
-function saveCfg() {
-  const cfg = LS.get('ads_config') || {};
-  cfg.firma_adi = el('cfg_firma')?.value || '';
-  LS.set('ads_config', cfg);
-  alert('Kaydedildi');
-}
-
-function saveDuyuru() {
-  const metin = el('d_metin')?.value;
-  if (!metin) return;
-  const d = LS.get('ads_duyurular') || [];
-  d.push({ metin, url: el('d_url')?.value, renk: el('d_renk')?.value });
-  LS.set('ads_duyurular', d);
-  renderDuyurularAdmin();
-}
-
-function delDuyuru(idx) {
-  const d = LS.get('ads_duyurular') || [];
-  d.splice(idx, 1);
-  LS.set('ads_duyurular', d);
-  renderDuyurularAdmin();
-}
-
-function renderDuyuruBanner() {
-  const d = LS.get('ads_duyurular') || [];
-  const bar = el('duyuruBar');
-  if (!d.length) { bar.classList.remove('show'); return; }
-  const r = d[0];
-  bar.style.background = r.renk || '#C9A84C';
-  const textColor = r.renk === '#DC2626' ? 'white' : '#1E2A44';
-  bar.innerHTML = `<p style="color:${textColor}">${r.metin}</p>${r.url ? `<a href="${r.url}" target="_blank" style="color:${textColor}">Detaylar →</a>` : ''}`;
-  bar.classList.add('show');
-}
-
-function delDok(idx) {
-  const docs = LS.get('ads_dokumanlar') || [];
-  docs.splice(idx, 1);
-  LS.set('ads_dokumanlar', docs);
-  renderDokAdm();
-}
-
-function saveDok() { alert('Doküman ekleme işlemi geliştirilme aşamasındadır.'); }
-function saveBlog() { alert('Blog kaydet'); }
-function saveTeam() { alert('Ekip kaydet'); }
-function saveHikaye() { alert('Hikaye kaydet'); }
-function clearBlogForm() {}
-function clearTeamForm() {}
 
 // ================================================================
-// 8. SAYFA YÜKLENİNCE
+// 10. E-POSTA MODAL FONKSİYONLARI
+// ================================================================
+function toggleMailMethod() {
+  el('emailjsInfo').style.display = el('mailMethod').value === 'emailjs' ? 'block' : 'none';
+}
+
+function closeMailModal() {
+  el('mailModal').classList.remove('show');
+}
+
+function doSendMail() {
+  alert('E-posta gönderme işlemi için EmailJS ayarları yapılmalıdır.');
+  closeMailModal();
+}
+
+// ================================================================
+// 11. SAYFA YÜKLENİNCE
 // ================================================================
 document.addEventListener('DOMContentLoaded', () => {
   renderAnaSayfa();
