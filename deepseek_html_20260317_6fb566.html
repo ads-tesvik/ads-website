@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>ADS Danışmanlık | TÜBİTAK Ar-Ge Uzmanı</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<style>
+/* ===== BASE - Mevcut stiller aynen korunuyor ===== */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--navy:#1E2A44;--gold:#C9A84C;--light:#F8F9FA;--text:#2D3748;--muted:#718096}
+html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overflow-x:hidden}
+.page{display:none}.page.active{display:block}
+
+/* ===== TÜBİTAK ÖZEL STİLLER ===== */
+.tubitak-badge{background:linear-gradient(135deg,#1E2A44,#2E4A7D);color:white;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;display:inline-block;margin-bottom:10px}
+.tubitak-card{border-left:4px solid #2E4A7D;background:white;border-radius:10px;padding:18px;margin-bottom:16px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+.ai-score{display:inline-block;width:36px;height:36px;border-radius:50%;background:#2E4A7D;color:white;text-align:center;line-height:36px;font-weight:700;font-size:14px}
+.score-bar{height:8px;border-radius:20px;background:#E5E7EB;margin:5px 0}
+.score-fill{height:8px;border-radius:20px;background:#2E4A7D}
+.program-card{cursor:pointer;transition:.2s;border:2px solid transparent}
+.program-card.selected{border-color:#C9A84C;background:#FFFBEB}
+.program-card:hover{transform:translateY(-2px);box-shadow:0 8px 16px rgba(0,0,0,.08)}
+.uyari-tubitak{background:#EFF6FF;border-left:4px solid #2E4A7D;border-radius:6px;padding:12px;margin:10px 0;font-size:13px}
+.mevzuat-kutu{background:#F9FAFB;border:1px solid #E5E7EB;border-radius:8px;padding:12px;margin-bottom:12px}
+.mevzuat-tarih{color:#2E4A7D;font-weight:700;font-size:13px}
+.cagri-takvimi{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:15px 0}
+.cagri-item{background:white;border:1px solid #E5E7EB;border-radius:8px;padding:12px;text-align:center}
+.cagri-item.acik{border-left:4px solid #10B981}
+.cagri-item.kapali{border-left:4px solid #EF4444}
+.cagri-kod{font-weight:700;color:#2E4A7D;font-size:15px}
+.cagri-durum{font-size:11px;font-weight:600;display:inline-block;padding:2px 8px;border-radius:20px;margin-top:5px}
+.durum-acik{background:#D1FAE5;color:#065F46}
+.durum-kapali{background:#FEE2E2;color:#991B1B}
+.proje-ipucu{background:#FDF4FF;border-left:4px solid #7C3AED;border-radius:6px;padding:12px;margin:10px 0}
+.hakem-rehber{background:#FEF2F2;border:1px solid #FECDD3;border-radius:8px;padding:15px;margin:15px 0}
+.hakem-rehber h5{color:#991B1B;margin-bottom:8px}
+.hakem-soru{font-weight:600;margin:8px 0 3px;color:#2D3748}
+.rapor-ozet{background:#F0FDF4;border-radius:8px;padding:15px;margin:10px 0;border:1px solid #BBF7D0}
+.kalan-gun{font-size:20px;font-weight:700;color:#D97706}
+</style>
+</head>
+<body>
+
+<!-- DUYURU BAR -->
+<div id="duyuruBar"></div>
+
+<!-- NAVBAR (Aynı) -->
+<nav class="nbar">
+  <div class="logo" onclick="showPage('anaSayfa')">ADS <span>|</span> TÜBİTAK Ar-Ge Uzmanı</div>
+  <div class="nav-menu">
+    <a class="nav-link" onclick="showPage('anaSayfa')">Anasayfa</a>
+    <a class="nav-link" onclick="showPage('tubitakPage')">🔬 TÜBİTAK</a>
+    <a class="nav-link" onclick="showPage('tubitakCagriPage')">📅 Güncel Çağrılar</a>
+    <a class="nav-link" onclick="showPage('tubitakRehberPage')">📘 Başvuru Rehberi</a>
+    <a class="nav-link" onclick="showPage('tubitakHakemPage')">⚖️ Hakem Süreci</a>
+    <a class="nav-link" onclick="showPage('iletisimPage')">İletişim</a>
+    <a class="nav-link" onclick="openAdmin()" style="background:rgba(201,168,76,.15);color:#C9A84C;border:1px solid rgba(201,168,76,.4)">🔐</a>
+  </div>
+</nav>
+
+<!-- ========== ANA SAYFA (TÜBİTAK ODAKLI) ========== -->
+<div id="anaSayfa" class="page active">
+  <div class="hero" style="background:linear-gradient(135deg,#1E2A44 0%,#2563EB 100%)">
+    <div class="hero-grid container">
+      <div>
+        <div class="badge-c">TÜBİTAK AR-GE UZMAN DANIŞMANLIĞI</div>
+        <h1>Projenizi<br><span>%75 Hibe ile</span><br>Hayata Geçirin</h1>
+        <p class="sub">1501, 1507, 1511, 1512 programlarında uzman ekibimizle yanınızdayız. 100+ başarılı proje, 500M+ TL kazandırılan teşvik.</p>
+        <div style="display:flex;gap:9px;flex-wrap:wrap">
+          <button class="btn-gold" onclick="showPage('tubitakFormPage')">Hemen Ön Değerlendir</button>
+          <button class="btn-outline-w" onclick="showPage('tubitakPage')">Programları İncele</button>
+        </div>
+        <div id="cagriOzet" style="margin-top:20px;background:rgba(255,255,255,.1);border-radius:10px;padding:15px">
+          <!-- Güncel çağrılar burada dinamik gösterilecek -->
+        </div>
+      </div>
+      <div><img class="hero-img" src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?q=80&w=900&auto=format" alt="Ar-Ge Ekibi"></div>
+    </div>
+  </div>
+  
+  <!-- TÜBİTAK Program Kartları -->
+  <div class="section section-alt">
+    <div class="container">
+      <h2 class="sec-title">TÜBİTAK Ar-Ge Programları</h2>
+      <div class="g4" id="programKartlari"></div>
+    </div>
+  </div>
+  
+  <!-- Başarı Hikayeleri -->
+  <div class="section">
+    <div class="container">
+      <h2 class="sec-title">Başarılı TÜBİTAK Projeleri</h2>
+      <div class="g3" id="tubitakHikayeler"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== TÜBİTAK ANA SAYFA ========== -->
+<div id="tubitakPage" class="page">
+  <div class="section">
+    <div class="container">
+      <h2 class="sec-title">TÜBİTAK Ar-Ge Destekleri</h2>
+      <span class="sec-sub">ADS El Kitabı Bölüm 3'e göre hazırlanmıştır.</span>
+      
+      <table class="tbl">
+        <thead><tr><th>Program</th><th>Hedef Kitle</th><th>Bütçe</th><th>Hibe</th><th>Süre</th><th>Güncel Çağrı</th></tr></thead>
+        <tbody id="tubitakProgramTablosu"></tbody>
+      </table>
+      
+      <div class="g3" style="margin-top:30px">
+        <div class="svc-card" onclick="showPage('tubitakFormPage')">
+          <h4>🔬 1501 Sanayi Ar-Ge</h4>
+          <p>Kapsamlı Ar-Ge projeleri, 36 aya kadar, 1-5M TL bütçe.</p>
+          <a class="svc-link">Hemen Değerlendir →</a>
+        </div>
+        <div class="svc-card" onclick="showPage('tubitakFormPage')">
+          <h4>🧪 1507 KOBİ Ar-Ge</h4>
+          <p>Ar-Ge'ye yeni başlayan KOBİ'ler, 18 ay, 500K-1M TL.</p>
+          <a class="svc-link">Hemen Değerlendir →</a>
+        </div>
+        <div class="svc-card" onclick="showPage('tubitakFormPage')">
+          <h4>💡 1512 BİGG</h4>
+          <p>Bireysel girişimciler, %100 hibe, 200-400K TL.</p>
+          <a class="svc-link">Hemen Değerlendir →</a>
+        </div>
+        <div class="svc-card" onclick="showPage('tubitakFormPage')">
+          <h4>⚙️ 1511 Öncelikli Alanlar</h4>
+          <p>Stratejik sektörler, 2-10M TL, açık çağrı.</p>
+          <a class="svc-link">Hemen Değerlendir →</a>
+        </div>
+        <div class="svc-card" onclick="showPage('tubitakFormPage')">
+          <h4>📊 1509 Uluslararası</h4>
+          <p>EUROSTARS, Eureka, Horizon Europe destekli.</p>
+          <a class="svc-link">Hemen Değerlendir →</a>
+        </div>
+      </div>
+      
+      <div class="uyari-tubitak" style="margin-top:25px">
+        <i class="fas fa-book-open"></i> <strong>ADS El Kitabı'ndan:</strong> TÜBİTAK projelerinde başarı için 10 altın kural, iş paketi oluşturma teknikleri ve risk analizi rehberi için lütfen bizimle iletişime geçin.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== TÜBİTAK ÇAĞRI TAKVİMİ ========== -->
+<div id="tubitakCagriPage" class="page">
+  <div class="section">
+    <div class="container">
+      <h2 class="sec-title">📅 Güncel TÜBİTAK Çağrı Takvimi</h2>
+      <span class="sec-sub">teydeb.tubitak.gov.tr üzerinden anlık verilerle güncellenmektedir.</span>
+      
+      <div class="cagri-takvimi" id="cagriTakvimi"></div>
+      
+      <div class="mevzuat-kutu">
+        <h4 style="color:#2E4A7D;margin-bottom:10px">🔔 Kritik Tarihler</h4>
+        <div id="kritikTarihler"></div>
+      </div>
+      
+      <div class="g2" style="margin-top:20px">
+        <div class="svc-card">
+          <h4>PRODİS Ön Kayıt (KBÖK)</h4>
+          <p>Kuruluş Bazlı Ön Kayıt, çağrı kapanışından en az 3 gün önce tamamlanmalıdır. Bu işlem 1 hafta sürebilir.</p>
+          <a href="https://eteydeb.tubitak.gov.tr" target="_blank" class="btn-navy btn-sm">PRODİS'e Git →</a>
+        </div>
+        <div class="svc-card">
+          <h4>e-imza Kontrolü</h4>
+          <p>Başvuru için geçerli e-imza gereklidir. Süresini kontrol edin.</p>
+          <a href="https://www.turkiye.gov.tr" target="_blank" class="btn-navy btn-sm">e-Devlet →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== TÜBİTAK BAŞVURU REHBERİ ========== -->
+<div id="tubitakRehberPage" class="page">
+  <div class="section">
+    <div class="container">
+      <h2 class="sec-title">📘 TÜBİTAK Başvuru Rehberi</h2>
+      <span class="sec-sub">ADS El Kitabı Bölüm 3.7 - Proje Yazım Teknikleri</span>
+      
+      <div class="g2">
+        <div class="svc-card">
+          <h4>📝 Proje Özeti (Çok Önemli!)</h4>
+          <ul style="padding-left:18px;font-size:12px;margin-top:8px">
+            <li>1 sayfa, 250-300 kelime</li>
+            <li>Giriş, Amaç, Yöntem, Yenilikçi Yön, Beklenen Çıktılar</li>
+            <li>Hakem ilk burayı okur!</li>
+          </ul>
+        </div>
+        <div class="svc-card">
+          <h4>📊 İş Paketleri (Work Packages)</h4>
+          <ul style="padding-left:18px;font-size:12px;margin-top:8px">
+            <li>3-6 iş paketi (WP1...WP6)</li>
+            <li>Her WP için: Amaç, Faaliyetler, Süre, Çıktılar</li>
+            <li>Gantt şeması ile göster</li>
+          </ul>
+        </div>
+        <div class="svc-card">
+          <h4>⚠️ Risk Analizi ve B Planı</h4>
+          <ul style="padding-left:18px;font-size:12px;margin-top:8px">
+            <li>Teknik riskler (algoritma başarısızlığı)</li>
+            <li>Personel riski (kilit personel ayrılırsa)</li>
+            <li>Tedarik riski (ithal malzeme gecikmesi)</li>
+          </ul>
+        </div>
+        <div class="svc-card">
+          <h4>💰 Bütçe Hazırlama</h4>
+          <ul style="padding-left:18px;font-size:12px;margin-top:8px">
+            <li>Personel (%70'i geçmemeli)</li>
+            <li>Makine-teçhizat (proforma faturalı)</li>
+            <li>Malzeme (%40'ı geçmemeli)</li>
+            <li>Seyahat, hizmet alımı, danışmanlık</li>
+          </ul>
+        </div>
+      </div>
+      
+      <h3 style="color:#2E4A7D;margin:30px 0 15px">📋 TÜBİTAK 1501 İçin Örnek İş Paketleri</h3>
+      <table class="tbl">
+        <thead><tr><th>WP No</th><th>WP Adı</th><th>Süre</th><th>Amaç</th><th>Faaliyetler</th></tr></thead>
+        <tbody>
+          <tr><td>WP1</td><td>Literatür Taraması</td><td>1-3 ay</td><td>Yenilikçi yönü belirle</td><td>Patent, makale taraması</td></tr>
+          <tr><td>WP2</td><td>Tasarım ve Simülasyon</td><td>4-9 ay</td><td>Algoritma geliştirme</td><td>Modelleme, simülasyon</td></tr>
+          <tr><td>WP3</td><td>Prototip Üretimi</td><td>10-18 ay</td><td>İlk örnek üretimi</td><td>Mekanik tasarım, montaj</td></tr>
+          <tr><td>WP4</td><td>Test ve Validasyon</td><td>19-24 ay</td><td>Doğrulama</td><td>Testler, iyileştirme</td></tr>
+        </tbody>
+      </table>
+      
+      <div class="proje-ipucu">
+        <i class="fas fa-lightbulb" style="color:#7C3AED;margin-right:6px"></i>
+        <strong>ADS İpucu:</strong> İş paketlerini oluştururken her birinin bir "çıktı" üretmesine dikkat edin. Örneğin WP1'in çıktısı "Teknik Şartname Raporu", WP2'nin çıktısı "Simülasyon Modeli" olabilir.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== TÜBİTAK HAKEM SÜRECİ REHBERİ ========== -->
+<div id="tubitakHakemPage" class="page">
+  <div class="section">
+    <div class="container">
+      <h2 class="sec-title">⚖️ Hakem Süreci Yönetimi</h2>
+      <span class="sec-sub">ADS El Kitabı Bölüm 3.8 - Hakem Süreci ve Firma Ziyareti</span>
+      
+      <div class="hakem-rehber">
+        <h5><i class="fas fa-exclamation-triangle"></i> EN KRİTİK AŞAMA: HAKEM SORULARI</h5>
+        <p>Hakemlerden ortalama 20-30 soru gelir. Cevaplama süresi genellikle 2-3 haftadır.</p>
+      </div>
+      
+      <h3 style="color:#2E4A7D;margin:20px 0 10px">📌 Hakem Sorularına Cevap Verme Stratejileri</h3>
+      <div class="g3" style="margin-bottom:20px">
+        <div class="svc-card">
+          <span class="hakem-soru">1. Soruları Anlayın</span>
+          <p style="font-size:11px">Her soruyu dikkatlice okuyun, ne sorulduğunu tam olarak anlayın.</p>
+        </div>
+        <div class="svc-card">
+          <span class="hakem-soru">2. Projenin Güçlü Yönlerini Vurgulayın</span>
+          <p style="font-size:11px">Cevaplarınızda yenilikçilik, uygulanabilirlik, ekonomik katkıyı öne çıkarın.</p>
+        </div>
+        <div class="svc-card">
+          <span class="hakem-soru">3. Açık, Net ve Kısa Olun</span>
+          <p style="font-size:11px">Gereksiz ayrıntılara girmeyin, anlaşılır cevaplar verin.</p>
+        </div>
+        <div class="svc-card">
+          <span class="hakem-soru">4. Kanıt Sunun</span>
+          <p style="font-size:11px">Teknik çizim, test sonucu, literatür referansı, proforma fatura ekleyin.</p>
+        </div>
+        <div class="svc-card">
+          <span class="hakem-soru">5. Savunmacı Olmayın</span>
+          <p style="font-size:11px">Eleştirileri projeyi geliştirmek için fırsat görün.</p>
+        </div>
+        <div class="svc-card">
+          <span class="hakem-soru">6. Zamanında Cevap Verin</span>
+          <p style="font-size:11px">Süre sınırlıdır, geç kalırsanız proje reddedilebilir.</p>
+        </div>
+      </div>
+      
+      <h3 style="color:#2E4A7D;margin:20px 0 10px">🏢 Firma Ziyareti Hazırlık Kontrol Listesi</h3>
+      <table class="tbl">
+        <thead><tr><th>Hazırlık</th><th>Açıklama</th><th>Sorumlu</th></tr></thead>
+        <tbody>
+          <tr><td>Sunum</td><td>20 slaytlık, görsel açıdan etkileyici sunum</td><td>Danışman + Proje Yürütücüsü</td></tr>
+          <tr><td>Prova</td><td>En az 3 kez, olası sorular simüle edilir</td><td>Tüm ekip + Danışman</td></tr>
+          <tr><td>Altyapı Gösterimi</td><td>Laboratuvar, makine, test düzeneği hazır</td><td>Teknik ekip</td></tr>
+          <tr><td>Dokümantasyon</td><td>Proforma faturalar, CV'ler, taahhütnameler</td><td>Proje yürütücüsü</td></tr>
+          <tr><td>Lojistik</td><td>Toplantı odası, ikram, ulaşım</td><td>İdari ekip</td></tr>
+        </tbody>
+      </table>
+      
+      <div class="proje-ipucu" style="margin-top:20px">
+        <i class="fas fa-star" style="color:#7C3AED"></i>
+        <strong>ADS El Kitabı'ndan:</strong> "Hakem sorularına özenle cevap verilmeli, firma ziyaretine iyi hazırlanılmalıdır. Bu iki aşama projenin kaderini belirler."
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== TÜBİTAK ÖN DEĞERLENDİRME FORMU ========== -->
+<div id="tubitakFormPage" class="page">
+  <div class="section">
+    <div class="container">
+      <h2 class="sec-title">🔬 TÜBİTAK Ön Değerlendirme Formu</h2>
+      <span class="sec-sub">ADS Yapay Zeka Asistanı, projenizi analiz edip size özel rapor hazırlayacak.</span>
+      
+      <div class="g2" style="align-items:start">
+        <!-- SOL: FORM -->
+        <div>
+          <div class="tubitak-badge">ADIM 1: PROJE BİLGİLERİ</div>
+          
+          <div class="form-box gold">
+            <span class="form-lbl">KİŞİSEL BİLGİLER</span>
+            <div class="g2">
+              <div class="fi"><label>Ad Soyad <span class="req">*</span></label><input id="f_ad" placeholder="Adınız Soyadınız"></div>
+              <div class="fi"><label>Telefon <span class="req">*</span></label><input id="f_tel" type="tel" placeholder="+90 5xx xxx xx xx"></div>
+              <div class="fi"><label>E-posta</label><input id="f_email" type="email" placeholder="ornek@firma.com"></div>
+              <div class="fi"><label>Doğum Tarihi (BİGG için)</label><input id="f_dogum" type="date"></div>
+            </div>
+          </div>
+          
+          <div class="form-box navy">
+            <span class="form-lbl">FİRMA BİLGİLERİ</span>
+            <div class="g2">
+              <div class="fi"><label>Firma Adı</label><input id="f_firma" placeholder="Ticaret unvanı"></div>
+              <div class="fi"><label>Kuruluş Tarihi</label><input id="f_kurulus" type="date"></div>
+              <div class="fi"><label>Vergi No / TC</label><input id="f_vergi" placeholder="VKN veya TC"></div>
+              <div class="fi"><label>Çalışan Sayısı</label><input id="f_calisan" type="number" min="0" placeholder="0"></div>
+            </div>
+          </div>
+          
+          <div class="form-box" style="border-left:4px solid #7C3AED">
+            <span class="form-lbl">PROJE DETAYLARI</span>
+            <div class="fi"><label>Proje Başlığı <span class="req">*</span></label><input id="f_proje_baslik" placeholder="Örn: Yapay Zeka Destekli Görüntü İşleme Sistemi"></div>
+            <div class="fi"><label>Proje Konusu (Kısa Özet) <span class="req">*</span></label><textarea id="f_proje_ozet" placeholder="Projenizi 3-5 cümle ile açıklayın..." style="min-height:80px"></textarea></div>
+            <div class="g2">
+              <div class="fi"><label>Teknoloji Alanı <span class="req">*</span></label>
+                <select id="f_teknoloji">
+                  <option>Seçiniz...</option>
+                  <option>Yapay Zeka / Yazılım</option>
+                  <option>Donanım / Elektronik</option>
+                  <option>Makine / Mekatronik</option>
+                  <option>Kimya / Malzeme</option>
+                  <option>Biyoteknoloji / Sağlık</option>
+                  <option>Enerji / Çevre</option>
+                  <option>Savunma / Havacılık</option>
+                  <option>Diğer</option>
+                </select>
+              </div>
+              <div class="fi"><label>Proje Aşaması <span class="req">*</span></label>
+                <select id="f_asama">
+                  <option>Seçiniz...</option>
+                  <option>Sadece fikir aşaması</option>
+                  <option>Literatür/Patent taraması yapıldı</option>
+                  <option>Ön çalışmalar tamamlandı</option>
+                  <option>Prototip hazır</option>
+                  <option>Ürün hazır, ticarileşme aşamasında</option>
+                </select>
+              </div>
+              <div class="fi"><label>Tahmini Proje Bütçesi (TL) <span class="req">*</span></label>
+                <select id="f_butce">
+                  <option>Seçiniz...</option>
+                  <option>200.000 - 400.000 TL (BİGG)</option>
+                  <option>500.000 - 1.000.000 TL (1507)</option>
+                  <option>1.000.000 - 3.000.000 TL (1501)</option>
+                  <option>3.000.000 - 5.000.000 TL (1501)</option>
+                  <option>5.000.000 TL+ (1511)</option>
+                </select>
+              </div>
+              <div class="fi"><label>Ar-Ge Personel Sayısı <span class="req">*</span></label><input id="f_arge_personel" type="number" min="0" placeholder="0"></div>
+            </div>
+            <div class="fi"><label>Projenin Yenilikçi Yönü Nedir? <span class="req">*</span></label><textarea id="f_yenilik" placeholder="Mevcut çözümlerden farkınız ne? Patent/literatür desteği var mı?" style="min-height:60px"></textarea></div>
+          </div>
+          
+          <div class="form-box" style="border-left:4px solid #16A34A">
+            <span class="form-lbl">TEKNİK KAPASİTE</span>
+            <div class="g2">
+              <div class="fi"><label>Ekipte Mühendis Var mı?</label>
+                <select id="f_muhendis">
+                  <option>Seçiniz...</option>
+                  <option>Evet</option>
+                  <option>Hayır</option>
+                </select>
+              </div>
+              <div class="fi"><label>PRODİS Kaydı Var mı?</label>
+                <select id="f_prodis">
+                  <option>Seçiniz...</option>
+                  <option>Evet</option>
+                  <option>Hayır</option>
+                  <option>Bilmiyorum</option>
+                </select>
+              </div>
+              <div class="fi"><label>Patent/Faydalı Model?</label>
+                <select id="f_patent">
+                  <option>Seçiniz...</option>
+                  <option>Yok</option>
+                  <option>Başvuru yapıldı</option>
+                  <option>Tescil alındı</option>
+                </select>
+              </div>
+              <div class="fi"><label>Akademik Danışman Desteği?</label>
+                <select id="f_akademik">
+                  <option>Seçiniz...</option>
+                  <option>Evet</option>
+                  <option>Hayır</option>
+                  <option>Planlıyorum</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-box" style="border-left:4px solid #D97706">
+            <span class="form-lbl">ÖNCEKİ DENEYİMLER</span>
+            <div class="g2">
+              <div class="fi"><label>Daha önce TÜBİTAK desteği aldınız mı?</label>
+                <select id="f_onceki_tubitak">
+                  <option>Seçiniz...</option>
+                  <option>Evet</option>
+                  <option>Hayır</option>
+                </select>
+              </div>
+              <div class="fi"><label>Daha önce proje yazdınız mı?</label>
+                <select id="f_onceki_proje">
+                  <option>Seçiniz...</option>
+                  <option>Evet</option>
+                  <option>Hayır</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          
+          <div style="margin-top:20px;display:flex;gap:10px">
+            <button class="btn-gold" style="flex:1;padding:14px" onclick="tubitakDegerlendir()">
+              <i class="fas fa-robot"></i> Yapay Zeka ile Ön Değerlendir
+            </button>
+          </div>
+        </div>
+        
+        <!-- SAĞ: CANLI ÖZET ve RAPOR -->
+        <div>
+          <div id="tubitakRaporAlani" style="background:white;border-radius:12px;padding:20px;box-shadow:0 4px 18px rgba(0,0,0,.1);border-top:4px solid #2E4A7D">
+            <div style="text-align:center;color:#9CA3AF;padding:30px 0">
+              <i class="fas fa-robot" style="font-size:48px;margin-bottom:10px;color:#2E4A7D"></i>
+              <p>Formu doldurun, Yapay Zeka Asistanımız projenizi analiz edip size özel rapor hazırlayacak.</p>
+            </div>
+          </div>
+          
+          <div class="cbox" style="margin-top:15px;background:#2E4A7D">
+            <h4>📞 TÜBİTAK Uzman Ekibimiz</h4>
+            <p><i class="fas fa-phone"></i> <a href="tel:+905323261673">+90 532 326 1673</a></p>
+            <p><i class="fas fa-envelope"></i> <a href="mailto:tubitak@adsdanismanlik.com">tubitak@adsdanismanlik.com</a></p>
+            <a href="https://wa.me/905323261673" target="_blank" class="btn-wa" style="background:#25D366;color:white">WhatsApp'tan Sor</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== TÜBİTAK RAPOR SONUÇ SAYFASI (GİZLİ) ========== -->
+<div id="tubitakRaporPage" class="page">
+  <div class="section">
+    <div class="container">
+      <div id="tubitakRaporDetay"></div>
+      <div style="text-align:center;margin-top:20px">
+        <button class="btn-gold" onclick="showPage('tubitakFormPage')">Yeni Değerlendirme</button>
+        <button class="btn-navy" onclick="window.print()">📄 PDF Olarak Kaydet</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== İLETİŞİM (Sadeleştirilmiş) ========== -->
+<div id="iletisimPage" class="page">
+  <div class="section">
+    <div class="container">
+      <h2 class="sec-title">İletişim</h2>
+      <div class="g2">
+        <div class="cbox" style="background:#2E4A7D">
+          <h4>ADS TÜBİTAK Ekibi</h4>
+          <p><i class="fas fa-map-marker-alt"></i> Ankara / Türkiye</p>
+          <p><i class="fas fa-phone"></i> <a href="tel:+905323261673">+90 532 326 1673</a></p>
+          <p><i class="fas fa-envelope"></i> <a href="mailto:tubitak@adsdanismanlik.com">tubitak@adsdanismanlik.com</a></p>
+        </div>
+        <div>
+          <p style="margin-bottom:10px"><strong>ADS El Kitabı'na erişmek için:</strong></p>
+          <button class="btn-gold" onclick="showPage('tubitakRehberPage')">📘 Başvuru Rehberi</button>
+          <button class="btn-navy" style="margin-top:10px" onclick="showPage('tubitakHakemPage')">⚖️ Hakem Süreci</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER (Aynı) -->
+<div class="footer">
+  © 2026 ADS Yatırım ve Teşvik Danışmanlığı | TÜBİTAK Ar-Ge Uzman Danışmanlığı<br>
+  <a href="mailto:tubitak@adsdanismanlik.com">tubitak@adsdanismanlik.com</a> |
+  <a href="https://wa.me/905323261673">+90 532 326 1673</a>
+</div>
+<a href="https://wa.me/905323261673" target="_blank" class="wa-float"><i class="fab fa-whatsapp"></i></a>
+
+<!-- ===== JAVASCRIPT - TÜBİTAK ÖZEL ===== -->
+<script>
+// ================================================================
+// 1. TÜBİTAK GÜNCEL VERİ TABANI (ADS El Kitabı Bölüm 3.1.4)
+// ================================================================
+const TUBITAK_PROGRAMLARI = [
+  {kod:'1501', ad:'Sanayi Ar-Ge Destek Programı', hedef:'Deneyimli KOBİ\'ler', butce_min:1e6, butce_max:5e6, hibe:75, sure:36, oncelik:'Orta', link:'https://www.tubitak.gov.tr/tr/destekler/sanayi/1501'},
+  {kod:'1507', ad:'KOBİ Ar-Ge Başlangıç Destek Programı', hedef:'Ar-Ge\'ye yeni başlayan KOBİ\'ler', butce_min:500e3, butce_max:1e6, hibe:75, sure:18, oncelik:'Yüksek', link:'https://www.tubitak.gov.tr/tr/destekler/sanayi/1507'},
+  {kod:'1511', ad:'Öncelikli Alanlar Ar-Ge Destek Programı', hedef:'Stratejik sektörler', butce_min:2e6, butce_max:10e6, hibe:75, sure:36, oncelik:'Çok Yüksek', link:'https://www.tubitak.gov.tr/tr/destekler/sanayi/1511'},
+  {kod:'1512', ad:'Bireysel Genç Girişim (BİGG) Programı', hedef:'Bireysel girişimciler', butce_min:200e3, butce_max:400e3, hibe:100, sure:18, oncelik:'Çok Yüksek', link:'https://www.tubitak.gov.tr/tr/destekler/girisimcilik/1512'},
+  {kod:'1509', ad:'Uluslararası Sanayi Ar-Ge Destek Programı', hedef:'Uluslararası iş birliği', butce_min:2e6, butce_max:10e6, hibe:75, sure:36, oncelik:'Düşük', link:'https://www.tubitak.gov.tr/tr/destekler/sanayi/1509'}
+];
+
+// Güncel çağrı takvimi (periyodik güncellenecek - örnek veri)
+const TUBITAK_CAGRI = [
+  {kod:'1501', donem:'2026/1', baslangic:'2026-01-03', bitis:'2026-01-31', durum:'kapali', on_kayit:'2026-01-28'},
+  {kod:'1501', donem:'2026/2', baslangic:'2026-07-01', bitis:'2026-07-31', durum:'acik', on_kayit:'2026-07-28', kalan_gun:45},
+  {kod:'1507', donem:'2026/1', baslangic:'2026-03-01', bitis:'2026-03-31', durum:'acik', on_kayit:'2026-03-28', kalan_gun:14},
+  {kod:'1507', donem:'2026/2', baslangic:'2026-09-01', bitis:'2026-09-30', durum:'beklemede', on_kayit:'2026-09-27'},
+  {kod:'1511', donem:'2026', baslangic:'2026-01-01', bitis:'2026-12-31', durum:'acik', on_kayit:'Her zaman', kalan_gun:288},
+  {kod:'1512', donem:'2026/1', baslangic:'2026-02-15', bitis:'2026-03-15', durum:'acik', on_kayit:'2026-03-10', kalan_gun:28}
+];
+
+// ================================================================
+// 2. YAPAY ZEKA DEĞERLENDİRME FONKSİYONLARI
+// ================================================================
+function tubitakDegerlendir() {
+  // Form verilerini topla
+  const ad = el('f_ad')?.value?.trim() || '';
+  const tel = el('f_tel')?.value?.trim() || '';
+  
+  if (!ad || !tel) {
+    alert('Ad Soyad ve Telefon zorunludur!');
+    return;
+  }
+  
+  const veri = {
+    ad: ad,
+    tel: tel,
+    email: el('f_email')?.value || '',
+    dogum: el('f_dogum')?.value || '',
+    firma: el('f_firma')?.value || '',
+    kurulus: el('f_kurulus')?.value || '',
+    vergi: el('f_vergi')?.value || '',
+    calisan: parseInt(el('f_calisan')?.value) || 0,
+    proje_baslik: el('f_proje_baslik')?.value || '',
+    proje_ozet: el('f_proje_ozet')?.value || '',
+    teknoloji: el('f_teknoloji')?.value || '',
+    asama: el('f_asama')?.value || '',
+    butce_aralik: el('f_butce')?.value || '',
+    arge_personel: parseInt(el('f_arge_personel')?.value) || 0,
+    yenilik: el('f_yenilik')?.value || '',
+    muhendis: el('f_muhendis')?.value || '',
+    prodis: el('f_prodis')?.value || '',
+    patent: el('f_patent')?.value || '',
+    akademik: el('f_akademik')?.value || '',
+    onceki_tubitak: el('f_onceki_tubitak')?.value || '',
+    onceki_proje: el('f_onceki_proje')?.value || ''
+  };
+  
+  // ADS El Kitabı'na dayalı yapay zeka analizi
+  const analiz = tubitakAIAnaliz(veri);
+  
+  // Raporu göster
+  tubitakRaporGoster(veri, analiz);
+}
+
+function tubitakAIAnaliz(veri) {
+  // Program bazlı puanlama (ADS El Kitabı Bölüm 3.2.3, 3.3.2)
+  const puanlar = [];
+  
+  // 1512 BİGG değerlendirmesi
+  let puan1512 = 0;
+  if (veri.asama.includes('Sadece fikir') || veri.asama.includes('Literatür')) puan1512 += 25;
+  if (veri.teknoloji.includes('Yapay Zeka') || veri.teknoloji.includes('Yazılım')) puan1512 += 20;
+  if (veri.muhendis === 'Evet') puan1512 += 15;
+  if (veri.patent !== 'Yok') puan1512 += 20;
+  if (veri.onceki_tubitak === 'Hayır') puan1512 += 20; // İlk kez başvuru avantajı
+  puanlar.push({program:'1512 BİGG', puan:Math.min(puan1512, 100), aciklama:'Bireysel girişimciler için %100 hibe programı'});
+  
+  // 1507 KOBİ Ar-Ge değerlendirmesi
+  let puan1507 = 0;
+  if (veri.calisan > 0 && veri.calisan < 250) puan1507 += 30;
+  if (veri.arge_personel >= 1) puan1507 += 25;
+  if (veri.asama.includes('Ön çalışmalar') || veri.asama.includes('Prototip')) puan1507 += 20;
+  if (veri.proje_ozet.length > 20) puan1507 += 15;
+  if (veri.patent !== 'Yok') puan1507 += 10;
+  puanlar.push({program:'1507 KOBİ Ar-Ge', puan:Math.min(puan1507, 100), aciklama:'Ar-Ge\'ye yeni başlayan KOBİ\'ler için 18 ay, 500K-1M TL'});
+  
+  // 1501 Sanayi Ar-Ge değerlendirmesi
+  let puan1501 = 0;
+  if (veri.arge_personel >= 3) puan1501 += 30;
+  if (veri.asama.includes('Prototip') || veri.asama.includes('Ürün hazır')) puan1501 += 20;
+  if (veri.patent !== 'Yok') puan1501 += 20;
+  if (veri.akademik === 'Evet') puan1501 += 15;
+  if (veri.proje_ozet.length > 30) puan1501 += 15;
+  puanlar.push({program:'1501 Sanayi Ar-Ge', puan:Math.min(puan1501, 100), aciklama:'Kapsamlı Ar-Ge projeleri, 36 ay, 1-5M TL'});
+  
+  // 1511 Öncelikli Alanlar
+  let puan1511 = 0;
+  const oncelikliAlanlar = ['Yapay Zeka', 'Biyoteknoloji', 'Enerji', 'Savunma'];
+  if (oncelikliAlanlar.some(alan => veri.teknoloji.includes(alan))) puan1511 += 40;
+  if (veri.arge_personel >= 5) puan1511 += 30;
+  if (veri.patent !== 'Yok') puan1511 += 20;
+  if (veri.akademik === 'Evet') puan1511 += 10;
+  puanlar.push({program:'1511 Öncelikli Alanlar', puan:Math.min(puan1511, 100), aciklama:'Stratejik sektörler, 2-10M TL, açık çağrı'});
+  
+  // Sırala
+  puanlar.sort((a,b) => b.puan - a.puan);
+  
+  // En uygun programı bul
+  const enUygun = puanlar[0];
+  
+  // Çağrı durumu kontrolü
+  const cagriDurum = TUBITAK_CAGRI.filter(c => c.kod === enUygun.program.split(' ')[0] && c.durum === 'acik');
+  const acikCagri = cagriDurum.length > 0 ? cagriDurum[0] : null;
+  
+  return {
+    puanlar: puanlar,
+    enUygun: enUygun,
+    acikCagri: acikCagri,
+    analizNotlari: {
+      gucluYonler: [],
+      zayifYonler: [],
+      riskler: [],
+      oneriler: []
+    }
+  };
+}
+
+function tubitakRaporGoster(veri, analiz) {
+  const alan = el('tubitakRaporAlani');
+  if (!alan) return;
+  
+  const enUygun = analiz.enUygun;
+  const acikCagri = analiz.acikCagri;
+  
+  // Guclu/zayif yönleri belirle
+  if (veri.arge_personel >= 3) analiz.analizNotlari.gucluYonler.push('Güçlü Ar-Ge ekibi');
+  if (veri.patent !== 'Yok') analiz.analizNotlari.gucluYonler.push('Fikri mülkiyet varlığı');
+  if (veri.akademik === 'Evet') analiz.analizNotlari.gucluYonler.push('Akademik danışman desteği');
+  if (veri.proje_ozet.length > 50) analiz.analizNotlari.gucluYonler.push('Detaylı proje tanımı');
+  
+  if (veri.arge_personel === 0) analiz.analizNotlari.zayifYonler.push('Ar-Ge personeli eksik');
+  if (veri.prodis === 'Hayır') analiz.analizNotlari.zayifYonler.push('PRODİS kaydı yok');
+  if (veri.patent === 'Yok') analiz.analizNotlari.zayifYonler.push('Patent/Faydalı model yok');
+  
+  // Riskler
+  if (!veri.proje_ozet) analiz.analizNotlari.riskler.push('Proje özeti eksik');
+  if (veri.onceki_proje === 'Hayır') analiz.analizNotlari.riskler.push('İlk proje deneyimi');
+  
+  // Öneriler
+  if (veri.prodis === 'Hayır') analiz.analizNotlari.oneriler.push('PRODİS sistemine hemen kayıt olun');
+  if (veri.patent === 'Yok') analiz.analizNotlari.oneriler.push('Patent araştırması yapın');
+  if (veri.akademik === 'Hayır') analiz.analizNotlari.oneriler.push('Akademik danışman desteği almayı düşünün');
+  
+  // Rapor HTML'i oluştur
+  const html = `
+    <div class="tubitak-badge">🔬 YAPAY ZEKA ANALİZ SONUCU</div>
+    <h3 style="color:#1E2A44;margin:10px 0">${veri.proje_baslik || 'Proje Değerlendirmesi'}</h3>
+    <p style="color:#6B7280;font-size:13px;margin-bottom:15px">${veri.ad} | ${veri.firma || 'Firma bilgisi girilmemiş'}</p>
+    
+    <div class="rapor-ozet">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:18px;font-weight:700;color:#1E2A44">En Uygun Program:</span>
+        <span class="tubitak-badge" style="background:#2E4A7D;font-size:16px;padding:8px 18px">${enUygun.program}</span>
+      </div>
+      <p style="margin:10px 0 5px">${enUygun.aciklama}</p>
+      <div class="score-bar"><div class="score-fill" style="width:${enUygun.puan}%"></div></div>
+      <p style="text-align:right;font-size:12px;color:#6B7280">Uygunluk Puanı: ${enUygun.puan}/100</p>
+    </div>
+    
+    ${acikCagri ? `
+    <div style="background:#F0FDF4;border-radius:8px;padding:15px;margin:15px 0;border:1px solid #BBF7D0">
+      <div style="display:flex;justify-content:space-between">
+        <span><i class="fas fa-check-circle" style="color:#16A34A"></i> <strong>AÇIK ÇAĞRI!</strong></span>
+        <span class="durum-acik" style="padding:4px 12px">Son Başvuru: ${acikCagri.bitis}</span>
+      </div>
+      <p style="margin-top:8px">Program: ${acikCagri.kod} | Dönem: ${acikCagri.donem}</p>
+      <div class="kalan-gun">⏰ ${acikCagri.kalan_gun || '?'} gün kaldı!</div>
+      <p style="font-size:12px;margin-top:8px"><strong>⚠ Kritik:</strong> Kuruluş Bazlı Ön Kayıt (KBÖK) için son tarih: ${acikCagri.on_kayit}</p>
+    </div>
+    ` : `
+    <div style="background:#FEF2F2;border-radius:8px;padding:15px;margin:15px 0;border:1px solid #FECDD3">
+      <i class="fas fa-exclamation-triangle" style="color:#DC2626"></i> 
+      <strong>Şu anda ${enUygun.program} için açık çağrı bulunmamaktadır.</strong>
+      <p style="margin-top:5px;font-size:12px">Bir sonraki dönem için hazırlık yapabilirsiniz.</p>
+    </div>
+    `}
+    
+    <h4 style="color:#1E2A44;margin:20px 0 10px">📊 Tüm Program Uygunluk Analizi</h4>
+    ${analiz.puanlar.map(p => `
+      <div style="margin-bottom:12px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:3px">
+          <span style="font-weight:600">${p.program}</span>
+          <span style="color:${p.puan>=70?'#16A34A':p.puan>=40?'#D97706':'#9CA3AF'}">${p.puan}/100</span>
+        </div>
+        <div class="score-bar"><div class="score-fill" style="width:${p.puan}%;background:${p.puan>=70?'#16A34A':p.puan>=40?'#D97706':'#9CA3AF'}"></div></div>
+        <p style="font-size:11px;color:#6B7280;margin-top:2px">${p.aciklama}</p>
+      </div>
+    `).join('')}
+    
+    <h4 style="color:#1E2A44;margin:20px 0 10px">✅ Güçlü Yönler</h4>
+    <ul style="padding-left:20px;margin-bottom:15px">
+      ${analiz.analizNotlari.gucluYonler.map(g => `<li style="margin-bottom:3px;color:#16A34A"><i class="fas fa-check-circle"></i> ${g}</li>`).join('')}
+      ${analiz.analizNotlari.gucluYonler.length === 0 ? '<li style="color:#9CA3AF">Henüz güçlü yön belirlenemedi</li>' : ''}
+    </ul>
+    
+    <h4 style="color:#1E2A44;margin:20px 0 10px">⚠️ Geliştirilmesi Gereken Alanlar</h4>
+    <ul style="padding-left:20px;margin-bottom:15px">
+      ${analiz.analizNotlari.zayifYonler.map(z => `<li style="margin-bottom:3px;color:#D97706"><i class="fas fa-exclamation-triangle"></i> ${z}</li>`).join('')}
+      ${analiz.analizNotlari.zayifYonler.length === 0 ? '<li style="color:#9CA3AF">Zayıf yön bulunamadı</li>' : ''}
+    </ul>
+    
+    <h4 style="color:#1E2A44;margin:20px 0 10px">🔔 Risk Analizi ve Öneriler</h4>
+    <div style="background:#FFFBEB;border-left:4px solid #D97706;padding:15px;border-radius:8px">
+      <p style="margin-bottom:8px"><strong>Riskler:</strong></p>
+      <ul style="padding-left:20px;margin-bottom:12px">
+        ${analiz.analizNotlari.riskler.map(r => `<li style="color:#92400E">${r}</li>`).join('')}
+        ${analiz.analizNotlari.riskler.length === 0 ? '<li style="color:#9CA3AF">Belirgin risk yok</li>' : ''}
+      </ul>
+      <p style="margin-bottom:8px"><strong>ADS Önerileri:</strong></p>
+      <ul style="padding-left:20px">
+        ${analiz.analizNotlari.oneriler.map(o => `<li style="color:#2E4A7D"><i class="fas fa-lightbulb"></i> ${o}</li>`).join('')}
+        ${analiz.analizNotlari.oneriler.length === 0 ? '<li style="color:#9CA3AF">Öneri yok</li>' : ''}
+      </ul>
+    </div>
+    
+    <h4 style="color:#1E2A44;margin:20px 0 10px">📋 ADS El Kitabı'ndan Alıntılar</h4>
+    <div style="background:#EFF6FF;border-left:4px solid #2E4A7D;padding:15px;border-radius:8px">
+      <p><i class="fas fa-quote-right" style="color:#2E4A7D;opacity:.5"></i> "Hakem sürecinde en kritik aşama, gelen sorulara verilen cevaplardır. Her soruya projenin güçlü yönlerini vurgulayan, ek belgelerle desteklenmiş cevaplar hazırlayın."</p>
+      <p style="margin-top:8px;font-style:italic;text-align:right">— ADS El Kitabı, Bölüm 3.8.3</p>
+    </div>
+    
+    <div style="display:flex;gap:10px;margin-top:20px">
+      <button class="btn-gold" style="flex:1" onclick="tubitakRaporKaydet()">
+        <i class="fas fa-download"></i> Raporu İndir (HTML)
+      </button>
+      <button class="btn-navy" style="flex:1" onclick="tubitakMailGonder()">
+        <i class="fas fa-envelope"></i> E-posta ile Gönder
+      </button>
+    </div>
+    <p style="font-size:11px;color:#9CA3AF;text-align:center;margin-top:8px">
+      Bu rapor ADS Yapay Zeka Asistanı tarafından oluşturulmuştur. Kesin değerlendirme için uzman danışmanlığı alınız.
+    </p>
+  `;
+  
+  alan.innerHTML = html;
+}
+
+function tubitakRaporKaydet() {
+  const alan = el('tubitakRaporAlani');
+  if (!alan) return;
+  
+  const html = `
+    <!DOCTYPE html>
+    <html>
+    <head><meta charset="UTF-8"><title>TÜBİTAK Ön Değerlendirme Raporu</title>
+    <style>
+      body{font-family:Arial;margin:20px;color:#333}
+      .header{background:#1E2A44;color:white;padding:15px;border-radius:8px}
+      .program-box{border-left:4px solid #2E4A7D;padding:10px;margin:10px 0;background:#F9FAFB}
+      .cagri-acik{background:#F0FDF4;border:1px solid #86EFAC;padding:10px;border-radius:8px}
+      .score-bar{height:10px;background:#E5E7EB;border-radius:10px;margin:5px 0}
+      .score-fill{height:10px;background:#2E4A7D;border-radius:10px}
+    </style>
+    </head>
+    <body>
+      <div class="header"><h1>TÜBİTAK Ön Değerlendirme Raporu</h1></div>
+      ${alan.innerHTML}
+      <p style="margin-top:20px;font-size:11px;color:#999">Rapor Tarihi: ${new Date().toLocaleString('tr-TR')}</p>
+    </body>
+    </html>
+  `;
+  
+  const blob = new Blob([html], {type: 'text/html;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `TUBITAK_Rapor_${new Date().toISOString().split('T')[0]}.html`;
+  a.click();
+}
+
+function tubitakMailGonder() {
+  const alan = el('tubitakRaporAlani');
+  if (!alan) return;
+  
+  // Basit mailto ile gönder
+  const subject = 'TÜBİTAK Ön Değerlendirme Raporum';
+  const body = 'Merhaba,\n\nTÜBİTAK ön değerlendirme raporumu ekte incelenmesi için gönderiyorum.\n\nSaygılarımla.';
+  window.location.href = `mailto:tubitak@adsdanismanlik.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  
+  alert('E-posta uygulamanız açılacaktır. Raporu HTML olarak kaydedip ekleyebilirsiniz.');
+}
+
+// ================================================================
+// 3. SAYFA RENDER FONKSİYONLARI
+// ================================================================
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const e = el(id);
+  if (e) e.classList.add('active');
+  window.scrollTo(0,0);
+  
+  // Sayfaya özel render işlemleri
+  if (id === 'tubitakCagriPage') renderCagriTakvimi();
+  if (id === 'anaSayfa') renderAnaSayfa();
+  if (id === 'tubitakPage') renderTubitakPage();
+}
+
+function renderCagriTakvimi() {
+  const container = el('cagriTakvimi');
+  if (!container) return;
+  
+  container.innerHTML = TUBITAK_CAGRI.map(c => `
+    <div class="cagri-item ${c.durum === 'acik' ? 'acik' : 'kapali'}">
+      <div class="cagri-kod">${c.kod}</div>
+      <div style="font-size:12px;margin:5px 0">${c.donem}</div>
+      <div class="cagri-durum ${c.durum === 'acik' ? 'durum-acik' : 'durum-kapali'}">
+        ${c.durum === 'acik' ? 'AÇIK' : c.durum === 'kapali' ? 'KAPALI' : 'BEKLEMEDE'}
+      </div>
+      ${c.kalan_gun ? `<div style="margin-top:5px;font-size:11px;color:#D97706">⏰ ${c.kalan_gun} gün</div>` : ''}
+      <div style="font-size:10px;margin-top:5px;color:#6B7280">Son: ${c.bitis}</div>
+    </div>
+  `).join('');
+  
+  // Kritik tarihler
+  const kritik = el('kritikTarihler');
+  if (kritik) {
+    const acikCagrilar = TUBITAK_CAGRI.filter(c => c.durum === 'acik');
+    kritik.innerHTML = acikCagrilar.map(c => `
+      <div style="margin-bottom:8px;padding:5px;background:#F3F4F6;border-radius:5px">
+        <strong>${c.kod}</strong> son başvuru: ${c.bitis} | Ön kayıt: ${c.on_kayit}
+      </div>
+    `).join('') || '<p>Şu anda açık çağrı yok.</p>';
+  }
+}
+
+function renderAnaSayfa() {
+  const programKartlari = el('programKartlari');
+  if (programKartlari) {
+    programKartlari.innerHTML = TUBITAK_PROGRAMLARI.slice(0,4).map(p => `
+      <div class="svc-card program-card" onclick="showPage('tubitakFormPage')">
+        <h4>${p.kod} - ${p.ad.substring(0,20)}</h4>
+        <p>${p.hedef.substring(0,30)} | ${(p.butce_min/1e6).toFixed(1)}-${(p.butce_max/1e6).toFixed(1)}M TL | %${p.hibe} hibe</p>
+        <span class="svc-link">Değerlendir →</span>
+      </div>
+    `).join('');
+  }
+  
+  // Çağrı özeti
+  const cagriOzet = el('cagriOzet');
+  if (cagriOzet) {
+    const acikSayisi = TUBITAK_CAGRI.filter(c => c.durum === 'acik').length;
+    cagriOzet.innerHTML = `
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span><i class="fas fa-calendar-check" style="color:#C9A84C"></i> <strong>Güncel Çağrılar:</strong> ${acikSayisi} program açık</span>
+        <button class="btn-sm" style="background:transparent;color:white;border:1px solid white" onclick="showPage('tubitakCagriPage')">Detaylar →</button>
+      </div>
+    `;
+  }
+  
+  // Başarı hikayeleri
+  const hikayeler = el('tubitakHikayeler');
+  if (hikayeler) {
+    hikayeler.innerHTML = `
+      <div class="hik-card">
+        <h4>🏆 PoliTek Kompozit</h4>
+        <p><strong>TÜBİTAK 1501</strong> | 2.4M TL bütçe | 1.8M TL hibe</p>
+        <p style="font-size:11px">Karbon fiber fren diski geliştirme projesi. 5 yeni mühendis, 2 patent, Almanya'ya ihracat.</p>
+      </div>
+      <div class="hik-card">
+        <h4>🏆 MedAI Teknoloji</h4>
+        <p><strong>TÜBİTAK 1512 BİGG</strong> | 350K TL bütçe | %100 hibe</p>
+        <p style="font-size:11px">Yapay zeka destekli tıbbi görüntüleme yazılımı. 3 kişilik ekip, ilk yatırım turu.</p>
+      </div>
+      <div class="hik-card">
+        <h4>🏆 Metek Metal</h4>
+        <p><strong>TÜBİTAK 1507</strong> | 850K TL bütçe | %75 hibe</p>
+        <p style="font-size:11px">CNC tezgah optimizasyonu, verimlilik %25 arttı.</p>
+      </div>
+    `;
+  }
+}
+
+function renderTubitakPage() {
+  const tablo = el('tubitakProgramTablosu');
+  if (tablo) {
+    tablo.innerHTML = TUBITAK_PROGRAMLARI.map(p => {
+      const acikCagri = TUBITAK_CAGRI.find(c => c.kod === p.kod && c.durum === 'acik');
+      return `
+        <tr>
+          <td><strong>${p.kod}</strong></td>
+          <td>${p.hedef}</td>
+          <td>${(p.butce_min/1e6).toFixed(1)}-${(p.butce_max/1e6).toFixed(1)}M TL</td>
+          <td>%${p.hibe}</td>
+          <td>${p.sure} ay</td>
+          <td>${acikCagri ? '<span class="durum-acik" style="padding:2px 8px">Açık</span>' : '<span class="durum-kapali" style="padding:2px 8px">Kapalı</span>'}</td>
+        </tr>
+      `;
+    }).join('');
+  }
+}
+
+// ================================================================
+// 4. YARDIMCI FONKSİYONLAR
+// ================================================================
+function el(id) { return document.getElementById(id); }
+
+// ================================================================
+// 5. SAYFA YÜKLENİNCE
+// ================================================================
+document.addEventListener('DOMContentLoaded', () => {
+  renderAnaSayfa();
+});
+</script>
+</body>
+</html>
