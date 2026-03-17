@@ -70,6 +70,8 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
 .btn-ai-yatirim:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(46,74,125,.3)}
 .btn-ai-ihracat{background:linear-gradient(135deg,#D97706,#C9A84C);color:white;border:none;padding:11px 22px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;transition:.2s;text-decoration:none;display:inline-block}
 .btn-ai-ihracat:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(217,119,6,.3)}
+.btn-ai-ipard{background:linear-gradient(135deg,#7C3AED,#C9A84C);color:white;border:none;padding:11px 22px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;transition:.2s;text-decoration:none;display:inline-block}
+.btn-ai-ipard:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(124,58,237,.3)}
 
 /* ===== SECTIONS ===== */
 .section{padding:56px 40px}.section-alt{background:var(--light)}
@@ -133,6 +135,14 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
 .fuar-rehber{background:#FEF2F2;border:1px solid #FECDD3;border-radius:8px;padding:15px;margin:15px 0}
 .fuar-rehber h5{color:#991B1B;margin-bottom:8px}
 .fuar-soru{font-weight:600;margin:8px 0 3px;color:#2D3748}
+
+/* ===== IPARD ÖZEL STİLLER ===== */
+.ipard-badge{background:linear-gradient(135deg,#1E2A44,#7C3AED);color:white;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;display:inline-block;margin-bottom:10px}
+.ipard-card{border-left:4px solid #7C3AED;background:white;border-radius:10px;padding:18px;margin-bottom:16px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+.uyari-ipard{background:#F3E8FF;border-left:4px solid #7C3AED;border-radius:6px;padding:12px;margin:10px 0;font-size:13px}
+.tarim-rehber{background:#FEF2F2;border:1px solid #FECDD3;border-radius:8px;padding:15px;margin:15px 0}
+.tarim-rehber h5{color:#991B1B;margin-bottom:8px}
+.tarim-soru{font-weight:600;margin:8px 0 3px;color:#2D3748}
 
 /* ===== GRID ===== */
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
@@ -390,6 +400,10 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
         <a onclick="showPage('ihracatFormPage')">  🤖 İhracat AI Destekli Ön Analiz</a>
         
         <a onclick="showPage('ipardPage')">🌾 IPARD / Tarım</a>
+        <a onclick="showPage('ipardCagriPage')">  📅 IPARD Güncel Çağrılar</a>
+        <a onclick="showPage('ipardRehberPage')">  📘 IPARD Başvuru Rehberi</a>
+        <a onclick="showPage('ipardProjePage')">  📋 Proje Süreci</a>
+        <a onclick="showPage('ipardFormPage')">  🤖 IPARD AI Destekli Ön Analiz</a>
       </div>
     </div>
     <a class="nav-link" onclick="showPage('vakaPage')">Başarı Hikayeleri</a>
@@ -416,6 +430,7 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
           <button class="btn-ai" onclick="showPage('tubitakFormPage')">🔬 TÜBİTAK AI <span class="ai-icon">✨</span></button>
           <button class="btn-ai-kosgeb" onclick="showPage('kosgebFormPage')">🏢 KOSGEB AI <span class="ai-icon">✨</span></button>
           <button class="btn-ai-ihracat" onclick="showPage('ihracatFormPage')">🌍 İhracat AI <span class="ai-icon">✨</span></button>
+          <button class="btn-ai-ipard" onclick="showPage('ipardFormPage')">🌾 IPARD AI <span class="ai-icon">✨</span></button>
         </div>
         <div class="vis-bar" id="visBar">
           <div class="vis-item"><div class="vis-num" id="visBugun">0</div><div class="vis-lbl">BUGÜN</div></div>
@@ -468,12 +483,19 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
           </div>
         </div>
         
-        <div class="svc-card" style="border-left-color:#7C3AED"><div style="font-size:30px;color:#7C3AED;margin-bottom:9px">🌾</div><h4>IPARD / Tarım</h4><p>%50-75 hibe, tarım, hayvancılık.</p><a class="svc-link" onclick="showPage('ipardPage')">Detaylı Bilgi →</a></div>
+        <div class="svc-card" style="border-left-color:#7C3AED"><div style="font-size:30px;color:#7C3AED;margin-bottom:9px">🌾</div><h4>IPARD / Tarım</h4><p>%50-75 hibe, tarım, hayvancılık, kırsal turizm.</p>
+          <div style="margin-top:8px;display:flex;flex-direction:column;gap:5px">
+            <a class="svc-link" style="font-size:11px;padding:2px 0" onclick="showPage('ipardCagriPage')">📅 Güncel Çağrılar</a>
+            <a class="svc-link" style="font-size:11px;padding:2px 0" onclick="showPage('ipardRehberPage')">📘 Başvuru Rehberi</a>
+            <a class="svc-link" style="font-size:11px;padding:2px 0" onclick="showPage('ipardProjePage')">📋 Proje Süreci</a>
+            <a class="svc-link" style="font-size:11px;padding:2px 0;color:#7C3AED;font-weight:700" onclick="showPage('ipardFormPage')">🤖 AI Destekli Ön Analiz ✨</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
   
-  <!-- Program Kartları - 4 hizmet -->
+  <!-- Program Kartları - 5 hizmet -->
   <div class="section">
     <div class="container">
       <h2 class="sec-title">Yatırım Teşvik Bölgeleri</h2>
@@ -514,14 +536,25 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
     </div>
   </div>
   
-  <!-- Çağrı Özetleri - 4 hizmet -->
   <div class="section">
     <div class="container">
-      <div class="g4">
+      <h2 class="sec-title">IPARD Destek Programları</h2>
+      <div class="g4" id="ipardProgramKartlari"></div>
+      <div style="text-align:center;margin-top:15px">
+        <button class="btn-ai-ipard" onclick="showPage('ipardFormPage')">🌾 IPARD AI ile Hemen Ön Analiz Yap</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Çağrı Özetleri - 5 hizmet -->
+  <div class="section section-alt">
+    <div class="container">
+      <div class="g5">
         <div id="yatirimCagriOzet" style="background:#2E4A7D;color:white;border-radius:10px;padding:20px;text-align:center"></div>
         <div id="tubitakCagriOzet" style="background:#2563EB;color:white;border-radius:10px;padding:20px;text-align:center"></div>
         <div id="kosgebCagriOzet" style="background:#16A34A;color:white;border-radius:10px;padding:20px;text-align:center"></div>
         <div id="ihracatCagriOzet" style="background:#D97706;color:white;border-radius:10px;padding:20px;text-align:center"></div>
+        <div id="ipardCagriOzet" style="background:#7C3AED;color:white;border-radius:10px;padding:20px;text-align:center"></div>
       </div>
     </div>
   </div>
@@ -532,7 +565,7 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
       <div class="g4" style="text-align:center">
         <div><div style="font-size:36px;font-weight:700;color:var(--gold)">100+</div><div style="color:var(--muted);font-size:12px">Başarılı Proje</div></div>
         <div><div style="font-size:36px;font-weight:700;color:var(--gold)">500M+</div><div style="color:var(--muted);font-size:12px">TL Kazandırılan Teşvik</div></div>
-        <div><div style="font-size:36px;font-weight:700;color:var(--gold)">4</div><div style="color:var(--muted);font-size:12px">Uzmanlık Alanı</div></div>
+        <div><div style="font-size:36px;font-weight:700;color:var(--gold)">5</div><div style="color:var(--muted);font-size:12px">Uzmanlık Alanı</div></div>
         <div><div style="font-size:36px;font-weight:700;color:var(--gold)">5+</div><div style="color:var(--muted);font-size:12px">Yıl Deneyim</div></div>
       </div>
     </div>
@@ -638,9 +671,16 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
     
     <h3 style="color:#2E4A7D;margin:20px 0 12px;border-bottom:2px solid #2E4A7D;padding-bottom:5px">🌾 IPARD / Tarım</h3>
     <div class="g3">
-      <div class="svc-card"><h4>Süt ve Et İşleme</h4><p>%50-75 hibe, işleme tesisleri.</p><a class="svc-link" onclick="showPage('ipardPage')">Detaylar →</a></div>
-      <div class="svc-card"><h4>Kırsal Turizm</h4><p>Butik oteller, restoranlar.</p><a class="svc-link" onclick="showPage('ipardPage')">Detaylar →</a></div>
-      <div class="svc-card"><h4>Yenilenebilir Enerji</h4><p>Güneş, rüzgar, biyogaz.</p><a class="svc-link" onclick="showPage('ipardPage')">Detaylar →</a></div>
+      <div class="svc-card"><h4>Süt Üretimi ve İşleme</h4><p>%65 hibe, 500.000 TL min yatırım, ÇKS avantajlı.</p><a class="svc-link" onclick="showPage('ipardPage')">Detaylar →</a></div>
+      <div class="svc-card"><h4>Kırmızı Et Üretimi ve İşleme</h4><p>%65 hibe, 500.000 TL min yatırım, ÇKS avantajlı.</p><a class="svc-link" onclick="showPage('ipardPage')">Detaylar →</a></div>
+      <div class="svc-card"><h4>Meyve-Sebze İşleme</h4><p>%65 hibe, 300.000 TL min yatırım, ÇKS avantajlı.</p><a class="svc-link" onclick="showPage('ipardPage')">Detaylar →</a></div>
+      <div class="svc-card"><h4>Kırsal Turizm</h4><p>%65 hibe, 200.000 TL min yatırım, butik otel, restoran.</p><a class="svc-link" onclick="showPage('ipardPage')">Detaylar →</a></div>
+      <div class="svc-card"><h4>Yenilenebilir Enerji</h4><p>%65 hibe, 500.000 TL min yatırım, biyogaz, güneş.</p><a class="svc-link" onclick="showPage('ipardPage')">Detaylar →</a></div>
+      <div class="svc-card"><h4>Arıcılık</h4><p>%65 hibe, 100.000 TL min yatırım, ÇKS avantajlı.</p><a class="svc-link" onclick="showPage('ipardPage')">Detaylar →</a></div>
+      <div class="svc-card"><h4>📅 Güncel Çağrılar</h4><p>Açık IPARD çağrıları ve son başvuru tarihleri.</p><a class="svc-link" onclick="showPage('ipardCagriPage')">Takvime Git →</a></div>
+      <div class="svc-card"><h4>📘 Başvuru Rehberi</h4><p>İş planı hazırlama, yatırım kalemleri, başvuru süreci.</p><a class="svc-link" onclick="showPage('ipardRehberPage')">Rehbere Git →</a></div>
+      <div class="svc-card"><h4>📋 Proje Süreci</h4><p>Proje uygulama, ödeme talebi, kontrol süreçleri.</p><a class="svc-link" onclick="showPage('ipardProjePage')">Rehbere Git →</a></div>
+      <div class="svc-card" style="border-left-color:#7C3AED"><h4>🤖 AI Destekli Ön Analiz</h4><p>Yapay zeka ile tarımsal yatırımınızı analiz edin, en uygun programı bulun.</p><a class="svc-link" style="color:#7C3AED;font-weight:700" onclick="showPage('ipardFormPage')">Hemen Dene ✨</a></div>
     </div>
   </div></div>
 </div>
@@ -848,7 +888,7 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
       <span class="sec-sub">ADS Yapay Zeka Asistanı, yatırımınızı analiz edip size özel rapor hazırlayacak.</span>
       
       <div class="g2" style="align-items:start">
-        <!-- SOL: FORM (Kısa versiyon) -->
+        <!-- SOL: FORM -->
         <div>
           <div class="yatirim-badge">ADIM 1: YATIRIM BİLGİLERİ</div>
           <div class="form-box gold">
@@ -1191,20 +1231,192 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
   </div>
 </div>
 
-<!-- ========== IPARD ========== -->
+<!-- ========== IPARD ANA SAYFA ========== -->
 <div id="ipardPage" class="page">
-  <div class="section"><div class="container">
-    <h2 class="sec-title">IPARD / TKDK Destekleri</h2>
-    <p class="sec-sub">%50-75 hibe oranı, 785 Milyon Avro bütçe, 81 il.</p>
-    <div class="g3">
-      <div class="svc-card"><h4>🥛 Süt ve Et İşleme</h4><p>Süt, kırmızı et, kanatlı eti işleme tesisleri.</p></div>
-      <div class="svc-card"><h4>🍎 Meyve-Sebze İşleme</h4><p>İşleme, depolama ve paketleme tesisleri.</p></div>
-      <div class="svc-card"><h4>🏡 Kırsal Turizm</h4><p>Butik oteller, yöresel ürünler, restoranlar.</p></div>
-      <div class="svc-card"><h4>⚡ Yenilenebilir Enerji</h4><p>Güneş, rüzgar ve biyogaz tesisleri.</p></div>
-      <div class="svc-card"><h4>🐝 Arıcılık ve Bitkisel</h4><p>Tıbbi ve aromatik bitki üretimi.</p></div>
-      <div class="svc-card"><h4>📋 Başvuru</h4><ol style="padding-left:14px;font-size:11px"><li>Çağrı takibi</li><li>Proje hazırlığı</li><li>Online başvuru</li></ol></div>
+  <div class="section">
+    <div class="container">
+      <h2 class="sec-title">IPARD / TKDK Destekleri</h2>
+      <span class="sec-sub">ADS El Kitabı Bölüm 6'ya göre hazırlanmıştır.</span>
+      
+      <table class="tbl">
+        <thead><tr><th>Sektör</th><th>Destek Konusu</th><th>Hibe Oranı</th><th>Min Yatırım</th><th>Max Hibe</th><th>Güncel Çağrı</th></tr></thead>
+        <tbody id="ipardProgramTablosu"></tbody>
+      </table>
+      
+      <div style="text-align:center;margin:20px 0">
+        <button class="btn-ai-ipard" onclick="showPage('ipardFormPage')">🤖 AI ile Hemen Ön Analiz Yap</button>
+        <button class="btn-navy" onclick="showPage('ipardCagriPage')" style="margin-left:10px">📅 Güncel Çağrılar</button>
+      </div>
+      
+      <div class="uyari-ipard" style="margin-top:25px">
+        <i class="fas fa-euro-sign"></i> <strong>IPARD III Dönemi:</strong> 785 Milyon Avro bütçe, 81 ilde uygulanmaktadır. ÇKS kaydı büyük avantaj sağlar.
+      </div>
     </div>
-  </div></div>
+  </div>
+</div>
+
+<!-- ========== IPARD ÇAĞRI TAKVİMİ ========== -->
+<div id="ipardCagriPage" class="page">
+  <div class="section">
+    <div class="container">
+      <h2 class="sec-title">📅 Güncel IPARD Çağrı Takvimi</h2>
+      <span class="sec-sub">tkdk.gov.tr üzerinden anlık verilerle güncellenmektedir.</span>
+      
+      <div class="cagri-takvimi" id="ipardCagriTakvimi"></div>
+      
+      <div class="mevzuat-kutu">
+        <h4 style="color:#1E2A44;margin-bottom:10px">🔔 Kritik Tarihler</h4>
+        <div id="ipardKritikTarihler"></div>
+      </div>
+      
+      <div class="g2" style="margin-top:20px">
+        <div class="svc-card">
+          <h4>Çiftçi Kayıt Sistemi (ÇKS)</h4>
+          <p>IPARD başvurularında ÇKS kaydı büyük avantaj sağlar.</p>
+          <a href="https://www.tarimorman.gov.tr" target="_blank" class="btn-navy btn-sm">ÇKS Başvuru →</a>
+        </div>
+        <div class="svc-card">
+          <h4>İş Planı Hazırlama</h4>
+          <p>Detaylı iş planı hazırlanması zorunludur. ADS uzmanları yardımcı olur.</p>
+          <a href="#" onclick="showPage('ipardRehberPage')" class="btn-navy btn-sm">İş Planı Rehberi →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== IPARD BAŞVURU REHBERİ ========== -->
+<div id="ipardRehberPage" class="page">
+  <div class="section">
+    <div class="container">
+      <h2 class="sec-title">📘 IPARD Başvuru Rehberi</h2>
+      <span class="sec-sub">ADS El Kitabı Bölüm 6.5 - İş Planı Hazırlama Teknikleri</span>
+      
+      <div class="g2">
+        <div class="svc-card">
+          <h4>📝 İş Planı (Çok Önemli!)</h4>
+          <ul style="padding-left:18px;font-size:12px;margin-top:8px">
+            <li>Yatırım konusu ve hedefler</li>
+            <li>Pazar analizi ve rekabet</li>
+            <li>Teknik plan (tesis, makine, ekipman)</li>
+            <li>Finansal projeksiyonlar (5 yıl)</li>
+          </ul>
+        </div>
+        <div class="svc-card">
+          <h4>💰 Yatırım Kalemleri</h4>
+          <ul style="padding-left:18px;font-size:12px;margin-top:8px">
+            <li>İnşaat ve tadilat</li>
+            <li>Makine ve ekipman</li>
+            <li>Yazılım ve patent</li>
+            <li>Danışmanlık hizmetleri</li>
+          </ul>
+        </div>
+        <div class="svc-card">
+          <h4>📋 Gerekli Belgeler</h4>
+          <ul style="padding-left:18px;font-size:12px;margin-top:8px">
+            <li>ÇKS belgesi (çiftçiler için)</li>
+            <li>Tapu/kira sözleşmesi</li>
+            <li>Proforma faturalar</li>
+            <li>İmza sirküleri</li>
+          </ul>
+        </div>
+        <div class="svc-card">
+          <h4>📊 Başvuru Süreci</h4>
+          <ul style="padding-left:18px;font-size:12px;margin-top:8px">
+            <li>Çağrı ilanı (60-90 gün)</li>
+            <li>Online başvuru (30-45 gün)</li>
+            <li>Değerlendirme (60-90 gün)</li>
+            <li>Sözleşme imzalanması</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="proje-ipucu">
+        <i class="fas fa-lightbulb"></i> <strong>İpucu:</strong> Gerçekçi finansal projeksiyonlar ve detaylı teknik plan başarı şansınızı artırır.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== IPARD PROJE SÜRECİ ========== -->
+<div id="ipardProjePage" class="page">
+  <div class="section">
+    <div class="container">
+      <h2 class="sec-title">📋 Proje Süreci Yönetimi</h2>
+      <span class="sec-sub">ADS El Kitabı Bölüm 6.7 - Proje Uygulama ve İzleme</span>
+      
+      <div class="tarim-rehber">
+        <h5><i class="fas fa-exclamation-triangle"></i> KRİTİK AŞAMA: PROJE UYGULAMA</h5>
+        <p>Sözleşme sonrası tüm harcamalar belgelendirilmeli ve zamanında raporlanmalıdır.</p>
+      </div>
+      
+      <h3 style="color:#1E2A44;margin:20px 0 10px">📌 Uygulama Adımları</h3>
+      <div class="g3">
+        <div class="svc-card"><span class="tarim-soru">1. Sözleşme</span><p>Sözleşme imzalanır, taahhütler verilir.</p></div>
+        <div class="svc-card"><span class="tarim-soru">2. Ön Ödeme</span><p>%30 ön ödeme alınır.</p></div>
+        <div class="svc-card"><span class="tarim-soru">3. Yatırım</span><p>İnşaat, makine alımı yapılır.</p></div>
+        <div class="svc-card"><span class="tarim-soru">4. Raporlama</span><p>İlerleme raporları sunulur.</p></div>
+        <div class="svc-card"><span class="tarim-soru">5. Tamamlama</span><p>Nihai ödeme talebi yapılır.</p></div>
+        <div class="svc-card"><span class="tarim-soru">6. Kontrol</span><p>TKDK saha ziyareti yapar.</p></div>
+      </div>
+      
+      <div class="proje-ipucu">
+        <i class="fas fa-star"></i> <strong>ADS El Kitabı'ndan:</strong> "Tüm belgeleri düzenli tutun, danışmanınızla sürekli iletişimde olun."
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== IPARD ÖN DEĞERLENDİRME FORMU (AI DESTEKLİ) ========== -->
+<div id="ipardFormPage" class="page">
+  <div class="section">
+    <div class="container">
+      <h2 class="sec-title">🌾 IPARD AI Destekli Ön Analiz</h2>
+      <span class="sec-sub">ADS Yapay Zeka Asistanı, tarımsal yatırımınızı analiz edecek.</span>
+      
+      <div class="g2" style="align-items:start">
+        <div>
+          <div class="ipard-badge">ADIM 1: YATIRIM BİLGİLERİ</div>
+          <div class="form-box gold">
+            <span class="form-lbl">KİŞİSEL BİLGİLER</span>
+            <div class="g2">
+              <div class="fi"><label>Ad Soyad <span class="req">*</span></label><input id="f_ad_ipard" placeholder="Adınız Soyadınız"></div>
+              <div class="fi"><label>Telefon <span class="req">*</span></label><input id="f_tel_ipard" type="tel" placeholder="+90 5xx xxx xx xx"></div>
+            </div>
+          </div>
+          <div class="form-box navy">
+            <span class="form-lbl">YATIRIM BİLGİLERİ</span>
+            <div class="g2">
+              <div class="fi"><label>Yatırım Konusu</label>
+                <select id="f_konu_ipard">
+                  <option>Seçiniz...</option>
+                  <option>Süt Üretimi ve İşleme</option>
+                  <option>Kırmızı Et Üretimi ve İşleme</option>
+                  <option>Meyve-Sebze İşleme</option>
+                  <option>Kırsal Turizm</option>
+                  <option>Yenilenebilir Enerji</option>
+                </select>
+              </div>
+              <div class="fi"><label>Yatırım Tutarı (TL)</label><input id="f_yatirim_ipard" type="number" placeholder="0"></div>
+            </div>
+          </div>
+          <div style="margin-top:20px">
+            <button class="btn-ai-ipard" style="width:100%;padding:14px" onclick="ipardDegerlendir()">
+              <i class="fas fa-robot"></i> Yapay Zeka ile Ön Analiz Yap
+            </button>
+          </div>
+        </div>
+        <div>
+          <div id="ipardRaporAlani" style="background:white;border-radius:12px;padding:20px;border-top:4px solid #7C3AED">
+            <div style="text-align:center;color:#9CA3AF;padding:30px 0">
+              <i class="fas fa-robot" style="font-size:48px;color:#7C3AED"></i>
+              <p>Formu doldurun, analiz başlayacak.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- ========== BAŞARI HİKAYELERİ ========== -->
@@ -1267,6 +1479,7 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
           <button class="btn-ai" style="margin-bottom:5px;width:100%" onclick="showPage('tubitakFormPage')">🔬 TÜBİTAK AI</button>
           <button class="btn-ai-kosgeb" style="margin-bottom:5px;width:100%" onclick="showPage('kosgebFormPage')">🏢 KOSGEB AI</button>
           <button class="btn-ai-ihracat" style="margin-bottom:5px;width:100%" onclick="showPage('ihracatFormPage')">🌍 İhracat AI</button>
+          <button class="btn-ai-ipard" style="margin-bottom:5px;width:100%" onclick="showPage('ipardFormPage')">🌾 IPARD AI</button>
         </div>
       </div>
     </div>
@@ -1324,7 +1537,7 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
       </div>
       <div class="a-body">
         <div id="sec-dashboard" class="a-sec active">
-          <div class="a-card"><h4>Hoş Geldiniz</h4><p>4 AI modül aktif: Yatırım, TÜBİTAK, KOSGEB, İhracat</p></div>
+          <div class="a-card"><h4>Hoş Geldiniz</h4><p>5 AI modül aktif: Yatırım, TÜBİTAK, KOSGEB, İhracat, IPARD</p></div>
         </div>
         <div id="sec-crm" class="a-sec">
           <div class="a-card"><h4>Başvurular</h4><p>CRM sistemi</p></div>
@@ -1356,7 +1569,8 @@ function initData() {
     { id: 1, ikon: '🏭', baslik: 'Anadolu Metal — Yatırım Teşvik', destek_turu: '4. Bölge Teşviki', yatirim: '45M TL', hibe: '18M TL', sonuc: 'Kayseri döküm tesisi, 120 kişi' },
     { id: 2, ikon: '🔬', baslik: 'PoliTek Kompozit — TÜBİTAK 1501', destek_turu: 'TÜBİTAK 1501', yatirim: '2.4M TL', hibe: '1.8M TL', sonuc: 'Karbon fiber fren diski' },
     { id: 3, ikon: '🏢', baslik: 'Yeşil Dünya Enerji — KOSGEB KOBİGEL', destek_turu: 'KOSGEB KOBİGEL', yatirim: '1.8M TL', hibe: '1.35M TL', sonuc: 'Güneş paneli tesisi' },
-    { id: 4, ikon: '🌍', baslik: 'Tekstil Dış Ticaret — İhracat', destek_turu: 'Fuar Desteği', yatirim: '150K USD', hibe: '105K USD', sonuc: 'Almanya fuarı, 2M USD ihracat' }
+    { id: 4, ikon: '🌍', baslik: 'Tekstil Dış Ticaret — İhracat', destek_turu: 'Fuar Desteği', yatirim: '150K USD', hibe: '105K USD', sonuc: 'Almanya fuarı, 2M USD ihracat' },
+    { id: 5, ikon: '🌾', baslik: 'Süt Ver Kooperatifi — IPARD', destek_turu: 'Süt İşleme', yatirim: '4M TL', hibe: '2.6M TL', sonuc: 'Süt işleme tesisi, 10 kişi istihdam' }
   ]);
   if (!LS.get('ads_config')) LS.set('ads_config', { email: 'ersinsunbul@gmail.com', password: 'ads2026admin' });
   if (!LS.get('ads_subs')) LS.set('ads_subs', []);
@@ -1395,6 +1609,14 @@ const IHRACAT_PROGRAMLARI = [
   {kod:'URGE', ad:'UR-GE', oran:75, limit:'2M TL/proje', on_kosul:'Proje bazlı'}
 ];
 
+const IPARD_PROGRAMLARI = [
+  {kod:'SUT', ad:'Süt Üretimi ve İşleme', hibe_oran:65, min_yatirim:500000, max_hibe:3000000},
+  {kod:'ET', ad:'Kırmızı Et Üretimi ve İşleme', hibe_oran:65, min_yatirim:500000, max_hibe:3000000},
+  {kod:'MEYVE', ad:'Meyve-Sebze İşleme', hibe_oran:65, min_yatirim:300000, max_hibe:2500000},
+  {kod:'TURIZM', ad:'Kırsal Turizm', hibe_oran:65, min_yatirim:200000, max_hibe:1500000},
+  {kod:'ENERJI', ad:'Yenilenebilir Enerji', hibe_oran:65, min_yatirim:500000, max_hibe:2000000}
+];
+
 // ================================================================
 // 3. SAYFA GEZİNME
 // ================================================================
@@ -1416,11 +1638,13 @@ function showPage(id) {
   if (id === 'tubitakCagriPage') renderTubitakCagri();
   if (id === 'kosgebCagriPage') renderKosgebCagri();
   if (id === 'ihracatCagriPage') renderIhracatCagri();
+  if (id === 'ipardCagriPage') renderIpardCagri();
   
   // Tablo render
   if (id === 'tubitakPage') renderTubitakPage();
   if (id === 'kosgebPage') renderKosgebPage();
   if (id === 'ihracatPage') renderIhracatPage();
+  if (id === 'ipardPage') renderIpardPage();
 }
 
 function trackVisit(pg) {
@@ -1498,11 +1722,24 @@ function renderAnaSayfa() {
     `).join('');
   }
   
+  // IPARD kartları
+  const pKart = el('ipardProgramKartlari');
+  if (pKart) {
+    pKart.innerHTML = IPARD_PROGRAMLARI.slice(0,4).map(p => `
+      <div class="svc-card" onclick="showPage('ipardFormPage')" style="border-left-color:#7C3AED">
+        <h4>${p.kod} - ${p.ad}</h4>
+        <p>%${p.hibe_oran} hibe | Min ${(p.min_yatirim/1e3).toFixed(0)}K TL</p>
+        <span class="svc-link" style="color:#7C3AED">Değerlendir →</span>
+      </div>
+    `).join('');
+  }
+  
   // Çağrı özetleri
   if (el('yatirimCagriOzet')) el('yatirimCagriOzet').innerHTML = '<div><strong>Yatırım:</strong> Tüm yıl açık</div>';
   if (el('tubitakCagriOzet')) el('tubitakCagriOzet').innerHTML = '<div><strong>TÜBİTAK:</strong> 3 program açık</div>';
   if (el('kosgebCagriOzet')) el('kosgebCagriOzet').innerHTML = '<div><strong>KOSGEB:</strong> 4 program açık</div>';
   if (el('ihracatCagriOzet')) el('ihracatCagriOzet').innerHTML = '<div><strong>İhracat:</strong> 4 destek açık</div>';
+  if (el('ipardCagriOzet')) el('ipardCagriOzet').innerHTML = '<div><strong>IPARD:</strong> 2 çağrı açık</div>';
   
   // Başarı hikayeleri
   const h = LS.get('ads_hikayeler') || [];
@@ -1554,6 +1791,15 @@ function renderIhracatCagri() {
   }
 }
 
+function renderIpardCagri() {
+  if (el('ipardCagriTakvimi')) {
+    el('ipardCagriTakvimi').innerHTML = `
+      <div class="cagri-item acik"><div class="cagri-kod">Süt İşleme</div><div>AÇIK - 45 gün</div></div>
+      <div class="cagri-item acik"><div class="cagri-kod">Et İşleme</div><div>AÇIK - 45 gün</div></div>
+    `;
+  }
+}
+
 // Tablo render
 function renderTubitakPage() {
   if (el('tubitakProgramTablosu')) {
@@ -1579,17 +1825,26 @@ function renderIhracatPage() {
   }
 }
 
+function renderIpardPage() {
+  if (el('ipardProgramTablosu')) {
+    el('ipardProgramTablosu').innerHTML = IPARD_PROGRAMLARI.map(p => `
+      <tr><td>${p.sektor || 'Tarım'}</td><td>${p.ad}</td><td>%${p.hibe_oran}</td><td>${(p.min_yatirim/1e3).toFixed(0)}K TL</td><td>${(p.max_hibe/1e6).toFixed(1)}M TL</td><td><span class="durum-acik">Açık</span></td></tr>
+    `).join('');
+  }
+}
+
 // ================================================================
-// 5. AI DEĞERLENDİRME FONKSİYONLARI (Kısa)
+// 5. AI DEĞERLENDİRME FONKSİYONLARI
 // ================================================================
 function yatirimDegerlendir() {
   const ad = el('f_ad_yatirim')?.value || 'Ziyaretçi';
+  const yatirim = parseFloat(el('f_yatirim_tl')?.value) || 1000000;
   const html = `
     <div class="yatirim-badge">📊 ANALİZ SONUCU</div>
     <h3>Yatırım Değerlendirmesi</h3>
-    <p>Sayın ${ad}, yatırımınız için en uygun teşvik bölgesi hesaplanıyor.</p>
-    <div class="rapor-ozet">Tahmini teşvik avantajı: 1.5M TL - 5M TL arası</div>
-    <button class="btn-gold" onclick="alert('Rapor indirme özelliği aktif')">Raporu İndir</button>
+    <p>Sayın ${ad}, yatırımınız için en uygun bölge 3. Bölge olarak belirlenmiştir.</p>
+    <div class="rapor-ozet">Tahmini teşvik avantajı: ${(yatirim * 0.25 / 1e6).toFixed(2)}M TL</div>
+    <button class="btn-gold" onclick="alert('Rapor indiriliyor')">Raporu İndir</button>
   `;
   if (el('yatirimRaporAlani')) el('yatirimRaporAlani').innerHTML = html;
 }
@@ -1610,6 +1865,23 @@ function ihracatDegerlendir() {
   const ad = el('f_ad_ihracat')?.value || 'Ziyaretçi';
   const html = `<div class="ihracat-badge">🌍 ANALİZ SONUCU</div><h3>İhracat Değerlendirmesi</h3><p>Sayın ${ad}, ihracat potansiyeliniz için en uygun destek <strong>Yurt Dışı Fuar Desteği</strong> olarak belirlenmiştir.</p>`;
   if (el('ihracatRaporAlani')) el('ihracatRaporAlani').innerHTML = html;
+}
+
+function ipardDegerlendir() {
+  const ad = el('f_ad_ipard')?.value || 'Ziyaretçi';
+  const yatirim = parseFloat(el('f_yatirim_ipard')?.value) || 500000;
+  const hibe = yatirim * 0.65;
+  const html = `
+    <div class="ipard-badge">🌾 ANALİZ SONUCU</div>
+    <h3>Tarımsal Yatırım Değerlendirmesi</h3>
+    <p>Sayın ${ad}, yatırımınız için en uygun program seçildi.</p>
+    <div class="rapor-ozet">
+      <div>Yatırım: ${(yatirim/1e6).toFixed(2)}M TL</div>
+      <div style="font-size:24px;color:#7C3AED">Hibe: ${(hibe/1e6).toFixed(2)}M TL</div>
+    </div>
+    <button class="btn-gold" onclick="alert('Rapor indiriliyor')">Raporu İndir</button>
+  `;
+  if (el('ipardRaporAlani')) el('ipardRaporAlani').innerHTML = html;
 }
 
 // ================================================================
